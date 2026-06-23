@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#e0e3e6",
+                    "surface-container-high": "#e8e8ea",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-container": "#7c4dff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#20005f",
+                    "inverse-surface": "#2f3133",
+                    "on-background": "#1a1c1e",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#d8e2ff",
+                    "primary": "#632ce5",
+                    "background": "#f9f9fc",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "on-secondary-fixed": "#001a42",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#6833ea",
+                    "outline": "#7a7487",
+                    "inverse-primary": "#cdbdff",
+                    "surface-container": "#eeeef0",
+                    "secondary": "#0058bd",
+                    "tertiary": "#565a5c",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "surface-container-highest": "#e2e2e5",
+                    "inverse-on-surface": "#f0f0f3",
+                    "on-tertiary-fixed": "#191c1e",
+                    "surface-dim": "#dadadc",
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "primary-fixed": "#e8deff",
+                    "secondary-container": "#1e70e4",
+                    "on-primary-container": "#fcf6ff",
+                    "on-tertiary-container": "#f6f8fb",
+                    "primary-fixed-dim": "#cdbdff",
+                    "on-surface-variant": "#494455",
+                    "on-surface": "#1a1c1e",
+                    "surface-variant": "#e2e2e5",
+                    "outline-variant": "#cac3d8",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#004495",
+                    "surface-container-low": "#f3f3f6",
+                    "surface-bright": "#f9f9fc",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#6f7275",
+                    "surface": "#f9f9fc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "xs": "4px",
+                    "margin-mobile": "20px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            color: #1a1c1e;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+
+        .neo-toggle-track {
+            box-shadow: inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,0.8);
+        }
+
+        .neo-button-active {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+            transform: scale(0.98);
+        }
+
+        .custom-slider::-webkit-slider-runnable-track {
+            background: transparent;
+        }
+
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #f9f9fc;
+            box-shadow: 3px 3px 6px rgba(0,0,0,0.1), -3px -3px 6px rgba(255,255,255,0.8);
+            cursor: pointer;
+            margin-top: -8px;
+            border: none;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md overflow-x-hidden pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full neo-raised overflow-hidden border-2 border-background">
+<img class="w-full h-full object-cover" data-alt="A clean, professional portrait of a tech-savvy user in a bright, modern studio. The lighting is soft and high-key, matching the light-mode UI aesthetic. The background is a minimalist soft grey, emphasizing the subject's friendly and intelligent expression. High-end photography style with crisp detail and natural skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtvCEsqh7IJTc4ISzd7zb8DQFWe_LX5x-mdWG62MCAtySKeZXRT3vVp2OZaQcjfRJRdF4b674atoal6NWO9c5QHSx7HrC4w-Gp2RLFhICew8TXxb3yJFE-DOgR_CrwNnATs1IrqNFeUpfZbwSh22y_N3U6qqbdv1WS3g17idpuXvz5Q0BDrRymchR2dEPoPFOLSTAnqtMJdFCg2tPKq2JLurm3iOLkWZrROv_f8wrpYu1PLKCJN0NWuaHr33AfAdS9HX-XUyQY4F4"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full neo-raised text-primary hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="mt-24 px-margin-mobile max-w-2xl mx-auto space-y-lg">
+<!-- Section: Visual & Theme -->
+<section class="space-y-md">
+<h2 class="font-headline-md text-headline-md text-on-surface-variant px-2">Visual Style</h2>
+<div class="neo-raised rounded-3xl p-lg bg-background space-y-lg">
+<!-- Dark Mode Toggle -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neo-sunken text-primary">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Dark Mode</p>
+<p class="text-[12px] text-outline">Adjust interface brightness</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="dark-mode-toggle" type="checkbox" value=""/>
+<div class="w-14 h-7 neo-toggle-track bg-background rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-background after:neo-raised after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-fixed"></div>
+</label>
+</div>
+<!-- Sensitivity Slider -->
+<div class="space-y-sm">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neo-sunken text-primary">
+<span class="material-symbols-outlined" data-icon="touch_app">touch_app</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Sensitivity</p>
+</div>
+<span class="font-label-md text-primary" id="sensitivity-val">75%</span>
+</div>
+<div class="neo-sunken h-2 w-full rounded-full relative flex items-center px-1">
+<input class="w-full h-1 appearance-none bg-transparent custom-slider" id="sensitivity-slider" max="100" min="0" type="range" value="75"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Communications -->
+<section class="space-y-md">
+<h2 class="font-headline-md text-headline-md text-on-surface-variant px-2">Communications</h2>
+<div class="neo-raised rounded-3xl p-lg bg-background space-y-lg">
+<!-- Push Notifications -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neo-sunken text-primary">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Push Notifications</p>
+<p class="text-[12px] text-outline">Real-time device alerts</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 neo-toggle-track bg-background rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-background after:neo-raised after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-fixed"></div>
+</label>
+</div>
+<!-- Volume Slider -->
+<div class="space-y-sm">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neo-sunken text-primary">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Alert Volume</p>
+</div>
+<span class="font-label-md text-primary" id="volume-val">40%</span>
+</div>
+<div class="neo-sunken h-2 w-full rounded-full relative flex items-center px-1">
+<input class="w-full h-1 appearance-none bg-transparent custom-slider" id="volume-slider" max="100" min="0" type="range" value="40"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Privacy -->
+<section class="space-y-md">
+<h2 class="font-headline-md text-headline-md text-on-surface-variant px-2">Privacy &amp; Security</h2>
+<div class="neo-raised rounded-3xl p-lg bg-background space-y-lg">
+<!-- Location Services -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neo-sunken text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Location Services</p>
+<p class="text-[12px] text-outline">Geofencing &amp; automations</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 neo-toggle-track bg-background rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-background after:neo-raised after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-fixed"></div>
+</label>
+</div>
+<!-- Privacy Profile Card -->
+<div class="neo-sunken rounded-2xl p-md flex items-center gap-4 bg-background/50">
+<div class="w-10 h-10 rounded-full neo-raised flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface">Data Protection Active</p>
+<p class="text-[10px] text-outline uppercase tracking-wider">Last Sync: 2m ago</p>
+</div>
+<button class="px-4 py-2 rounded-xl neo-raised font-label-sm text-label-sm text-primary active:neo-button-active transition-all">Manage</button>
+</div>
+</div>
+</section>
+<!-- Sign Out Button -->
+<section class="pt-4">
+<button class="w-full py-4 rounded-2xl neo-raised text-error font-headline-md text-headline-md active:neo-button-active transition-all">
+                Sign Out
+            </button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<script>
+        // Update slider values dynamically
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeVal = document.getElementById('volume-val');
+        volumeSlider.addEventListener('input', (e) => {
+            volumeVal.textContent = e.target.value + '%';
+        });
+
+        const sensitivitySlider = document.getElementById('sensitivity-slider');
+        const sensitivityVal = document.getElementById('sensitivity-val');
+        sensitivitySlider.addEventListener('input', (e) => {
+            sensitivityVal.textContent = e.target.value + '%';
+        });
+
+        // Dark Mode Simulation
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                // In a real app, we'd toggle a .dark class on <html>
+                // For this demo, let's show a subtle visual cue or just the toggle state
+                console.log('Dark Mode Requested');
+            }
+        });
+
+        // Micro-interactions for buttons
+        document.querySelectorAll('.neo-raised').forEach(button => {
+            button.addEventListener('touchstart', () => {
+                button.classList.add('neo-button-active');
+            });
+            button.addEventListener('touchend', () => {
+                button.classList.remove('neo-button-active');
+            });
+        });
+    </script>
+</body></html>

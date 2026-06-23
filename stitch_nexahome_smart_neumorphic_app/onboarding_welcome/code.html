@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#565a5c",
+                    "primary-container": "#7c4dff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-primary-fixed": "#20005f",
+                    "surface-container": "#eeeef0",
+                    "surface-container-high": "#e8e8ea",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "surface-bright": "#f9f9fc",
+                    "primary": "#632ce5",
+                    "primary-fixed": "#e8deff",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#6833ea",
+                    "secondary-container": "#1e70e4",
+                    "on-tertiary-fixed": "#191c1e",
+                    "outline": "#7a7487",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "on-background": "#1a1c1e",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "secondary": "#0058bd",
+                    "outline-variant": "#cac3d8",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f3f6",
+                    "on-primary-container": "#fcf6ff",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1a1c1e",
+                    "surface-dim": "#dadadc",
+                    "tertiary-container": "#6f7275",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#004495",
+                    "surface": "#f9f9fc",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "inverse-surface": "#2f3133",
+                    "primary-fixed-dim": "#cdbdff",
+                    "secondary-fixed": "#d8e2ff",
+                    "background": "#f9f9fc",
+                    "surface-variant": "#e2e2e5",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-tertiary-container": "#f6f8fb",
+                    "inverse-primary": "#cdbdff",
+                    "on-tertiary-fixed-variant": "#44474a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Neomorphic Raised State */
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), 
+                        -6px -6px 12px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Neomorphic Sunken State */
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.08), 
+                        inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Hero Image Container Shadow */
+        .hero-shadow {
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05), 
+                        -10px -10px 20px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Primary Action Button Hover/Active */
+        .btn-primary-active:active {
+            transform: scale(0.96);
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.1s ease;
+        }
+
+        /* Animation for dots */
+        .dot-active {
+            width: 24px;
+            background-color: #632ce5;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-element {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-between">
+<!-- Top Bar / Skip Button -->
+<header class="w-full flex justify-end items-center px-margin-mobile py-lg fixed top-0 left-0 z-50">
+<button class="neo-raised px-4 py-2 rounded-xl text-primary font-label-md transition-all active:scale-95 duration-200">
+            Skip
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full flex flex-col items-center justify-center pt-24 px-margin-mobile space-y-lg">
+<!-- Hero Illustration Container -->
+<div class="w-full max-w-[340px] aspect-square rounded-[40px] neo-raised relative overflow-hidden flex items-center justify-center p-md floating-element">
+<div class="w-full h-full rounded-[32px] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A futuristic, high-tech architectural visualization of a smart home interior. The scene features clean lines, white marble surfaces, and floor-to-ceiling windows showing a twilight city view. Violet and indigo ambient glowing light accents outline intelligent home interfaces integrated into the walls. The aesthetic is clean, premium, and sophisticated, perfectly matching a high-end neomorphic UI design palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHkMCQdgiOOjr6kIW59Z9VuXt0dANPv3eQc3qzoesoQprI2JgpX3RmDu0BQwfgOhDtHdWDfCbDdwwsHxp8GlJq0LfB2DEODC5aeLxQziAZEYmsHCboiXq2RdubXAcdyZS0AQnCKiiL27cd-0vjNABkfHG_74ZKd30Kn0wjSvXKDtU5sQLcgUSuyML-3-MOXd23RZakLITaGO2eTiN0W438QyGDcrcLjGhubsMM0_3-d6FaXggOkAq9xifOpsmLvwFGEoNbJ_nKQhg"/>
+</div>
+<!-- Floating Decorative Glass Icons -->
+<div class="absolute -top-4 -right-4 w-16 h-16 neo-raised bg-background/80 backdrop-blur-md rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="bolt">bolt</span>
+</div>
+<div class="absolute -bottom-2 -left-4 w-14 h-14 neo-raised bg-background/80 backdrop-blur-md rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="lock">lock</span>
+</div>
+</div>
+<!-- Typography Cluster -->
+<div class="w-full text-center space-y-md pt-md">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface font-extrabold tracking-tight">
+                Control Your Home Smarter
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant px-md leading-relaxed">
+                Experience the ultimate comfort and security with NexaHome's premium automation.
+            </p>
+</div>
+</main>
+<!-- Navigation & Indicators Footer -->
+<footer class="w-full px-margin-mobile pb-12 flex flex-col items-center space-y-xl">
+<!-- Page Indicator Dots -->
+<div class="flex items-center space-x-2">
+<div class="h-2 dot-active rounded-full"></div>
+<div class="h-2 w-2 bg-outline-variant rounded-full neo-sunken"></div>
+<div class="h-2 w-2 bg-outline-variant rounded-full neo-sunken"></div>
+</div>
+<!-- Primary Call to Action -->
+<div class="w-full max-w-[340px]">
+<button class="w-full py-5 rounded-[24px] bg-background neo-raised text-primary font-headline-md hover:opacity-90 transition-all active:scale-95 duration-200 flex items-center justify-center group" onclick="handleGetStarted()">
+<span class="mr-2">Get Started</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</footer>
+<!-- Background Decorative Elements -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-container/5 blur-[120px] rounded-full -z-10"></div>
+<script>
+        // Simple micro-interaction for the button
+        function handleGetStarted() {
+            const btn = event.currentTarget;
+            btn.classList.remove('neo-raised');
+            btn.classList.add('neo-sunken');
+            
+            // Revert after a short delay to simulate tap
+            setTimeout(() => {
+                btn.classList.remove('neo-sunken');
+                btn.classList.add('neo-raised');
+                console.log('Navigating to next onboarding step...');
+            }, 150);
+        }
+
+        // Parallax effect on mouse move (Desktop Only)
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const moveX = (e.clientX - window.innerWidth / 2) / 50;
+                const moveY = (e.clientY - window.innerHeight / 2) / 50;
+                const hero = document.querySelector('.floating-element');
+                if (hero) {
+                    hero.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                }
+            }
+        });
+    </script>
+</body></html>

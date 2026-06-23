@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Device Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#cac3d8",
+                    "tertiary": "#565a5c",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eeeef0",
+                    "surface-bright": "#f9f9fc",
+                    "primary-fixed-dim": "#cdbdff",
+                    "primary-container": "#7c4dff",
+                    "on-background": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#004495",
+                    "secondary-container": "#1e70e4",
+                    "surface-variant": "#e2e2e5",
+                    "surface-dim": "#dadadc",
+                    "on-surface": "#1a1c1e",
+                    "surface-container-high": "#e8e8ea",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#6f7275",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#cdbdff",
+                    "secondary": "#0058bd",
+                    "primary-fixed": "#e8deff",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "background": "#f9f9fc",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "outline": "#7a7487",
+                    "on-tertiary-container": "#f6f8fb",
+                    "surface-tint": "#6833ea",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9fc",
+                    "on-primary-fixed": "#20005f",
+                    "on-primary-container": "#fcf6ff",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "primary": "#632ce5",
+                    "inverse-on-surface": "#f0f0f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.8), 0 0 0 2px rgba(99, 44, 229, 0.2);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #632ce5 0%, #7c4dff 100%);
+        }
+
+        .active-scale:active {
+            transform: scale(0.95);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- Top App Bar (Shared Component Strategy) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<button class="flex items-center justify-center w-10 h-10 rounded-full neo-raised active-scale">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full neo-raised overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A hyper-realistic, close-up studio portrait of a friendly professional man in his 30s with a clean haircut, wearing a minimalist grey sweater. The lighting is soft and directional, creating gentle shadows that emphasize a high-end, premium aesthetic. The background is a clean, neutral studio grey, matching a sophisticated smart-home application interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBHdGDb3d3A_TvAINXULG5VL8dSvXJzGq91wfyD0K1lZ5AyKpuGxbTsMGGKI4ze0IhL-eh6VmCYOHZ6A-z58bknWTRINZPyGOECLKHTf4pDy9VnvPIORLCBTCBLxV7lD7VSzg70oXhztInOc93GxGkMwAElxYsW2c-g-H0e5UhBcEuYQYwUriQP26kV1jKoPfzfle7bfg1c8I6NZxkrZZUHR4gW5D1SWQDogftfvLK96Nd3_jTPN6ieZwUAJQiqAVNPkDNS43XWok"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-32 px-margin-mobile max-w-lg mx-auto w-full">
+<!-- Welcome / Hero Area -->
+<div class="mb-lg space-y-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Device Setup</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Configure your new smart device for the NexaHome ecosystem.</p>
+</div>
+<!-- Form Card Container -->
+<div class="bg-background rounded-[24px] neo-raised p-lg space-y-xl">
+<!-- Device Visualization (Visual context) -->
+<div class="flex flex-col items-center justify-center py-md">
+<div class="w-32 h-32 rounded-full neo-sunken flex items-center justify-center mb-md relative">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">sensors</span>
+<div class="absolute -top-1 -right-1 w-8 h-8 rounded-full primary-gradient neo-raised flex items-center justify-center border-2 border-background">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase">Pairing Successful</span>
+</div>
+<!-- Form Fields -->
+<form class="space-y-lg">
+<!-- Device Name Input -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant ml-xs">Device Name</label>
+<div class="neo-sunken rounded-xl px-md py-md bg-background flex items-center">
+<span class="material-symbols-outlined text-outline mr-md">edit</span>
+<input class="w-full bg-transparent border-none p-0 font-body-md text-on-surface placeholder:text-outline-variant focus:ring-0" placeholder="e.g. Living Room Lamp" type="text"/>
+</div>
+</div>
+<!-- Room Selection Dropdown -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant ml-xs">Room Selection</label>
+<div class="neo-sunken rounded-xl px-md py-md bg-background flex items-center relative">
+<span class="material-symbols-outlined text-outline mr-md">meeting_room</span>
+<select class="w-full bg-transparent border-none p-0 font-body-md text-on-surface appearance-none focus:ring-0">
+<option disabled="" selected="" value="">Select a room</option>
+<option value="living_room">Living Room</option>
+<option value="kitchen">Kitchen</option>
+<option value="bedroom">Master Bedroom</option>
+<option value="office">Home Office</option>
+<option value="garage">Garage</option>
+</select>
+<span class="material-symbols-outlined absolute right-md pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+<!-- Device Type Grid (Selection) -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant ml-xs">Device Type</label>
+<div class="grid grid-cols-2 gap-md">
+<!-- Type Option 1 -->
+<button class="neo-sunken rounded-xl p-md flex flex-col items-center gap-xs border-2 border-primary active-scale" type="button">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-label-sm text-label-sm text-on-surface">Lighting</span>
+</button>
+<!-- Type Option 2 -->
+<button class="neo-raised rounded-xl p-md flex flex-col items-center gap-xs hover:bg-surface-container-low transition-colors active-scale" type="button">
+<span class="material-symbols-outlined text-on-surface-variant">thermostat</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Climate</span>
+</button>
+<!-- Type Option 3 -->
+<button class="neo-raised rounded-xl p-md flex flex-col items-center gap-xs hover:bg-surface-container-low transition-colors active-scale" type="button">
+<span class="material-symbols-outlined text-on-surface-variant">videocam</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Security</span>
+</button>
+<!-- Type Option 4 -->
+<button class="neo-raised rounded-xl p-md flex flex-col items-center gap-xs hover:bg-surface-container-low transition-colors active-scale" type="button">
+<span class="material-symbols-outlined text-on-surface-variant">outlet</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Power</span>
+</button>
+</div>
+</div>
+</form>
+<!-- Submit Button Area -->
+<div class="pt-md">
+<button class="w-full py-md rounded-xl primary-gradient text-white font-headline-md text-headline-md neo-raised shadow-[0px_8px_16px_rgba(99,44,229,0.3)] active-scale transition-all duration-200">
+                    Complete Setup
+                </button>
+</div>
+</div>
+<!-- Secondary Information -->
+<div class="mt-xl p-lg rounded-[24px] neo-sunken flex items-start gap-md">
+<span class="material-symbols-outlined text-primary-container">info</span>
+<p class="font-label-md text-label-md text-on-surface-variant leading-relaxed">
+                Automations for this device can be configured in the <span class="text-primary font-bold">Auto</span> tab once setup is finalized.
+            </p>
+</div>
+</main>
+<!-- Navigation Shell (Suppressed based on Transactional Flow logic) -->
+<!-- Note: Following "The Destination Rule", since this is a Device Setup Form (Transactional/Task-Focused), 
+         the global navigation shell is suppressed to focus user attention on the setup task. -->
+<script>
+        // Micro-interactions for Device Type selection
+        const typeButtons = document.querySelectorAll('.grid button');
+        typeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                typeButtons.forEach(b => {
+                    b.classList.remove('neo-sunken', 'border-primary');
+                    b.classList.add('neo-raised');
+                    const icon = b.querySelector('.material-symbols-outlined');
+                    const label = b.querySelector('span:last-child');
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    icon.classList.replace('text-primary', 'text-on-surface-variant');
+                    label.classList.replace('text-on-surface', 'text-on-surface-variant');
+                });
+                btn.classList.remove('neo-raised');
+                btn.classList.add('neo-sunken', 'border-primary');
+                const activeIcon = btn.querySelector('.material-symbols-outlined');
+                const activeLabel = btn.querySelector('span:last-child');
+                activeIcon.style.fontVariationSettings = "'FILL' 1";
+                activeIcon.classList.replace('text-on-surface-variant', 'text-primary');
+                activeLabel.classList.replace('text-on-surface-variant', 'text-on-surface');
+            });
+        });
+    </script>
+</body></html>

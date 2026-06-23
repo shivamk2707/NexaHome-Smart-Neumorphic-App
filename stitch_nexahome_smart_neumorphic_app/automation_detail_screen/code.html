@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Automation Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+        .dark .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.4), -6px -6px 12px rgba(255,255,255,0.05);
+        }
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+        .dark .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.4), inset -4px -4px 8px rgba(255,255,255,0.05);
+        }
+        .neomorph-pressed {
+            box-shadow: inset 6px 6px 12px rgba(0,0,0,0.1), inset -6px -6px 12px rgba(255,255,255,0.8);
+        }
+        .primary-glow {
+            box-shadow: 0 0 20px rgba(99, 44, 229, 0.3), 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flow-line {
+            background: linear-gradient(to bottom, #632ce5 50%, transparent 50%);
+            background-size: 1px 20px;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cac3d8",
+                        "tertiary": "#565a5c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container": "#eeeef0",
+                        "surface-bright": "#f9f9fc",
+                        "primary-fixed-dim": "#cdbdff",
+                        "primary-container": "#7c4dff",
+                        "on-background": "#1a1c1e",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#004495",
+                        "secondary-container": "#1e70e4",
+                        "surface-variant": "#e2e2e5",
+                        "surface-dim": "#dadadc",
+                        "on-surface": "#1a1c1e",
+                        "surface-container-high": "#e8e8ea",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#494455",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6f7275",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#cdbdff",
+                        "secondary": "#0058bd",
+                        "primary-fixed": "#e8deff",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "background": "#f9f9fc",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "outline": "#7a7487",
+                        "on-tertiary-container": "#f6f8fb",
+                        "surface-tint": "#6833ea",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed": "#20005f",
+                        "on-primary-container": "#fcf6ff",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "primary": "#632ce5",
+                        "inverse-on-surface": "#f0f0f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- Top AppBar (from JSON guidance) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center active:scale-95 duration-100 transition-transform">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Morning Routine</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile">
+<!-- Automation Meta Header -->
+<div class="mb-lg flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container-high px-md py-xs rounded-full neomorph-sunken">Active</span>
+<div class="flex items-center gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Last run: 4h ago</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">This routine triggers your smart home environment to prepare for the day.</p>
+</div>
+<!-- IF-THEN Visual Flow -->
+<div class="relative flex flex-col items-center">
+<!-- TRIGGER BLOCK (IF) -->
+<div class="w-full relative z-10">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-primary font-bold uppercase tracking-widest px-xs">IF</span>
+<div class="h-[1px] flex-grow bg-outline-variant opacity-30"></div>
+</div>
+<div class="neomorph-raised bg-background rounded-xl p-lg flex items-center justify-between group transition-all duration-300">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full neomorph-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">schedule</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">07:00 AM</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Every Weekday</p>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center text-on-surface-variant active:neomorph-sunken">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Neomorphic Connector Line -->
+<div class="h-12 w-1 flow-line opacity-20"></div>
+<div class="w-8 h-8 rounded-full neomorph-sunken flex items-center justify-center z-10 -my-2 bg-background">
+<span class="material-symbols-outlined text-primary text-sm">arrow_downward</span>
+</div>
+<div class="h-12 w-1 flow-line opacity-20"></div>
+<!-- ACTION BLOCK (THEN) -->
+<div class="w-full relative z-10">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-primary font-bold uppercase tracking-widest px-xs">THEN</span>
+<div class="h-[1px] flex-grow bg-outline-variant opacity-30"></div>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Action 1: Lights -->
+<div class="neomorph-raised bg-background rounded-xl p-lg flex flex-col gap-md group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full neomorph-sunken flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[32px]">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Living Room Lights</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Set Brightness to 70%</p>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">settings_input_component</span>
+</button>
+</div>
+<!-- Neomorphic Slider Well -->
+<div class="h-12 w-full neomorph-sunken rounded-full relative overflow-hidden px-1 flex items-center">
+<div class="h-10 bg-primary rounded-full" style="width: 70%"></div>
+<div class="absolute right-6 font-label-md text-label-md text-on-surface font-bold">70%</div>
+<!-- Slider Handle -->
+<div class="absolute left-[calc(70%-20px)] w-10 h-10 rounded-full neomorph-raised bg-background shadow-lg border border-white/20"></div>
+</div>
+</div>
+<!-- Action 2: Coffee Machine -->
+<div class="neomorph-raised bg-background rounded-xl p-lg flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full neomorph-sunken flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[32px]">coffee_maker</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Coffee Machine</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Start Brewing: Espresso</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<!-- Toggle -->
+<div class="w-14 h-8 neomorph-sunken rounded-full p-1 relative flex items-center">
+<div class="w-6 h-6 rounded-full neomorph-raised bg-background translate-x-6"></div>
+</div>
+</div>
+</div>
+<!-- Add Action Placeholder -->
+<button class="w-full py-md rounded-xl neomorph-sunken flex items-center justify-center gap-sm text-on-surface-variant border-2 border-dashed border-outline-variant/30 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md text-label-md">Add another action</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Atmospheric Background Element -->
+<div class="fixed bottom-32 right-[-100px] w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+<div class="fixed top-48 left-[-100px] w-64 h-64 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+</main>
+<!-- FAB for Running Manually (Guidance says suppress on Details, but it is useful here for testing) -->
+<button class="fixed bottom-28 right-margin-mobile w-14 h-14 rounded-full primary-glow bg-primary text-on-primary flex items-center justify-center z-40 active:scale-90 duration-200 shadow-xl">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<!-- Bottom Navigation (from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic for neomorphic states
+        document.querySelectorAll('.neomorph-raised').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.remove('neomorph-raised');
+                button.classList.add('neomorph-sunken');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('neomorph-sunken');
+                button.classList.add('neomorph-raised');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('neomorph-sunken');
+                button.classList.add('neomorph-raised');
+            });
+        });
+
+        // Mock slider interaction
+        const sliderHandle = document.querySelector('.neomorph-raised.absolute');
+        if(sliderHandle) {
+            let isDragging = false;
+            sliderHandle.addEventListener('mousedown', () => isDragging = true);
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => {
+                if(!isDragging) return;
+                const container = sliderHandle.parentElement;
+                const rect = container.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                let percent = Math.min(Math.max(0, (x / rect.width) * 100), 100);
+                
+                const bar = container.querySelector('.bg-primary');
+                const label = container.querySelector('.text-on-surface');
+                
+                bar.style.width = percent + '%';
+                sliderHandle.style.left = `calc(${percent}% - 20px)`;
+                label.innerText = Math.round(percent) + '%';
+            });
+        }
+    </script>
+</body></html>

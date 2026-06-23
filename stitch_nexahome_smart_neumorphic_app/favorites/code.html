@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Favorites</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --neumorph-light: -6px -6px 12px rgba(255, 255, 255, 0.8);
+      --neumorph-dark: 6px 6px 12px rgba(0, 0, 0, 0.1);
+      --neumorph-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+      --neumorph-inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9fc;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .neomorph-raised {
+      box-shadow: var(--neumorph-light), var(--neumorph-dark);
+    }
+
+    .neomorph-sunken {
+      box-shadow: var(--neumorph-inset-light), var(--neumorph-inset-dark);
+    }
+
+    .neomorph-active {
+      background: linear-gradient(145deg, #7c4dff, #632ce5);
+      box-shadow: 0 0 15px rgba(99, 44, 229, 0.4), var(--neumorph-dark);
+    }
+
+    /* Custom toggle styles */
+    .toggle-track {
+      width: 48px;
+      height: 24px;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .active-toggle .toggle-thumb {
+      transform: translateX(24px);
+      background-color: #ffffff;
+    }
+
+    .active-toggle .toggle-track {
+      background-color: #7c4dff;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#e0e3e6",
+            "surface-container-high": "#e8e8ea",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#adc6ff",
+            "primary-container": "#7c4dff",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#20005f",
+            "inverse-surface": "#2f3133",
+            "on-background": "#1a1c1e",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#d8e2ff",
+            "primary": "#632ce5",
+            "background": "#f9f9fc",
+            "on-tertiary-fixed-variant": "#44474a",
+            "on-secondary-fixed": "#001a42",
+            "on-error": "#ffffff",
+            "on-primary": "#ffffff",
+            "surface-tint": "#6833ea",
+            "outline": "#7a7487",
+            "inverse-primary": "#cdbdff",
+            "surface-container": "#eeeef0",
+            "secondary": "#0058bd",
+            "tertiary": "#565a5c",
+            "on-primary-fixed-variant": "#4f00d0",
+            "surface-container-highest": "#e2e2e5",
+            "inverse-on-surface": "#f0f0f3",
+            "on-tertiary-fixed": "#191c1e",
+            "surface-dim": "#dadadc",
+            "tertiary-fixed-dim": "#c4c7ca",
+            "primary-fixed": "#e8deff",
+            "secondary-container": "#1e70e4",
+            "on-primary-container": "#fcf6ff",
+            "on-tertiary-container": "#f6f8fb",
+            "primary-fixed-dim": "#cdbdff",
+            "on-surface-variant": "#494455",
+            "on-surface": "#1a1c1e",
+            "surface-variant": "#e2e2e5",
+            "outline-variant": "#cac3d8",
+            "on-secondary-container": "#fefcff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#004495",
+            "surface-container-low": "#f3f3f6",
+            "surface-bright": "#f9f9fc",
+            "on-error-container": "#93000a",
+            "tertiary-container": "#6f7275",
+            "surface": "#f9f9fc"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1.5rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xl": "32px",
+            "md": "16px",
+            "gutter": "16px",
+            "margin-desktop": "40px",
+            "xs": "4px",
+            "margin-mobile": "20px",
+            "sm": "8px",
+            "lg": "24px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "display": ["Inter"],
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+            "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional close-up studio portrait of a modern smart home user, featuring soft high-key lighting and a minimalist background that echoes a clean tech aesthetic. The individual has a friendly, confident expression, captured with a shallow depth of field. The lighting highlights textures of skin and fabric, utilizing a palette of soft whites and cool greys with a touch of deep violet in the clothing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6X2r4JuWoENi4KdBNFJPVOX3DIfTN7W6ToNUXN8eaqXcGpXGFqF85z5YdZsLLEv3eXFz-gnsBT_QVls940dzjPf7iT8hSnTuUupJ6hV45b1AqprKZeWTRmz44l3m_JLkLJq4fSLen7T3lVIsdl2Zx3WuuKpxqAxHCmI560o17xfxWFfz2oELi8olMrEycd6aqzfkttx6Qeca9ZeKQLn_9UrqI2n7BS4p5jq72ZCpnioE1MCh2wVVnCar9lKaQHLNcy5qp3rQlUYc"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-24 px-margin-mobile">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div class="space-y-1">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Favorites</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Quick access to your most used devices.</p>
+</div>
+<button class="flex items-center gap-2 px-md py-sm rounded-xl neomorph-raised bg-background text-primary font-label-md text-label-md hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+        Edit
+      </button>
+</div>
+<!-- Favorites Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Living Room Thermostat Card (Raised/Complex) -->
+<div class="neomorph-raised bg-background p-lg rounded-2xl flex flex-col gap-md transition-all duration-300">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" data-icon="thermostat">thermostat</span>
+</div>
+<div class="text-right">
+<span class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Living Room</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">22.5°C</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Climate Control</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Heating to 23°C</p>
+</div>
+<div class="neomorph-sunken rounded-xl h-2 w-full mt-2 overflow-hidden">
+<div class="bg-primary h-full w-3/4 rounded-full shadow-[0_0_8px_rgba(99,44,229,0.5)]"></div>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Intensity</span>
+<span class="font-label-md text-label-md text-on-surface">75%</span>
+</div>
+</div>
+<!-- Smart Lights (Toggle Interaction) -->
+<div class="neomorph-raised bg-background p-lg rounded-2xl flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" data-icon="lightbulb">lightbulb</span>
+</div>
+<button class="group" onclick="this.parentElement.parentElement.classList.toggle('active-toggle');">
+<div class="toggle-track neomorph-sunken flex items-center px-1">
+<div class="toggle-thumb neomorph-raised bg-white"></div>
+</div>
+</button>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Ceiling Lights</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Kitchen • Warm White</p>
+</div>
+<div class="flex gap-2 mt-sm">
+<div class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-[#FFF4E0]"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-[#E0F4FF]"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-[#F4E0FF]"></div>
+<button class="w-8 h-8 rounded-full neomorph-sunken flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Security Camera (Image/Video Context) -->
+<div class="neomorph-raised bg-background p-lg rounded-2xl flex flex-col gap-md">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-widest">Live • Front Porch</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="videocam">videocam</span>
+</div>
+<div class="relative aspect-video rounded-xl overflow-hidden neomorph-sunken border-4 border-surface-container">
+<img class="w-full h-full object-cover grayscale-[20%]" data-alt="A crisp, high-definition security camera view of a modern minimalist house entrance during the golden hour. The image features clean architectural lines, a sleek black wooden door, and lush green landscaping softly lit by warm evening sun. The overall aesthetic is high-end, secure, and peaceful, with a professional color grade favoring natural earth tones and deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7CLgJ3388cynd5RAwZx2ynv51WthOEzOyZ_ICTWxprOpB6SS0o7iwi6NYs8ZmxZ8qIwxTk-qxWSAwYxoasJxFYHoWa_TfTiCirAu9I_Eo_QC4AydDRtg6hRppYmjMhwfTFsJQIkcRDowlFn2LpVG5AfzwCDmS0rjZlNpeDyDHda1r8-yZLnuzFqJEFKFGbUl9DC4slhQyN1W_gye8t5OaPzz-HkOKAM07JkXJgfJvUpLvrFOp1CUO5jbztAHW9HA1cFZc_M5XIAQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<div class="absolute bottom-2 right-2 flex gap-1">
+<div class="px-2 py-1 bg-black/50 backdrop-blur-md rounded text-[10px] text-white font-bold tracking-widest uppercase">Cam 01</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-1">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Security</h3>
+<button class="neomorph-raised bg-background text-error p-2 rounded-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</button>
+</div>
+</div>
+<!-- Coffee Maker (Process/Status) -->
+<div class="neomorph-raised bg-background p-lg rounded-2xl flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]" data-icon="coffee_maker">coffee_maker</span>
+</div>
+<div class="px-3 py-1 rounded-full neomorph-sunken">
+<span class="font-label-sm text-label-sm text-secondary font-bold">In Progress</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Espresso Machine</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Brewing: Double Shot</p>
+</div>
+<div class="flex items-center gap-4 mt-sm">
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Progress</span>
+<span class="font-label-sm text-label-sm text-on-surface">65%</span>
+</div>
+<div class="h-2 w-full neomorph-sunken rounded-full overflow-hidden">
+<div class="h-full w-[65%] bg-secondary rounded-full"></div>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="stop">stop</span>
+</button>
+</div>
+</div>
+<!-- Media Center (Active/Gradient) -->
+<div class="neomorph-active p-lg rounded-2xl flex flex-col gap-md text-white">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" data-icon="tv">tv</span>
+</div>
+<span class="material-symbols-outlined opacity-80" data-icon="more_vert">more_vert</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold">Home Cinema</h3>
+<p class="font-body-md text-body-md opacity-90">Playing: Interstellar (4K)</p>
+</div>
+<div class="flex items-center justify-between mt-sm">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary-container bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Small avatar of a person with a bright smile, clean background, modern look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAskhEsvCAQo8TPwfm666M2ExQDljYbezN8pUH4PnypoAN1ej_4AFzT9kzgAqrSxn0TM2YmbY3quP9HnnnW272JMBw0I24DE_7wp11gVBm61xSh27rjY_kMpTjgYaWIzX9Z-TfONfnTekrPRN18E-1LQNMwa0S4fyQ7Ow8t18q9p0PW-Mrwx1OOs0kDIB8Cl-MIC3V__GyWqqAkNaLLOBVeDj_1ZlFIAR4rOEJrJY26dEBKp97b48AtfCVqW70UlFRwyZcFroxzdFI"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-primary-container bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Small avatar of a second person, diverse appearance, high key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9oeTjFx2fDj0rIRJkR4ruX3P41xi40QQ395P1xYx8fsihd5oikM_7XoOHZFuQ5wnUZNGuxWvT7x6PVkjpt7NPJV_iR0-OQmWHLjYLPhbqAcnIVTTZd591r3jcbB3JLlrFxAHxYr-FGhXhoNuyQbYLkOGpYoaXjhut-i5ZzB9Cqrifp3OhMnMN_zSKUMwwkzdeqA-HVi6nHgCvl_z3I5PNIEqEYi6jFPhyqAmCoV4BquL5eTucFY_hu9NOQmeal9E-sOJJzwu9tdQ"/>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined" data-icon="skip_previous">skip_previous</span>
+<span class="material-symbols-outlined" data-icon="pause_circle" style="font-variation-settings: 'FILL' 1;">pause_circle</span>
+<span class="material-symbols-outlined" data-icon="skip_next">skip_next</span>
+</div>
+</div>
+</div>
+<!-- Add New Card -->
+<button class="border-2 border-dashed border-outline-variant p-lg rounded-2xl flex flex-col items-center justify-center gap-md text-on-surface-variant hover:border-primary hover:text-primary transition-all group">
+<div class="w-16 h-16 rounded-full neomorph-raised flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]" data-icon="add">add</span>
+</div>
+<span class="font-headline-md text-headline-md font-medium">Add Device</span>
+</button>
+</div>
+<!-- Quick Scenes Section -->
+<div class="mt-xl">
+<h2 class="font-headline-md text-headline-md text-on-background mb-lg">Favorite Scenes</h2>
+<div class="flex gap-md overflow-x-auto pb-4 -mx-2 px-2 no-scrollbar">
+<!-- Scene 1 -->
+<button class="flex-shrink-0 flex items-center gap-3 px-lg py-md neomorph-raised bg-background rounded-2xl active:neomorph-sunken transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="nightlight">nightlight</span>
+<span class="font-label-md text-label-md text-on-surface font-bold whitespace-nowrap">Good Night</span>
+</button>
+<!-- Scene 2 -->
+<button class="flex-shrink-0 flex items-center gap-3 px-lg py-md neomorph-raised bg-background rounded-2xl active:neomorph-sunken transition-all">
+<span class="material-symbols-outlined text-secondary" data-icon="work">work</span>
+<span class="font-label-md text-label-md text-on-surface font-bold whitespace-nowrap">Productive</span>
+</button>
+<!-- Scene 3 -->
+<button class="flex-shrink-0 flex items-center gap-3 px-lg py-md neomorph-raised bg-background rounded-2xl active:neomorph-sunken transition-all">
+<span class="material-symbols-outlined text-error" data-icon="celebration">celebration</span>
+<span class="font-label-md text-label-md text-on-surface font-bold whitespace-nowrap">Party Mode</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<!-- Home Tab -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2 w-16 h-16 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Rooms Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 h-16 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm mt-1">Rooms</span>
+</a>
+<!-- Devices Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 h-16 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm mt-1">Devices</span>
+</a>
+<!-- Auto Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 h-16 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm mt-1">Auto</span>
+</a>
+<!-- Profile Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16 h-16 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<script>
+    // Lightweight interaction for cards
+    document.querySelectorAll('.neomorph-raised').forEach(card => {
+      card.addEventListener('mousedown', () => {
+        if (!card.classList.contains('active-toggle')) {
+          card.style.transform = 'scale(0.98)';
+        }
+      });
+      card.addEventListener('mouseup', () => {
+        card.style.transform = 'scale(1)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+      });
+    });
+
+    // Horizontal scroll mouse-wheel support for scenes
+    const scenesScroll = document.querySelector('.no-scrollbar');
+    if (scenesScroll) {
+      scenesScroll.addEventListener('wheel', (evt) => {
+        evt.preventDefault();
+        scenesScroll.scrollLeft += evt.deltaY;
+      });
+    }
+  </script>
+</body></html>

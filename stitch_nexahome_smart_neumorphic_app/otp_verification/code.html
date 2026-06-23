@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - OTP Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#565a5c",
+                    "primary-container": "#7c4dff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-primary-fixed": "#20005f",
+                    "surface-container": "#eeeef0",
+                    "surface-container-high": "#e8e8ea",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "surface-bright": "#f9f9fc",
+                    "primary": "#632ce5",
+                    "primary-fixed": "#e8deff",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#6833ea",
+                    "secondary-container": "#1e70e4",
+                    "on-tertiary-fixed": "#191c1e",
+                    "outline": "#7a7487",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "on-background": "#1a1c1e",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "secondary": "#0058bd",
+                    "outline-variant": "#cac3d8",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f3f6",
+                    "on-primary-container": "#fcf6ff",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1a1c1e",
+                    "surface-dim": "#dadadc",
+                    "tertiary-container": "#6f7275",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#004495",
+                    "surface": "#f9f9fc",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "inverse-surface": "#2f3133",
+                    "primary-fixed-dim": "#cdbdff",
+                    "secondary-fixed": "#d8e2ff",
+                    "background": "#f9f9fc",
+                    "surface-variant": "#e2e2e5",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-tertiary-container": "#f6f8fb",
+                    "inverse-primary": "#cdbdff",
+                    "on-tertiary-fixed-variant": "#44474a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9);
+        }
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+        .neo-button-active:active {
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1), inset -2px -2px 5px rgba(255,255,255,0.8);
+            transform: scale(0.98);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .otp-input:focus {
+            outline: none;
+            box-shadow: inset 4px 4px 8px rgba(99, 44, 229, 0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+            border: 1px solid #632ce5;
+        }
+        body {
+            background-color: #f9f9fc;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<button class="w-10 h-10 rounded-full flex items-center justify-center neo-raised neo-button-active hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</span>
+<div class="w-10 h-10 rounded-full neo-sunken p-1 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional headshot of a smiling young man in a modern office setting. The lighting is bright and warm, reflecting a premium light-mode aesthetic with soft shadows and high-end photographic quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb_xPx1d_oigSVxcRZj0arGMANddgAqwzdhzvh1r4HEgEJduuRo7uy4VQYZxKbkvzGpm6_e60mxuTiZ39ChlXmmAHDYgWYpdnOa7Sg1ts_1Xm--1bUHSOIB88eKeXST5Eb4But9QEk5ujB7q4CNp6r7xaT27EgkVsDTUSMPTbJm-SXAkczOP8OOg1h8VbujCH-u80IBXg-4cq7ZJkXP95cKSq0mmzTP7lb35mbz_Y3cop40xb7Qkq2DLkr-srmjDOe9H2XIUNSDUU"/>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-start pt-32 px-margin-mobile pb-80">
+<!-- Content Canvas -->
+<div class="w-full max-w-md flex flex-col items-center text-center space-y-lg">
+<div class="w-24 h-24 mb-md rounded-3xl flex items-center justify-center neo-raised bg-background">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">mark_email_read</span>
+</div>
+<div class="space-y-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">Verify Your Email</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mx-auto">
+                    We've sent a 6-digit verification code to <span class="text-primary font-semibold">alex@nexa.com</span>
+</p>
+</div>
+<!-- OTP Input Section -->
+<div class="flex gap-2 sm:gap-3 mt-lg w-full justify-center" id="otp-container">
+<div class="w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center neo-sunken bg-background border-none">
+<span class="font-headline-md text-headline-md text-on-surface otp-digit"></span>
+</div>
+<div class="w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center neo-sunken bg-background border-none">
+<span class="font-headline-md text-headline-md text-on-surface otp-digit"></span>
+</div>
+<div class="w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center neo-sunken bg-background border-none">
+<span class="font-headline-md text-headline-md text-on-surface otp-digit"></span>
+</div>
+<div class="w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center neo-sunken bg-background border-none">
+<span class="font-headline-md text-headline-md text-on-surface otp-digit"></span>
+</div>
+<div class="w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center neo-sunken bg-background border-none">
+<span class="font-headline-md text-headline-md text-on-surface otp-digit"></span>
+</div>
+<div class="w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center neo-sunken bg-background border-none">
+<span class="font-headline-md text-headline-md text-on-surface otp-digit"></span>
+</div>
+</div>
+<!-- Timer & Resend -->
+<div class="space-y-md mt-lg">
+<div class="flex items-center justify-center gap-2 text-primary font-semibold font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span id="timer">01:59</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">
+                    Didn't receive code? 
+                    <button class="text-primary font-bold hover:underline ml-1">Resend</button>
+</p>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full h-14 mt-lg bg-primary text-on-primary rounded-xl font-label-md text-label-md font-bold neo-raised shadow-[0px_4px_20px_rgba(99,44,229,0.3)] neo-button-active transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
+                Verify
+                <span class="material-symbols-outlined">verified_user</span>
+</button>
+</div>
+</main>
+<!-- Floating Keypad -->
+<section class="fixed bottom-0 left-0 w-full bg-background rounded-t-[32px] neo-raised pt-6 pb-margin-mobile px-margin-mobile z-50">
+<div class="grid grid-cols-3 gap-y-4 gap-x-4 max-w-md mx-auto">
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('1')">1</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('2')">2</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('3')">3</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('4')">4</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('5')">5</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('6')">6</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('7')">7</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('8')">8</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('9')">9</button>
+<div class="h-16"></div>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-on-surface font-headline-md text-headline-md neo-button-active" onclick="appendDigit('0')">0</button>
+<button class="h-16 rounded-2xl flex items-center justify-center neo-raised bg-background text-primary neo-button-active" onclick="popDigit()">
+<span class="material-symbols-outlined text-2xl">backspace</span>
+</button>
+</div>
+</section>
+<script>
+        let currentOtp = "";
+        const otpSpans = document.querySelectorAll('.otp-digit');
+        const timerElement = document.getElementById('timer');
+
+        function appendDigit(digit) {
+            if (currentOtp.length < 6) {
+                currentOtp += digit;
+                updateDisplay();
+            }
+        }
+
+        function popDigit() {
+            if (currentOtp.length > 0) {
+                currentOtp = currentOtp.slice(0, -1);
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            otpSpans.forEach((span, index) => {
+                span.textContent = currentOtp[index] || "";
+                
+                // Highlight the "active" box
+                const container = span.parentElement;
+                if (index === currentOtp.length) {
+                    container.classList.remove('neo-sunken');
+                    container.classList.add('neo-raised', 'ring-2', 'ring-primary/20');
+                } else if (currentOtp[index]) {
+                    container.classList.remove('neo-raised', 'ring-2', 'ring-primary/20');
+                    container.classList.add('neo-sunken');
+                } else {
+                    container.classList.remove('neo-raised', 'ring-2', 'ring-primary/20');
+                    container.classList.add('neo-sunken');
+                }
+            });
+        }
+
+        // Simple Timer Logic
+        let seconds = 119; // 01:59
+        const countdown = setInterval(() => {
+            let minutes = Math.floor(seconds / 60);
+            let remSeconds = seconds % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${remSeconds.toString().padStart(2, '0')}`;
+            if (seconds <= 0) clearInterval(countdown);
+            seconds--;
+        }, 1000);
+
+        // Initial visual state
+        updateDisplay();
+    </script>
+</body></html>

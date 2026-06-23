@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Smart Home Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.8);
+            --shadow-dark: 6px 6px 12px rgba(0, 0, 0, 0.1);
+            --shadow-light-inset: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+            --shadow-dark-inset: inset 4px 4px 8px rgba(0, 0, 0, 0.08);
+            
+            --dark-shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.05);
+            --dark-shadow-dark: 6px 6px 12px rgba(0, 0, 0, 0.4);
+            --dark-shadow-light-inset: inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+            --dark-shadow-dark-inset: inset 4px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .neomorph-raised {
+            box-shadow: var(--shadow-light), var(--shadow-dark);
+        }
+        .dark .neomorph-raised {
+            box-shadow: var(--dark-shadow-light), var(--dark-shadow-dark);
+        }
+
+        .neomorph-inset {
+            box-shadow: var(--shadow-light-inset), var(--shadow-dark-inset);
+        }
+        .dark .neomorph-inset {
+            box-shadow: var(--dark-shadow-light-inset), var(--dark-shadow-dark-inset);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-glow {
+            box-shadow: 0 0 20px rgba(99, 44, 229, 0.3), var(--shadow-light), var(--shadow-dark);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#cac3d8",
+                    "tertiary": "#565a5c",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eeeef0",
+                    "surface-bright": "#f9f9fc",
+                    "primary-fixed-dim": "#cdbdff",
+                    "primary-container": "#7c4dff",
+                    "on-background": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#004495",
+                    "secondary-container": "#1e70e4",
+                    "surface-variant": "#e2e2e5",
+                    "surface-dim": "#dadadc",
+                    "on-surface": "#1a1c1e",
+                    "surface-container-high": "#e8e8ea",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#6f7275",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#cdbdff",
+                    "secondary": "#0058bd",
+                    "primary-fixed": "#e8deff",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "background": "#f9f9fc",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "outline": "#7a7487",
+                    "on-tertiary-container": "#f6f8fb",
+                    "surface-tint": "#6833ea",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9fc",
+                    "on-primary-fixed": "#20005f",
+                    "on-primary-container": "#fcf6ff",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "primary": "#632ce5",
+                    "inverse-on-surface": "#f0f0f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution profile portrait of a modern homeowner in a bright, minimalist setting. The person has a friendly expression, with soft, natural light illuminating their face. The background is a clean, out-of-focus smart home interior with subtle violet and white accents, maintaining a premium and sophisticated tech-lifestyle aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvlUj1OxZLbd_K89HmllJYYKim89ZABIHExXAZSPpOkg6KIRPTPbW5oCzfvdx6iipYBJBDmlRq00F4bOJSz9-2zcA342D51o_bux9o1cplgVL7_wCw2nsK1N_lKGlo9OZATtdXhoRLpWMObYiIrfy-LVhLty0Z7cVcGkaWiH4UL9ZaOMGnB7RNY-SFYo63VT2PN-ilLzX6-n3ftOCdGJoxzakqX1yYxud84wT4nfOdWdC9pGo8D1UdEPEP89N3q0mr-R3KgBvuU9g"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-raised text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile">
+<!-- Welcome Section -->
+<section class="mb-lg">
+<p class="font-label-md text-on-surface-variant mb-1">Welcome back, Alex</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Home Overview</h2>
+</section>
+<!-- Bento Grid Status -->
+<div class="grid grid-cols-2 gap-lg mb-xl">
+<!-- Total Devices -->
+<div class="col-span-1 p-lg rounded-[24px] bg-background neomorph-raised flex flex-col gap-sm">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg neomorph-inset text-primary">
+<span class="material-symbols-outlined">devices</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant">Total Devices</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile">24</p>
+</div>
+</div>
+<!-- Active Devices -->
+<div class="col-span-1 p-lg rounded-[24px] bg-background neomorph-raised flex flex-col gap-sm">
+<div class="w-10 h-10 flex items-center justify-center rounded-lg neomorph-inset text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant">Active Now</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-secondary">12</p>
+</div>
+</div>
+<!-- Energy Consumption -->
+<div class="col-span-2 p-lg rounded-[32px] bg-background neomorph-raised relative overflow-hidden">
+<div class="relative z-10 flex justify-between items-end">
+<div>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">energy_savings_leaf</span>
+<p class="font-label-md text-on-surface-variant">Energy Consumed Today</p>
+</div>
+<div class="flex items-baseline gap-xs">
+<p class="text-[40px] font-bold leading-none tracking-tight">8.4</p>
+<p class="font-headline-md text-on-surface-variant">kWh</p>
+</div>
+</div>
+<div class="w-24 h-12 flex items-end gap-1">
+<div class="w-2 bg-primary-fixed-dim rounded-t-full h-1/2"></div>
+<div class="w-2 bg-primary-fixed-dim rounded-t-full h-3/4"></div>
+<div class="w-2 bg-primary-fixed-dim rounded-t-full h-2/3"></div>
+<div class="w-2 bg-primary-container rounded-t-full h-full"></div>
+<div class="w-2 bg-primary-fixed-dim rounded-t-full h-1/2"></div>
+</div>
+</div>
+<!-- Subtle background visualization hint -->
+<div class="absolute -right-8 -bottom-8 opacity-5">
+<span class="material-symbols-outlined text-[120px]">insights</span>
+</div>
+</div>
+<!-- Security Status -->
+<div class="col-span-2 p-lg rounded-[32px] bg-background neomorph-raised flex items-center justify-between">
+<div class="flex items-center gap-lg">
+<div class="w-16 h-16 flex items-center justify-center rounded-full neomorph-inset text-primary">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md">Security Status</h3>
+<p class="font-body-md text-on-surface-variant">Everything is protected</p>
+</div>
+</div>
+<div class="px-md py-sm rounded-full bg-primary-container text-on-primary font-label-md shadow-lg">
+                    Armed
+                </div>
+</div>
+</div>
+<!-- Featured Areas / Rooms Scroll -->
+<section class="mb-xl">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md">Room Shortcuts</h3>
+<button class="text-primary font-label-md">View All</button>
+</div>
+<div class="flex gap-lg overflow-x-auto pb-4 px-1 -mx-1 hide-scrollbar">
+<!-- Living Room -->
+<div class="flex-shrink-0 w-44 p-md rounded-[24px] bg-background neomorph-raised flex flex-col gap-md">
+<div class="w-full h-28 rounded-xl overflow-hidden neomorph-inset">
+<img class="w-full h-full object-cover" data-alt="A high-end, cozy living room with a neutral color palette, featuring a plush sofa, minimalist coffee table, and soft ambient lighting. Large windows let in gentle daylight, highlighting textures of wood and fabric. The atmosphere is calm and inviting, presented in a clean, modern architectural photography style with a focus on smart home elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqK0cslWJiqb51suvYPBpG84bXOifyvThNPt9hL1kHq5hRvtUcVVKQiXcXy8dcwcGFqvEI7-1mH1XjBogmdjavhY5LvKLWG2G9Hyfi1twixx9tMKYDeY9R-uuwMqgqVQA4BImMgen6HhjuYXtOSJKkdOFVymWKRiyXmJBRMNaqpHzesAay8tPqsdj_Z17TcGyc5hsdslEHfHWUxlENqDBQ9Ha8D3qz5ky7AuNCInvepdgBW7SvhNs7wHBDPf3Bnu1vx3Yjh4_ynRg"/>
+</div>
+<div>
+<p class="font-headline-md text-on-surface">Living Room</p>
+<p class="font-label-sm text-on-surface-variant">4 Devices</p>
+</div>
+</div>
+<!-- Kitchen -->
+<div class="flex-shrink-0 w-44 p-md rounded-[24px] bg-background neomorph-raised flex flex-col gap-md">
+<div class="w-full h-28 rounded-xl overflow-hidden neomorph-inset">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern kitchen with marble countertops, high-end integrated appliances, and warm under-cabinet lighting. The design is minimalist and ultra-clean, with polished surfaces reflecting the soft light. The mood is sophisticated and functional, capturing the essence of a premium smart home culinary space in a bright, light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPLYM8kxv00XSjSoJ9f7192tlh9CjtNrU1hCB0hn4apKgmdRqGIz2G52BKba_SDTkbGNUtHQs9Xx2PzoAWtfefVTx_ov3PsehBaPrP0S8xiHzT6VI0YBKTRmMo4TrPteHtmPd2-uztw2cG3jBbgmf7N2P2SxxDgPFSL3d8Zj8HtQLTjrj8wGL9R78XKMd4LFV3HpQm_slJq_-m6qbXxHJb3r5rAztXFeISLcpGZfhhC6tf53gbt7tCDHDk67jpIBNX2_dLCJM0_js"/>
+</div>
+<div>
+<p class="font-headline-md text-on-surface">Kitchen</p>
+<p class="font-label-sm text-on-surface-variant">7 Devices</p>
+</div>
+</div>
+<!-- Master Bedroom -->
+<div class="flex-shrink-0 w-44 p-md rounded-[24px] bg-background neomorph-raised flex flex-col gap-md">
+<div class="w-full h-28 rounded-xl overflow-hidden neomorph-inset">
+<img class="w-full h-full object-cover" data-alt="A serene master bedroom with soft linens, atmospheric smart lighting in a gentle lavender hue, and minimal decor. The space feels expansive and tranquil, with high-quality finishes and an emphasis on comfort. The lighting is low-key yet clear, reinforcing a sense of peace and advanced smart control for relaxation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmiFVS6VPP6Eotda-qNzlvWVEQV7PYJ0HrzYcmAiivkqI8TRle_rw9_vhhQKLjzSkd-QIe9XWzwVjyBiX9W3qx7rZwuVTLtetjw1FCJArLaCqlWU3YZra8pNZGfSv3VTcL-M8RAAdX-Va_O_SSGd0xlB5-PANgAaN1vgBjrjBlIKDrL9THANmffntCi8Jv-_e52JaqNDyuNVSe_TLm-UDKYM2DmnTaNL5oZtRItwtfBrP4hkPKaN6H0e79Q4iqTgClKWaLxFfoWnA"/>
+</div>
+<div>
+<p class="font-headline-md text-on-surface">Bedroom</p>
+<p class="font-label-sm text-on-surface-variant">5 Devices</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Controls Section -->
+<section class="mb-lg">
+<h3 class="font-headline-md text-headline-md mb-md">Quick Controls</h3>
+<div class="flex flex-col gap-md">
+<!-- Smart Lock -->
+<div class="p-lg rounded-[24px] bg-background neomorph-raised flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-inset text-primary">
+<span class="material-symbols-outlined">lock_open</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Front Door Lock</p>
+<p class="font-label-sm text-on-surface-variant">Unlocked</p>
+</div>
+</div>
+<!-- Toggle Switch -->
+<button class="w-14 h-8 rounded-full bg-surface-container-high neomorph-inset relative p-1 transition-all">
+<div class="w-6 h-6 rounded-full bg-white shadow-sm transition-all translate-x-0"></div>
+</button>
+</div>
+<!-- Climate Control -->
+<div class="p-lg rounded-[24px] bg-background neomorph-raised flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-inset text-secondary">
+<span class="material-symbols-outlined">thermostat</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Main AC</p>
+<p class="font-label-sm text-on-surface-variant">22°C • Auto Mode</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg neomorph-raised text-on-surface-variant">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<p class="font-headline-md text-headline-md min-w-[32px] text-center">22</p>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg neomorph-raised text-on-surface-variant">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2 scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- Rooms -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<!-- Devices -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<!-- Auto -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-24 w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white shadow-[0_10px_20px_rgba(99,44,229,0.4)] z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<script>
+        // Simple Interaction logic for toggles and buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.classList.contains('neomorph-raised')) {
+                    this.classList.replace('neomorph-raised', 'neomorph-inset');
+                    setTimeout(() => {
+                        this.classList.replace('neomorph-inset', 'neomorph-raised');
+                    }, 150);
+                }
+            });
+        });
+
+        // Toggle Switch Animation
+        const toggleBtn = document.querySelector('button.rounded-full.neomorph-inset');
+        if (toggleBtn) {
+            let isOn = false;
+            toggleBtn.addEventListener('click', function() {
+                const thumb = this.querySelector('div');
+                isOn = !isOn;
+                if(isOn) {
+                    thumb.style.transform = 'translateX(24px)';
+                    this.classList.remove('bg-surface-container-high');
+                    this.classList.add('bg-primary-container');
+                    thumb.classList.add('shadow-md');
+                } else {
+                    thumb.style.transform = 'translateX(0)';
+                    this.classList.add('bg-surface-container-high');
+                    this.classList.remove('bg-primary-container');
+                    thumb.classList.remove('shadow-md');
+                }
+            });
+        }
+    </script>
+</body></html>

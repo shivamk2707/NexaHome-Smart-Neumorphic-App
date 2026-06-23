@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#cac3d8",
+                    "tertiary": "#565a5c",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eeeef0",
+                    "surface-bright": "#f9f9fc",
+                    "primary-fixed-dim": "#cdbdff",
+                    "primary-container": "#7c4dff",
+                    "on-background": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#004495",
+                    "secondary-container": "#1e70e4",
+                    "surface-variant": "#e2e2e5",
+                    "surface-dim": "#dadadc",
+                    "on-surface": "#1a1c1e",
+                    "surface-container-high": "#e8e8ea",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#6f7275",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#cdbdff",
+                    "secondary": "#0058bd",
+                    "primary-fixed": "#e8deff",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "background": "#f9f9fc",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "outline": "#7a7487",
+                    "on-tertiary-container": "#f6f8fb",
+                    "surface-tint": "#6833ea",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9fc",
+                    "on-primary-fixed": "#20005f",
+                    "on-primary-container": "#fcf6ff",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "primary": "#632ce5",
+                    "inverse-on-surface": "#f0f0f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            color: #1a1c1e;
+            font-family: 'Inter', sans-serif;
+        }
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+        .neomorph-button-active {
+            background: linear-gradient(145deg, #632ce5, #7c4dff);
+            box-shadow: 4px 4px 10px rgba(99, 44, 229, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.8);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .toggle-track {
+            width: 52px;
+            height: 28px;
+            transition: all 0.3s ease;
+        }
+        .toggle-thumb {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        input:checked + .toggle-track .toggle-thumb {
+            transform: translateX(24px);
+            background-color: white;
+        }
+        input:checked + .toggle-track {
+            background-color: #632ce5;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden border-2 border-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution close-up portrait of a young tech-savvy homeowner with a friendly expression. The lighting is soft and natural, coming from a large window in a modern, minimalist apartment. The overall aesthetic is clean and bright, matching a premium smart home application's light mode theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA30hiIqN4sPT14QJ2wDTXemu9pSBH-fITdf1jDX7N94xTzIeDoTqVXXPNrKXyd5AMxUgjHYO_1nbMC_Sll9dLCIzgSUbPJ4Jn5rgrCq2j2W10g8-OicpAsyfD4JLT4X9fIsUH0_Qz3EJ--qLxSV_0pELXIm1KvqDi7MbiI7mfY7z0WPAlbOqbiGj3ows3bmnLIqgrGgjuchYdoBd6pTOAYy_PtHl4w4GkGgM2M5g2E4705h4-HQBwtM6J-De9UTL894YoVqtdIA0I"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-raised text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile space-y-lg">
+<!-- Dashboard Header -->
+<section class="space-y-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Automation</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your intelligent home routines</p>
+</section>
+<!-- Stats Bento Row -->
+<section class="grid grid-cols-2 gap-md">
+<div class="p-md rounded-[24px] neomorph-raised bg-background flex flex-col gap-xs">
+<span class="material-symbols-outlined text-primary text-[28px]">bolt</span>
+<span class="font-headline-md text-headline-md">12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Actions</span>
+</div>
+<div class="p-md rounded-[24px] neomorph-raised bg-background flex flex-col gap-xs">
+<span class="material-symbols-outlined text-secondary text-[28px]">schedule</span>
+<span class="font-headline-md text-headline-md">07:30</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Next: Morning Zen</span>
+</div>
+</section>
+<!-- Routines List -->
+<section class="space-y-lg">
+<!-- Morning Zen -->
+<div class="p-lg rounded-[32px] neomorph-raised bg-background flex flex-col gap-md transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-2xl neomorph-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Morning Zen</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">8 Devices • Daily</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="toggle-track neomorph-sunken bg-surface-container rounded-full flex items-center px-1">
+<div class="toggle-thumb bg-surface-container-highest rounded-full shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="grid grid-cols-3 gap-sm">
+<div class="flex flex-col items-center gap-xs py-sm px-xs rounded-xl neomorph-sunken opacity-60">
+<span class="material-symbols-outlined text-[20px]">coffee</span>
+<span class="font-label-sm text-label-sm">Brewer</span>
+</div>
+<div class="flex flex-col items-center gap-xs py-sm px-xs rounded-xl neomorph-sunken opacity-60">
+<span class="material-symbols-outlined text-[20px]">curtains</span>
+<span class="font-label-sm text-label-sm">Blinds</span>
+</div>
+<div class="flex flex-col items-center gap-xs py-sm px-xs rounded-xl neomorph-sunken opacity-60">
+<span class="material-symbols-outlined text-[20px]">thermostat</span>
+<span class="font-label-sm text-label-sm">HVAC</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-xs border-t border-surface-variant/30">
+<span class="font-label-md text-label-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">alarm</span>
+                        Starts at 07:30 AM
+                    </span>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Edit</button>
+</div>
+</div>
+<!-- Cinema Mode -->
+<div class="p-lg rounded-[32px] neomorph-raised bg-background flex flex-col gap-md transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-2xl neomorph-sunken flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]">movie</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Cinema Mode</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">4 Devices • Manual</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="toggle-track neomorph-sunken bg-surface-container rounded-full flex items-center px-1">
+<div class="toggle-thumb bg-surface-container-highest rounded-full shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="h-24 w-full rounded-2xl overflow-hidden neomorph-sunken">
+<img class="w-full h-full object-cover grayscale opacity-50" data-alt="A cinematic, low-angle shot of a luxurious home theater setup with plush velvet seating and ambient neon violet cove lighting. The screen is large and glowing with a deep blue atmospheric scene. The environment is dark and immersive, representing a high-end smart home entertainment experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBXfhNYpyYYDRaLjUeWLamC8gfeqbARMgW-GKS58JWBKOJYmhmsFJIITmLmMJtoJcXmmS6v8yX4DHjIC25kgxt44bBpoDoBPetI1lU_ctRawJsfNUaMSy_u3qncCdfZTQ7Fr8ARNOGSgxEjaH057bILAt4BSum9rpYp-aioMipSLKYBbe1MKZsf5KhTRdI36owqLJ-QM8ZCA89tRJAQF7DfmVWc7Z8EIw4HCpuCDK7Vl09fA36e7DE2Xo6Vtgd4KWwUigVkoIkDkA"/>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Last used 2 days ago</span>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Configure</button>
+</div>
+</div>
+<!-- Vacation Mode -->
+<div class="p-lg rounded-[32px] neomorph-raised bg-background flex flex-col gap-md transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-2xl neomorph-sunken flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]">flight</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Vacation Mode</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Security focus • On demand</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="toggle-track neomorph-sunken bg-surface-container rounded-full flex items-center px-1">
+<div class="toggle-thumb bg-surface-container-highest rounded-full shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<span class="font-label-md text-label-md text-on-surface-variant italic">Locks doors, arms alarm, enables eco-mode</span>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Setup</button>
+</div>
+</div>
+</section>
+<!-- New Routine Button -->
+<button class="w-full py-lg rounded-[24px] neomorph-raised bg-background flex items-center justify-center gap-md font-headline-md text-headline-md text-primary active:scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">add_circle</span>
+            Create New Routine
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (Supressed based on context: It is a Dashboard so we might need a quick action, but user specified routine list cards already have triggers. Let's add a subtle floating 'Help/Chat' if needed, otherwise skip to keep clean) -->
+<script>
+        // Micro-interactions for toggles
+        document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const card = e.target.closest('.neomorph-raised');
+                if (e.target.checked) {
+                    card.classList.add('ring-2', 'ring-primary/20');
+                } else {
+                    card.classList.remove('ring-2', 'ring-primary/20');
+                }
+            });
+        });
+    </script>
+</body></html>

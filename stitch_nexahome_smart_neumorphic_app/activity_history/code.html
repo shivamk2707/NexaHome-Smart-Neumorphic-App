@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Activity History - NexaHome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "error": "#ba1a1a",
+                  "tertiary-fixed": "#e0e3e6",
+                  "surface-container-high": "#e8e8ea",
+                  "error-container": "#ffdad6",
+                  "secondary-fixed-dim": "#adc6ff",
+                  "primary-container": "#7c4dff",
+                  "on-secondary": "#ffffff",
+                  "on-primary-fixed": "#20005f",
+                  "inverse-surface": "#2f3133",
+                  "on-background": "#1a1c1e",
+                  "on-tertiary": "#ffffff",
+                  "secondary-fixed": "#d8e2ff",
+                  "primary": "#632ce5",
+                  "background": "#f9f9fc",
+                  "on-tertiary-fixed-variant": "#44474a",
+                  "on-secondary-fixed": "#001a42",
+                  "on-error": "#ffffff",
+                  "on-primary": "#ffffff",
+                  "surface-tint": "#6833ea",
+                  "outline": "#7a7487",
+                  "inverse-primary": "#cdbdff",
+                  "surface-container": "#eeeef0",
+                  "secondary": "#0058bd",
+                  "tertiary": "#565a5c",
+                  "on-primary-fixed-variant": "#4f00d0",
+                  "surface-container-highest": "#e2e2e5",
+                  "inverse-on-surface": "#f0f0f3",
+                  "on-tertiary-fixed": "#191c1e",
+                  "surface-dim": "#dadadc",
+                  "tertiary-fixed-dim": "#c4c7ca",
+                  "primary-fixed": "#e8deff",
+                  "secondary-container": "#1e70e4",
+                  "on-primary-container": "#fcf6ff",
+                  "on-tertiary-container": "#f6f8fb",
+                  "primary-fixed-dim": "#cdbdff",
+                  "on-surface-variant": "#494455",
+                  "on-surface": "#1a1c1e",
+                  "surface-variant": "#e2e2e5",
+                  "outline-variant": "#cac3d8",
+                  "on-secondary-container": "#fefcff",
+                  "surface-container-lowest": "#ffffff",
+                  "on-secondary-fixed-variant": "#004495",
+                  "surface-container-low": "#f3f3f6",
+                  "surface-bright": "#f9f9fc",
+                  "on-error-container": "#93000a",
+                  "tertiary-container": "#6f7275",
+                  "surface": "#f9f9fc"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "xl": "32px",
+                  "md": "16px",
+                  "gutter": "16px",
+                  "margin-desktop": "40px",
+                  "xs": "4px",
+                  "margin-mobile": "20px",
+                  "sm": "8px",
+                  "lg": "24px",
+                  "base": "8px"
+          },
+          "fontFamily": {
+                  "label-md": ["Inter"],
+                  "display": ["Inter"],
+                  "body-md": ["Inter"],
+                  "label-sm": ["Inter"],
+                  "headline-lg-mobile": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "headline-md": ["Inter"],
+                  "body-lg": ["Inter"]
+          },
+          "fontSize": {
+                  "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                  "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                  "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #f9f9fc;
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .neomorph-raised {
+      background: #f9f9fc;
+      box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.9);
+    }
+
+    .neomorph-sunken {
+      background: #f9f9fc;
+      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.05), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+    }
+
+    .neomorph-icon-raised {
+      background: #f9f9fc;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.06), -4px -4px 8px rgba(255, 255, 255, 1);
+    }
+
+    .timeline-line {
+      width: 2px;
+      background: #e2e2e5;
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #632ce5;
+      position: absolute;
+      left: 19px;
+      top: 32px;
+      z-index: 10;
+      box-shadow: 0 0 0 4px #f9f9fc;
+    }
+
+    /* Micro-interactions */
+    .active-scale:active {
+      transform: scale(0.96);
+      transition: transform 0.1s ease-out;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden border-2 border-white">
+<img class="w-full h-full object-cover" data-alt="A high-definition professional headshot of a young male professional in a modern smart-home setting. He has a warm smile and is looking directly at the camera. The background is a blurred, high-end minimalist living room with soft violet and neutral grey tones. The lighting is bright and natural, reflecting a clean, light-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS9V9c-sxhNbaZU8CUPlV2EgXGzHrNT223JFcWFlpB1JekjEpuxbMNGruMN6Txg_zve1mDJLG1SV_v3PyrNb6JJdi02syiPELJjsYcveJsNu5q1f3gZsSFy2PwzWE4wCmZNUPbkAjfIj2sLQvjgPa1wuBFi63X-Zdlsfaft9IxqAgk6AJnX4kvS_3HRPrOngCLtjmoBpM-02NKrA1RwdJeKwd7UIeVwnrGBKVjqdxSNcXv_3Qf68kfDGDZAVWA9dBAdxsj1bVw6Jc"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-raised text-primary active-scale">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-28 px-margin-mobile max-w-2xl mx-auto">
+<!-- Filter Section (Recessed UI) -->
+<div class="mb-lg neomorph-sunken rounded-2xl p-sm flex items-center gap-sm overflow-x-auto no-scrollbar">
+<button class="flex-shrink-0 px-md py-xs rounded-xl bg-primary text-white font-label-md text-label-md shadow-lg shadow-primary/20">All</button>
+<button class="flex-shrink-0 px-md py-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Security</button>
+<button class="flex-shrink-0 px-md py-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Climate</button>
+<button class="flex-shrink-0 px-md py-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Energy</button>
+<button class="flex-shrink-0 px-md py-xs rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Lights</button>
+</div>
+<!-- Timeline Content -->
+<section class="relative">
+<div class="timeline-line"></div>
+<!-- Date Header -->
+<div class="relative mb-lg">
+<div class="bg-background inline-block pr-md relative z-10 font-label-sm text-label-sm text-outline uppercase tracking-widest">Today, Oct 24</div>
+</div>
+<!-- Timeline Entry 1: Security -->
+<div class="relative pl-xl mb-xl group">
+<div class="timeline-dot"></div>
+<div class="neomorph-raised rounded-2xl p-lg transition-transform duration-300 group-hover:-translate-y-1">
+<div class="flex items-start justify-between mb-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-icon-raised text-primary">
+<span class="material-symbols-outlined" data-icon="lock_open">lock_open</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Front Door Unlocked</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">By Bryan</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">10:24 AM</span>
+</div>
+<div class="mt-md rounded-xl overflow-hidden neomorph-sunken h-32 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="A wide-angle security camera view of a modern apartment hallway featuring a sleek, smart-lock enabled wooden door. The lighting is soft and neutral with a slight violet hue in the shadows to match the smart home brand. The image is crisp and professional, capturing a clean, upscale interior environment with minimal clutter." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqwyItVBAol29Rrsy7APwEbPy7K0Yy4yoGi45NpvKut-m2QOacIDncBxfMmAMldu79lIDR5GePCLtTHY8OLM3TNSdt-UzNBCOgooAh1N0Tf9Mv7eQPXGimDIeLi0mBqTZt_4dqwH378RWNAV9zW5rcUG7xGpgAAr7meyA60-43ADqhf0nCuC0YivmjsHxVew9nGTW2rP5wmN0EgVYwnx9nfIRyr0MpIit1nVSG-P_K1zRxRuqM9D14EwqF3WFo_DCAsiKp2vJHOU8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"></div>
+</div>
+</div>
+</div>
+<!-- Timeline Entry 2: Climate -->
+<div class="relative pl-xl mb-xl group">
+<div class="timeline-dot !bg-secondary"></div>
+<div class="neomorph-raised rounded-2xl p-lg transition-transform duration-300 group-hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-icon-raised text-secondary">
+<span class="material-symbols-outlined" data-icon="thermostat">thermostat</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Living Room AC Adjusted</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Set to 21°C • Eco Mode</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">09:15 AM</span>
+</div>
+</div>
+</div>
+<!-- Timeline Entry 3: Energy Alert -->
+<div class="relative pl-xl mb-xl group">
+<div class="timeline-dot !bg-error"></div>
+<div class="neomorph-raised rounded-2xl p-lg border-l-4 border-error/20 transition-transform duration-300 group-hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-icon-raised text-error">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-error">Energy Spike Detected</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Kitchen Appliances • 4.2kW Usage</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">08:42 AM</span>
+</div>
+</div>
+</div>
+<!-- Date Header -->
+<div class="relative mb-lg mt-xl">
+<div class="bg-background inline-block pr-md relative z-10 font-label-sm text-label-sm text-outline uppercase tracking-widest">Yesterday, Oct 23</div>
+</div>
+<!-- Timeline Entry 4: Lighting -->
+<div class="relative pl-xl mb-xl group">
+<div class="timeline-dot !bg-tertiary"></div>
+<div class="neomorph-raised rounded-2xl p-lg transition-transform duration-300 group-hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-icon-raised text-tertiary">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Night Scene Activated</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">All exterior lights on • 20% Dimmed</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">10:00 PM</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active-scale" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active-scale" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active-scale" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2 active-scale" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active-scale" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+    // Simple intersection observer for scroll-reveal effect on timeline items
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.group').forEach(item => {
+      item.style.opacity = "0.7";
+      item.style.transform = "translateY(20px)";
+      item.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+      observer.observe(item);
+    });
+  </script>
+</body></html>

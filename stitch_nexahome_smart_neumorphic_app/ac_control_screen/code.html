@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#cac3d8",
+                    "tertiary": "#565a5c",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eeeef0",
+                    "surface-bright": "#f9f9fc",
+                    "primary-fixed-dim": "#cdbdff",
+                    "primary-container": "#7c4dff",
+                    "on-background": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#004495",
+                    "secondary-container": "#1e70e4",
+                    "surface-variant": "#e2e2e5",
+                    "surface-dim": "#dadadc",
+                    "on-surface": "#1a1c1e",
+                    "surface-container-high": "#e8e8ea",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#6f7275",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#cdbdff",
+                    "secondary": "#0058bd",
+                    "primary-fixed": "#e8deff",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "background": "#f9f9fc",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "outline": "#7a7487",
+                    "on-tertiary-container": "#f6f8fb",
+                    "surface-tint": "#6833ea",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9fc",
+                    "on-primary-fixed": "#20005f",
+                    "on-primary-container": "#fcf6ff",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "primary": "#632ce5",
+                    "inverse-on-surface": "#f0f0f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+
+        .neo-dial-track {
+            box-shadow: inset 10px 10px 20px rgba(0,0,0,0.05), inset -10px -10px 20px rgba(255,255,255,0.9);
+        }
+
+        .neo-dial-handle {
+            box-shadow: 8px 8px 16px rgba(0,0,0,0.12), -8px -8px 16px rgba(255,255,255,0.9);
+        }
+
+        .active-gradient {
+            background: linear-gradient(135deg, #632ce5 0%, #7c4dff 100%);
+            box-shadow: 0 0 15px rgba(99, 44, 229, 0.4);
+        }
+
+        .dial-rotation {
+            transform: rotate(var(--rotation, 0deg));
+            transition: transform 0.1s linear;
+        }
+        
+        .toggle-active {
+            box-shadow: 0 0 10px rgba(99, 44, 229, 0.3), inset 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 flex items-center justify-center neo-raised rounded-full active:scale-95 duration-100 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<div class="w-10 h-10 rounded-full neo-raised overflow-hidden border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern tech-savvy individual with friendly expression, high-key soft lighting, minimalist background, centered composition, high-end commercial photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFIk-p2hlT-4y562XVTAev5Da05P9dysxTLzWT8KVVBG9PfNYPU9p8VOm31xtxogTUlZtCR2aRhEmJLX_9wcIBrEoqjGsIUH9EHAUMyK5C4Q__Z4PGxTNqLOPD_Vy8qtYNDavQg0LIUFmUXJskg9GT1iIMraNXQFPaFKm6pyLRO_WY1EjcJpCajIGmDWHfr7E5d05ClO2bMOia9eA00dVus9O9IKBchhkZNikTA-bc-iKofD1M2yrMKpvGKiHW3-mQFw7B1xPv0yM"/>
+</div>
+</header>
+<main class="pt-32 pb-32 px-margin-mobile max-w-lg mx-auto">
+<!-- Room Heading -->
+<div class="mb-lg">
+<p class="font-label-md text-label-md text-on-surface-variant">Living Room</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Climate Control</h2>
+</div>
+<!-- Temperature Dial Section -->
+<section class="flex flex-col items-center justify-center py-xl">
+<div class="relative w-72 h-72 flex items-center justify-center rounded-full neo-dial-track bg-background">
+<!-- Dial Outer Ring/Track -->
+<svg class="absolute inset-0 w-full h-full -rotate-90 p-4">
+<circle cx="50%" cy="50%" fill="none" r="45%" stroke="#eeeef0" stroke-width="8"></circle>
+<circle cx="50%" cy="50%" fill="none" id="progress-ring" r="45%" stroke="url(#primaryGradient)" stroke-dasharray="283" stroke-dashoffset="140" stroke-linecap="round" stroke-width="8"></circle>
+<defs>
+<lineargradient id="primaryGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#632ce5;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#7c4dff;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Inner Dial -->
+<div class="w-56 h-56 rounded-full neo-dial-handle bg-background flex flex-col items-center justify-center relative z-10 transition-transform active:scale-95">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Current</span>
+<div class="flex items-start">
+<span class="font-display text-display text-on-surface leading-none" id="temp-value">22</span>
+<span class="font-headline-md text-headline-md text-primary mt-1">°C</span>
+</div>
+<div class="mt-md flex gap-base">
+<span class="material-symbols-outlined text-primary fill-icon" style="font-size: 20px;">ac_unit</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cooling Active</span>
+</div>
+</div>
+<!-- Interaction Knobs -->
+<button class="absolute left-0 top-1/2 -translate-x-4 -translate-y-1/2 w-12 h-12 neo-raised rounded-full bg-background flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">remove</span>
+</button>
+<button class="absolute right-0 top-1/2 translate-x-4 -translate-y-1/2 w-12 h-12 neo-raised rounded-full bg-background flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">add</span>
+</button>
+</div>
+</section>
+<!-- Mode Selection -->
+<section class="mt-xl">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-md">Operation Mode</h3>
+<div class="grid grid-cols-3 gap-md neo-sunken p-2 rounded-xl">
+<button class="flex flex-col items-center justify-center py-md rounded-lg active-gradient text-on-primary">
+<span class="material-symbols-outlined mb-xs">ac_unit</span>
+<span class="font-label-sm text-label-sm">Cool</span>
+</button>
+<button class="flex flex-col items-center justify-center py-md rounded-lg text-on-surface-variant hover:bg-surface-variant/20 transition-colors">
+<span class="material-symbols-outlined mb-xs">sunny</span>
+<span class="font-label-sm text-label-sm">Heat</span>
+</button>
+<button class="flex flex-col items-center justify-center py-md rounded-lg text-on-surface-variant hover:bg-surface-variant/20 transition-colors">
+<span class="material-symbols-outlined mb-xs">autorenew</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</button>
+</div>
+</section>
+<!-- Fan Speed & Eco Mode -->
+<section class="mt-xl grid grid-cols-2 gap-lg">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-md">Fan Speed</h3>
+<div class="flex flex-col gap-sm">
+<div class="neo-sunken p-1 rounded-xl flex">
+<button class="flex-1 py-base rounded-lg font-label-sm text-label-sm text-on-surface-variant">Low</button>
+<button class="flex-1 py-base rounded-lg bg-surface-container-highest shadow-sm font-label-sm text-label-sm text-on-surface font-bold">Med</button>
+<button class="flex-1 py-base rounded-lg font-label-sm text-label-sm text-on-surface-variant">High</button>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-md">Efficiency</h3>
+<div class="flex items-center justify-between px-md py-base neo-raised rounded-xl bg-background">
+<span class="font-label-md text-label-md text-on-surface">Eco Mode</span>
+<button class="w-12 h-6 rounded-full neo-sunken relative transition-all duration-300" id="eco-toggle">
+<div class="absolute left-1 top-1 w-4 h-4 rounded-full neo-raised bg-background transition-all duration-300 transform translate-x-6 bg-primary" id="eco-thumb"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Usage Insight Card (Asymmetric Layout element) -->
+<section class="mt-xl">
+<div class="neo-raised rounded-2xl p-lg bg-background flex items-center gap-lg">
+<div class="w-16 h-16 neo-sunken rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined fill-icon" style="font-size: 32px;">energy_savings_leaf</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Efficiency Rank</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Top 5% of users in your area this month.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2">
+<span class="material-symbols-outlined fill-icon">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic
+        const ecoToggle = document.getElementById('eco-toggle');
+        const ecoThumb = document.getElementById('eco-thumb');
+        let ecoActive = true;
+
+        ecoToggle.addEventListener('click', () => {
+            ecoActive = !ecoActive;
+            if (ecoActive) {
+                ecoThumb.style.transform = 'translateX(24px)';
+                ecoThumb.classList.add('bg-primary');
+                ecoToggle.classList.add('toggle-active');
+            } else {
+                ecoThumb.style.transform = 'translateX(0px)';
+                ecoThumb.classList.remove('bg-primary');
+                ecoToggle.classList.remove('toggle-active');
+            }
+        });
+
+        // Dial temperature simulation
+        const tempValue = document.getElementById('temp-value');
+        const progressRing = document.getElementById('progress-ring');
+        let currentTemp = 22;
+
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.querySelector('.material-symbols-outlined')?.textContent === 'add') {
+                btn.addEventListener('click', () => {
+                    if (currentTemp < 30) {
+                        currentTemp++;
+                        tempValue.textContent = currentTemp;
+                        updateRing();
+                    }
+                });
+            }
+            if (btn.querySelector('.material-symbols-outlined')?.textContent === 'remove') {
+                btn.addEventListener('click', () => {
+                    if (currentTemp > 16) {
+                        currentTemp--;
+                        tempValue.textContent = currentTemp;
+                        updateRing();
+                    }
+                });
+            }
+        });
+
+        function updateRing() {
+            // Mapping 16-30 to 283-0 dashoffset
+            const min = 16;
+            const max = 30;
+            const percentage = (currentTemp - min) / (max - min);
+            const offset = 283 - (283 * percentage);
+            progressRing.style.strokeDashoffset = offset;
+        }
+
+        // Initialize ring
+        updateRing();
+    </script>
+</body></html>

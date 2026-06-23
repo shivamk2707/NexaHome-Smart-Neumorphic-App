@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Member Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Neomorphic Raised */
+        .neo-raised {
+            background: #f9f9fc;
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), 
+                        -6px -6px 12px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Neomorphic Sunken (Recessed) */
+        .neo-sunken {
+            background: #f9f9fc;
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.05), 
+                        inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Active Toggle Track Glow */
+        .toggle-active {
+            box-shadow: inset 2px 2px 5px rgba(99, 44, 229, 0.2), 
+                        inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+            background: #f0ebff;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        /* Custom scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#dadadc",
+                      "surface-container-high": "#e8e8ea",
+                      "background": "#f9f9fc",
+                      "surface-bright": "#f9f9fc",
+                      "tertiary-fixed": "#e0e3e6",
+                      "on-primary-container": "#fcf6ff",
+                      "on-background": "#1a1c1e",
+                      "tertiary": "#565a5c",
+                      "surface-variant": "#e2e2e5",
+                      "surface-container-highest": "#e2e2e5",
+                      "on-surface-variant": "#494455",
+                      "surface-container-lowest": "#ffffff",
+                      "primary": "#632ce5",
+                      "on-secondary-container": "#fefcff",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#6833ea",
+                      "surface": "#f9f9fc",
+                      "on-secondary-fixed-variant": "#004495",
+                      "inverse-primary": "#cdbdff",
+                      "outline-variant": "#cac3d8",
+                      "outline": "#7a7487",
+                      "primary-fixed-dim": "#cdbdff",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed-variant": "#4f00d0",
+                      "surface-container-low": "#f3f3f6",
+                      "secondary": "#0058bd",
+                      "tertiary-fixed-dim": "#c4c7ca",
+                      "tertiary-container": "#6f7275",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#001a42",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "secondary-container": "#1e70e4",
+                      "on-tertiary-fixed-variant": "#44474a",
+                      "primary-container": "#7c4dff",
+                      "on-tertiary-fixed": "#191c1e",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2f3133",
+                      "on-tertiary-container": "#f6f8fb",
+                      "on-surface": "#1a1c1e",
+                      "inverse-on-surface": "#f0f0f3",
+                      "surface-container": "#eeeef0",
+                      "primary-fixed": "#e8deff",
+                      "on-primary-fixed": "#20005f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "sm": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px",
+                      "xl": "32px",
+                      "margin-desktop": "40px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neo-raised overflow-hidden flex items-center justify-center border-2 border-white">
+<img class="w-full h-full object-cover" data-alt="A portrait of a sophisticated tech-savvy man in his early 30s with professional styling. He has a warm, confident expression and is framed in a high-key lighting setup with a soft, clean white studio background. The overall aesthetic is minimal, high-end, and perfectly aligned with a premium smart home application's brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzfyg53EmyBXckJX7_hLoFXdHRA6ng2TcR-o3FerYI60mSe-EfOar57fkp84WTM6X6CLypck9pmYSZdLx5RN-BX9EZeNAkOA-k5WmhMD4m_LBY3gVK3kVRLvso-9Nc_h0kyNVMyLvTYDdzxPbYiB7nT0NuPmMo9jFn0dvA2yUyyM1OCSXUvbZsFFmxRZlJtJAA_LTA0TITFBVDOeGcSlPNCteDTjLyu37n925gEcVzEutkmQjK3cP9ULqI5K-UtXscRCG8CJbODkE"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<button class="w-10 h-10 rounded-full neo-raised flex items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Header Section -->
+<section class="mb-lg">
+<div class="flex justify-between items-end mb-md">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-xs">Management</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Family Members</h2>
+</div>
+<button class="neo-raised px-md py-sm rounded-xl text-primary font-label-md text-label-md flex items-center gap-xs active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_add">person_add</span>
+                    Invite
+                </button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Control who has access to your smart home ecosystem and manage their specific device permissions.
+            </p>
+</section>
+<!-- Search / Filter (Sunken) -->
+<div class="neo-sunken rounded-2xl p-md mb-xl flex items-center gap-md">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md text-on-surface placeholder-outline" placeholder="Search members..." type="text"/>
+</div>
+<!-- Members List -->
+<div class="space-y-gutter">
+<!-- Member Card: Admin -->
+<div class="neo-raised rounded-[24px] p-lg flex flex-col gap-lg border border-white/50">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full neo-raised p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="A portrait of a elegant woman in a modern minimalist setting. She is wearing high-end smart casual attire. The image uses soft, natural lighting coming from a large window, emphasizing a clean, light-mode interface aesthetic. Her expression is approachable and authoritative, fitting the role of a smart home primary administrator." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCryO5k5tpArotR5VQ-KrJuTvMPeU7nHWzAjF-STsppjxNfrbe4dZboyu2JVm8OgCRPxXkhn0RuKDUITDaiNBHo983cWWIjHT802NnVd7zwlqQKozsq9t7j5nih6Nb5CqV1swI3mX6-0hcCc_sXPb0KXkpeRpR3_ZHFo_AmZit1tp_ZhR-8HHx7lDxn02RRj6JwIRIpv5HmAbYDKBhoNNJQEuQm4t7TkrD6cU-Tnhvy4FvverNG0M_T-UrL43zTNI6JT_dEnGHcsww"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Sarah Johnson</h3>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-fixed px-sm py-[2px] rounded-full">Admin</span>
+</div>
+</div>
+<button class="neo-raised w-10 h-10 rounded-full flex items-center justify-center text-outline">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Permission 1 -->
+<div class="neo-sunken rounded-xl p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</div>
+<div class="w-10 h-5 neo-sunken rounded-full relative p-[2px] toggle-active">
+<div class="w-4 h-4 rounded-full neo-raised bg-white absolute right-[2px] transition-all"></div>
+</div>
+</div>
+<!-- Permission 2 -->
+<div class="neo-sunken rounded-xl p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="light">light</span>
+<span class="font-label-md text-label-md">Lighting</span>
+</div>
+<div class="w-10 h-5 neo-sunken rounded-full relative p-[2px] toggle-active">
+<div class="w-4 h-4 rounded-full neo-raised bg-white absolute right-[2px] transition-all"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Member Card: Member 1 -->
+<div class="neo-raised rounded-[24px] p-lg flex flex-col gap-lg border border-white/50">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full neo-raised p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="A studio portrait of a cheerful young adult man with a friendly, casual vibe. He is wearing a simple grey hoodie. The lighting is soft and diffuse, creating a modern, clean look with no harsh shadows. The color palette is composed of soft whites and cool greys, consistent with a high-end neomorphic design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2NW_yLMF3LGvqmoVZOF-F_WusCbo_MSU0ozVKpYejDso4xeeFf0BSXE8ry0RMYapBfoB9GMGdqqugvif3nkBV39ji4twmr3C4DSkC8RaskBqM7yaH0BopbtzZR8HVm2HBGS4PJ_opwS3OaNMwLyqeiOAQstVeHP5gPc3-qi8WKbmJC9sc5YGV9qVDcfAqMF1RARDyfrurOMy3BiaDbhcC0FOHFgJE5W44Y5YdjiMOUjLYw_V-iONL4fMS2p8tU_K-GTP82kV3HXQ"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Mark Thompson</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-sm py-[2px] rounded-full">Member</span>
+</div>
+</div>
+<button class="neo-raised w-10 h-10 rounded-full flex items-center justify-center text-outline">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Permission 1 -->
+<div class="neo-sunken rounded-xl p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline" data-icon="thermostat">thermostat</span>
+<span class="font-label-md text-label-md">Climate</span>
+</div>
+<div class="w-10 h-5 neo-sunken rounded-full relative p-[2px] toggle-active">
+<div class="w-4 h-4 rounded-full neo-raised bg-white absolute right-[2px] transition-all"></div>
+</div>
+</div>
+<!-- Permission 2 -->
+<div class="neo-sunken rounded-xl p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+<span class="font-label-md text-label-md">Smart Lock</span>
+</div>
+<div class="w-10 h-5 neo-sunken rounded-full relative p-[2px]">
+<div class="w-4 h-4 rounded-full neo-raised bg-white absolute left-[2px] transition-all"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Member Card: Member 2 (Guest/Limited) -->
+<div class="neo-raised rounded-[24px] p-lg flex flex-col gap-lg border border-white/50 opacity-90">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full neo-raised p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="A portrait of a teenage girl with a bright, joyful smile, captured in a brightly lit modern living room. The background is slightly blurred but shows hints of a clean, high-tech interior. The aesthetic focuses on soft pastel tones and bright whites, maintaining the premium, calm, and high-tech personality of the smart home brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwJ-9yRT1_caUdWxkVpnb0kIBrbk30SeYmM1SM2FZolMWoaF3gxOuVJAbv1UoxejDrFmkj110hd2MRBNFTntODO2SGuztZsuR1knNKeJJpCb8TXS4YrIWWhc2cpcwzTN9mI9clbMQUDoI2Xiu4g9aTa2ezT3Lrzbqldz_wh0az8szS7GsAF7OWEVuknTkMrvOamAmn8BhwrLwgwfkCgdO_-D414JselhQnzwVDcxaO2AJVIbEic1Ii4ls0iUorfVKZVbmZChyWXuc"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Emily Chen</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-sm py-[2px] rounded-full">Member</span>
+</div>
+</div>
+<button class="neo-raised w-10 h-10 rounded-full flex items-center justify-center text-outline">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<!-- Specific Restriction Info -->
+<div class="neo-sunken rounded-xl p-md flex items-center gap-md">
+<span class="material-symbols-outlined text-error" data-icon="schedule">schedule</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Limited Access</span>
+<span class="font-label-sm text-label-sm text-outline">Daily: 08:00 AM - 10:00 PM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Member FAB (Simplified Intent) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-primary text-white shadow-[0_10px_20px_rgba(99,44,229,0.3)] flex items-center justify-center active:scale-90 transition-all z-50">
+<span class="material-symbols-outlined text-[28px]" data-icon="add">add</span>
+</button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2">
+<span class="material-symbols-outlined active-icon" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggles = document.querySelectorAll('.neo-sunken.relative');
+            
+            toggles.forEach(toggle => {
+                toggle.parentElement.addEventListener('click', () => {
+                    const thumb = toggle.querySelector('.neo-raised');
+                    const isActive = toggle.classList.contains('toggle-active');
+                    
+                    if (isActive) {
+                        toggle.classList.remove('toggle-active');
+                        thumb.style.right = 'auto';
+                        thumb.style.left = '2px';
+                        toggle.parentElement.querySelector('.material-symbols-outlined').classList.remove('text-primary');
+                        toggle.parentElement.querySelector('.material-symbols-outlined').classList.add('text-outline');
+                    } else {
+                        toggle.classList.add('toggle-active');
+                        thumb.style.left = 'auto';
+                        thumb.style.right = '2px';
+                        toggle.parentElement.querySelector('.material-symbols-outlined').classList.remove('text-outline');
+                        toggle.parentElement.querySelector('.material-symbols-outlined').classList.add('text-primary');
+                    }
+                });
+            });
+
+            // Ripple simulation or active states for neomorphic buttons
+            const buttons = document.querySelectorAll('.neo-raised');
+            buttons.forEach(btn => {
+                btn.addEventListener('mousedown', () => {
+                    btn.style.boxShadow = 'inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8)';
+                });
+                btn.addEventListener('mouseup', () => {
+                    btn.style.boxShadow = '6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.8)';
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.boxShadow = '6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.8)';
+                });
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Living Room Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cac3d8",
+                        "tertiary": "#565a5c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container": "#eeeef0",
+                        "surface-bright": "#f9f9fc",
+                        "primary-fixed-dim": "#cdbdff",
+                        "primary-container": "#7c4dff",
+                        "on-background": "#1a1c1e",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#004495",
+                        "secondary-container": "#1e70e4",
+                        "surface-variant": "#e2e2e5",
+                        "surface-dim": "#dadadc",
+                        "on-surface": "#1a1c1e",
+                        "surface-container-high": "#e8e8ea",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#494455",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6f7275",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#cdbdff",
+                        "secondary": "#0058bd",
+                        "primary-fixed": "#e8deff",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "background": "#f9f9fc",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "outline": "#7a7487",
+                        "on-tertiary-container": "#f6f8fb",
+                        "surface-tint": "#6833ea",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed": "#20005f",
+                        "on-primary-container": "#fcf6ff",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "primary": "#632ce5",
+                        "inverse-on-surface": "#f0f0f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            color: #1a1c1e;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Neomorphism Classes */
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9);
+        }
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+        .neo-pressed {
+            box-shadow: inset 6px 6px 12px rgba(0,0,0,0.1), inset -6px -6px 12px rgba(255,255,255,0.9);
+        }
+        .neo-raised-active {
+            background: linear-gradient(145deg, #7c4dff, #632ce5);
+            box-shadow: 4px 4px 10px rgba(99, 44, 229, 0.4), -4px -4px 10px rgba(255,255,255,0.5);
+        }
+
+        /* Dial Rotation Logic */
+        .dial-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        
+        .dial-progress {
+            transform: rotate(-90deg);
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        /* Chart Animations */
+        @keyframes growUp {
+            from { height: 0; }
+            to { height: var(--final-height); }
+        }
+        .chart-bar {
+            animation: growUp 1s ease-out forwards;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- Top AppBar (from JSON context) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<button class="neo-raised w-10 h-10 flex items-center justify-center rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Living Room</h1>
+</div>
+<div class="neo-raised w-10 h-10 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional high-definition close-up portrait of a modern user with soft lighting, reflecting the high-tech, clean aesthetic of a smart home application interface. The lighting is warm and welcoming, against a clean, out-of-focus background that suggests a premium living space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs7moAKnlUTq8Lh3bNeH021Z25rwIev18-II6wi8Wxv8EqO_JU16SN8gmvYCj-aEHbZi4Apuz_3puaf8eiFJBVcRzRp3cg9Z-Qd_h2WknTIZNxIWlWoUZOxakgEQ9RtNZNAt5P3U1OZfg1OecYrjmQwi0ghdaZJNpWO0g2EcXfq5ns0RYBfKWbe8tvwa_PY-i9i7ydMOvPCYCTY-mQH8zTHrRdWFc4WZEoMuB1x6tTIl_aGaagatWA4zSbDbeaGMuWJJX2UI8vt-A"/>
+</div>
+</header>
+<main class="mt-24 px-margin-mobile space-y-lg">
+<!-- Live Security Camera Preview (Bento Section) -->
+<section class="neo-raised rounded-[24px] overflow-hidden p-md bg-background">
+<div class="flex justify-between items-center mb-md px-xs">
+<h2 class="font-headline-md text-headline-md">Security Feed</h2>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Live</span>
+</div>
+</div>
+<div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-inner bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A wide-angle interior photograph of a minimalist modern living room during late afternoon. The scene is captured from a high corner angle, showing a sleek grey sofa, a marble coffee table, and large floor-to-ceiling windows with soft light filtering through. The overall mood is calm, secure, and technologically sophisticated, with soft blue and purple lighting accents from integrated smart LEDs." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3GN4ClXYqZyatJOAMR3BX34A18AAfkc1qtuATAE4P9UG9SwRFStDTRK_8gCfhpI_8JkoJ0inHDu6NNkRIiZf_4nwc1jqqdRLXg1QelwNOlQXGBh_6j2z41jFwoDud3ap0oOqu7ore_24hBwoZCzEPTRep1eqaNu5QueBxPdFEv3js6I0_m2fL_wIw7d-9BYEJ3wJczXbfuInczwJ4ghyVPpxOkx7aAK7KKMMZaOGp9M0ID9C21ZaZky3azXHtDC7YLmyZkRp0cx4"/>
+<div class="absolute bottom-4 left-4 flex gap-sm">
+<button class="bg-black/40 backdrop-blur-md text-white p-2 rounded-lg flex items-center gap-2 hover:bg-black/60 transition-colors">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+<span class="text-xs font-medium">CAM 01</span>
+</button>
+</div>
+<div class="absolute top-4 right-4 bg-black/40 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold">
+                    1080P • 24 FPS
+                </div>
+</div>
+</section>
+<!-- Main Controls Grid -->
+<div class="grid grid-cols-2 gap-lg">
+<!-- Lighting Control (Toggle) -->
+<section class="neo-raised rounded-[24px] p-lg bg-background flex flex-col items-center justify-between">
+<div class="w-full flex justify-between items-start mb-md">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="text-label-sm text-on-surface-variant font-bold">LIGHTS</span>
+</div>
+<div class="text-center mb-lg">
+<p class="font-headline-md text-headline-md" id="light-status">On</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Main Chandelier</p>
+</div>
+<!-- Custom Toggle Switch -->
+<button class="w-full h-12 neo-sunken rounded-full relative p-1 transition-all duration-300 overflow-hidden" id="light-toggle-btn" onclick="toggleLight()">
+<div class="absolute top-1 left-1 bottom-1 w-1/2 bg-primary rounded-full shadow-lg transition-all duration-300 flex items-center justify-center translate-x-[calc(100%-8px)]" id="toggle-thumb">
+<span class="material-symbols-outlined text-white text-sm">power_settings_new</span>
+</div>
+</button>
+</section>
+<!-- Fan Speed Control (Slider) -->
+<section class="neo-raised rounded-[24px] p-lg bg-background flex flex-col justify-between">
+<div class="w-full flex justify-between items-start mb-md">
+<span class="material-symbols-outlined text-secondary text-3xl">air</span>
+<span class="text-label-sm text-on-surface-variant font-bold">FAN</span>
+</div>
+<div class="space-y-md">
+<div class="text-center">
+<p class="font-headline-md text-headline-md" id="fan-val">60%</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Intensity</p>
+</div>
+<div class="neo-sunken h-12 w-full rounded-full p-2 flex items-center">
+<input class="w-full h-2 bg-primary-fixed rounded-full appearance-none cursor-pointer accent-primary" max="100" min="0" oninput="updateFan(this.value)" type="range" value="60"/>
+</div>
+</div>
+</section>
+</div>
+<!-- Temperature Dial (Circular Control) -->
+<section class="neo-raised rounded-[32px] p-xl bg-background flex flex-col items-center">
+<div class="w-full flex justify-between items-center mb-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">thermostat</span>
+<h3 class="font-headline-md text-headline-md">Climate</h3>
+</div>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[10px] font-bold">COOLING ACTIVE</span>
+</div>
+<div class="dial-container flex items-center justify-center neo-sunken shadow-[inset_10px_10px_20px_rgba(0,0,0,0.05),inset_-10px_-10px_20px_rgba(255,255,255,0.8)]">
+<!-- SVG Track -->
+<svg class="absolute inset-0 w-full h-full p-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#e2e2e5" stroke-linecap="round" stroke-width="8"></circle>
+<circle class="dial-progress" cx="50" cy="50" fill="none" r="45" stroke="url(#primaryGradient)" stroke-dasharray="283" stroke-dashoffset="190" stroke-linecap="round" stroke-width="8"></circle>
+<defs>
+<lineargradient id="primaryGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#7c4dff"></stop>
+<stop offset="100%" stop-color="#632ce5"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Raised Dial -->
+<div class="w-32 h-32 neo-raised bg-background rounded-full flex flex-col items-center justify-center z-10 transition-transform active:scale-95 duration-200">
+<span class="text-display font-display text-primary">22°</span>
+<span class="text-label-sm text-on-surface-variant -mt-2">Celsius</span>
+</div>
+</div>
+<div class="w-full flex justify-around mt-xl">
+<button class="neo-raised p-4 rounded-2xl active:neo-pressed transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">remove</span>
+</button>
+<div class="text-center flex flex-col justify-center">
+<p class="font-label-md text-label-md font-bold">AUTO MODE</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Optimized</p>
+</div>
+<button class="neo-raised p-4 rounded-2xl active:neo-pressed transition-all">
+<span class="material-symbols-outlined text-primary">add</span>
+</button>
+</div>
+</section>
+<!-- Energy Usage Chart -->
+<section class="neo-raised rounded-[24px] p-lg bg-background">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h3 class="font-headline-md text-headline-md">Energy Analytics</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Daily Living Room Consumption</p>
+</div>
+<div class="text-right">
+<p class="text-headline-md font-headline-md text-secondary">4.2 <span class="text-label-sm">kWh</span></p>
+</div>
+</div>
+<div class="h-32 flex items-end justify-between gap-2 px-2">
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neo-sunken" style="--final-height: 40%; height: 0;"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">MON</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neo-sunken" style="--final-height: 60%; height: 0;"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">TUE</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neo-sunken" style="--final-height: 35%; height: 0;"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">WED</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="chart-bar w-full bg-primary-container rounded-t-lg shadow-lg shadow-primary/20" style="--final-height: 90%; height: 0;"></div>
+<span class="text-[10px] font-bold text-primary">THU</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neo-sunken" style="--final-height: 50%; height: 0;"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">FRI</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neo-sunken" style="--final-height: 75%; height: 0;"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">SAT</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (from JSON context) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm mt-1">Rooms</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm mt-1">Devices</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm mt-1">Auto</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+<script>
+        function toggleLight() {
+            const btn = document.getElementById('light-toggle-btn');
+            const thumb = document.getElementById('toggle-thumb');
+            const status = document.getElementById('light-status');
+            
+            const isOn = thumb.style.transform === 'translateX(0px)';
+            
+            if (isOn) {
+                thumb.style.transform = 'translateX(calc(100% - 8px))';
+                thumb.classList.add('bg-primary');
+                thumb.classList.remove('bg-on-surface-variant');
+                status.innerText = 'On';
+            } else {
+                thumb.style.transform = 'translateX(0px)';
+                thumb.classList.remove('bg-primary');
+                thumb.classList.add('bg-on-surface-variant');
+                status.innerText = 'Off';
+            }
+        }
+
+        function updateFan(val) {
+            document.getElementById('fan-val').innerText = val + '%';
+        }
+    </script>
+</body></html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice Control - NexaHome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+            overflow-x: hidden;
+        }
+
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+
+        .mic-gradient {
+            background: linear-gradient(135deg, #7c4dff 0%, #632ce5 100%);
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(99, 44, 229, 0.2);
+            animation: pulse 3s infinite;
+        }
+
+        .pulse-ring-delay {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        .wave-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 40px;
+        }
+
+        .wave-bar {
+            width: 4px;
+            height: 8px;
+            background: #632ce5;
+            border-radius: 2px;
+            animation: wave 1.2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 8px; }
+            50% { height: 32px; }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-nav-well {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#e0e3e6",
+                    "surface-container-high": "#e8e8ea",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "primary-container": "#7c4dff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#20005f",
+                    "inverse-surface": "#2f3133",
+                    "on-background": "#1a1c1e",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#d8e2ff",
+                    "primary": "#632ce5",
+                    "background": "#f9f9fc",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "on-secondary-fixed": "#001a42",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#6833ea",
+                    "outline": "#7a7487",
+                    "inverse-primary": "#cdbdff",
+                    "surface-container": "#eeeef0",
+                    "secondary": "#0058bd",
+                    "tertiary": "#565a5c",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "surface-container-highest": "#e2e2e5",
+                    "inverse-on-surface": "#f0f0f3",
+                    "on-tertiary-fixed": "#191c1e",
+                    "surface-dim": "#dadadc",
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "primary-fixed": "#e8deff",
+                    "secondary-container": "#1e70e4",
+                    "on-primary-container": "#fcf6ff",
+                    "on-tertiary-container": "#f6f8fb",
+                    "primary-fixed-dim": "#cdbdff",
+                    "on-surface-variant": "#494455",
+                    "on-surface": "#1a1c1e",
+                    "surface-variant": "#e2e2e5",
+                    "outline-variant": "#cac3d8",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container-low": "#f3f3f6",
+                    "surface-bright": "#f9f9fc",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#6f7275",
+                    "surface": "#f9f9fc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "xs": "4px",
+                    "margin-mobile": "20px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a friendly tech-savvy homeowner in a modern, brightly lit apartment. The lighting is soft and natural, emphasizing a clean, contemporary lifestyle that aligns with high-end smart home technology. The overall aesthetic is minimalist, featuring a soft color palette of whites and greys." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsCc1pQXtzbGlUVuJACKn3q7fceOjN_vDNufLIFVqXQx48YAgkkSOQNuIfKf1z-PUW4ZpbC6DYvzrIc_MvYy1YnnxuVxgeClLJuw0-J_rDDf_MULQ57DURl9VTwa746d7qWyPjJcBtdEcz2aTPsGqA75lBPTVkbsShMzvqpGUr0NgnFtEomsJxlqJR9cEo94hB34PUwFOHqR9uACQ8WVrSckAcz8czAt5fGudAcaJjxOoVvnL-2YgIjJ1gPEYMYAnNFW10q1CMZDk"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<button class="neomorph-raised p-2 rounded-xl text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile flex flex-col items-center">
+<!-- Voice Activation State Container -->
+<div class="w-full max-w-md flex flex-col items-center justify-center py-lg text-center">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">How can I help?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Listening for your command...</p>
+<!-- Massive Glowing Microphone Button -->
+<div class="relative flex items-center justify-center mb-xl w-64 h-64">
+<!-- Pulse Animations -->
+<div class="pulse-ring"></div>
+<div class="pulse-ring pulse-ring-delay"></div>
+<!-- Main Button Body -->
+<button class="relative z-10 w-48 h-48 rounded-full mic-gradient shadow-[0_10px_30px_rgba(99,44,229,0.4)] flex items-center justify-center transition-transform active:scale-90 overflow-hidden" id="mic-button">
+<span class="material-symbols-outlined text-white text-[64px]" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+<!-- Internal Glassy Sheen -->
+<div class="absolute inset-0 bg-white/10 opacity-50 rounded-full pointer-events-none"></div>
+</button>
+</div>
+<!-- Visualizer Waves -->
+<div class="wave-container mb-xl">
+<div class="wave-bar" style="animation-delay: 0.1s"></div>
+<div class="wave-bar" style="animation-delay: 0.3s"></div>
+<div class="wave-bar" style="animation-delay: 0.5s"></div>
+<div class="wave-bar" style="animation-delay: 0.2s"></div>
+<div class="wave-bar" style="animation-delay: 0.4s"></div>
+<div class="wave-bar" style="animation-delay: 0.6s"></div>
+<div class="wave-bar" style="animation-delay: 0.15s"></div>
+<div class="wave-bar" style="animation-delay: 0.45s"></div>
+</div>
+</div>
+<!-- Voice History Section -->
+<div class="w-full max-w-md">
+<div class="flex justify-between items-center mb-md px-2">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Recent Activity</h3>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="history">history</span>
+</div>
+<div class="space-y-lg">
+<!-- History Card 1 -->
+<div class="neomorph-raised p-lg rounded-[24px] flex items-center gap-lg group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="w-12 h-12 neomorph-sunken rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">"Turn off the kitchen lights"</p>
+<p class="font-label-sm text-label-sm text-outline-variant mt-1">Confirmed • 2m ago</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- History Card 2 -->
+<div class="neomorph-raised p-lg rounded-[24px] flex items-center gap-lg group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="w-12 h-12 neomorph-sunken rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="thermostat">thermostat</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">"Set thermostat to 72 degrees"</p>
+<p class="font-label-sm text-label-sm text-outline-variant mt-1">Confirmed • 15m ago</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- History Card 3 -->
+<div class="neomorph-raised p-lg rounded-[24px] flex items-center gap-lg group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="w-12 h-12 neomorph-sunken rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">"Lock the front door"</p>
+<p class="font-label-sm text-label-sm text-outline-variant mt-1">Confirmed • 1h ago</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- History Card 4 -->
+<div class="neomorph-raised p-lg rounded-[24px] flex items-center gap-lg group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="w-12 h-12 neomorph-sunken rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">"Play morning jazz playlist"</p>
+<p class="font-label-sm text-label-sm text-outline-variant mt-1">Confirmed • 2h ago</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary active-nav-well p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        const micButton = document.getElementById('mic-button');
+        const waveBars = document.querySelectorAll('.wave-bar');
+        let isListening = true;
+
+        micButton.addEventListener('click', () => {
+            isListening = !isListening;
+            
+            if (isListening) {
+                // Resume animation
+                waveBars.forEach(bar => bar.style.animationPlayState = 'running');
+                document.querySelectorAll('.pulse-ring').forEach(ring => ring.style.display = 'block');
+                micButton.querySelector('span').style.color = 'white';
+            } else {
+                // Pause animation
+                waveBars.forEach(bar => bar.style.animationPlayState = 'paused');
+                document.querySelectorAll('.pulse-ring').forEach(ring => ring.style.display = 'none');
+                micButton.querySelector('span').style.color = 'rgba(255,255,255,0.7)';
+            }
+        });
+
+        // Add small random variations to wave bars for organic feel
+        function randomizeWaves() {
+            if (!isListening) return;
+            waveBars.forEach(bar => {
+                const duration = 0.5 + Math.random() * 1.5;
+                bar.style.animationDuration = `${duration}s`;
+            });
+        }
+        
+        setInterval(randomizeWaves, 2000);
+    </script>
+</body></html>

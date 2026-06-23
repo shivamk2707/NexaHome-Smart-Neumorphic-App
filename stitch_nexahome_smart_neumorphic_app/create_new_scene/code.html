@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Create Scene</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+            color: #1a1c1e;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+
+        .neomorph-raised-active {
+            box-shadow: 4px 4px 10px rgba(99, 44, 229, 0.3), -4px -4px 10px rgba(255,255,255,0.8);
+            background: linear-gradient(145deg, #632ce5, #7c4dff);
+        }
+
+        .neomorph-slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #f9f9fc;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2), -2px -2px 5px rgba(255,255,255,0.8);
+            border: 2px solid #632ce5;
+        }
+
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#e0e3e6",
+                      "surface-container-high": "#e8e8ea",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "primary-container": "#7c4dff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#20005f",
+                      "inverse-surface": "#2f3133",
+                      "on-background": "#1a1c1e",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#d8e2ff",
+                      "primary": "#632ce5",
+                      "background": "#f9f9fc",
+                      "on-tertiary-fixed-variant": "#44474a",
+                      "on-secondary-fixed": "#001a42",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#6833ea",
+                      "outline": "#7a7487",
+                      "inverse-primary": "#cdbdff",
+                      "surface-container": "#eeeef0",
+                      "secondary": "#0058bd",
+                      "tertiary": "#565a5c",
+                      "on-primary-fixed-variant": "#4f00d0",
+                      "surface-container-highest": "#e2e2e5",
+                      "inverse-on-surface": "#f0f0f3",
+                      "on-tertiary-fixed": "#191c1e",
+                      "surface-dim": "#dadadc",
+                      "tertiary-fixed-dim": "#c4c7ca",
+                      "primary-fixed": "#e8deff",
+                      "secondary-container": "#1e70e4",
+                      "on-primary-container": "#fcf6ff",
+                      "on-tertiary-container": "#f6f8fb",
+                      "primary-fixed-dim": "#cdbdff",
+                      "on-surface-variant": "#494455",
+                      "on-surface": "#1a1c1e",
+                      "surface-variant": "#e2e2e5",
+                      "outline-variant": "#cac3d8",
+                      "on-secondary-container": "#fefcff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#004495",
+                      "surface-container-low": "#f3f3f6",
+                      "surface-bright": "#f9f9fc",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#6f7275",
+                      "surface": "#f9f9fc"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "margin-desktop": "40px",
+                      "xs": "4px",
+                      "margin-mobile": "20px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "display": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<button class="w-10 h-10 flex items-center justify-center rounded-full neomorph-raised hover:opacity-80 active:scale-95 transition-all" onclick="window.history.back()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">Create Scene</h1>
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional close-up headshot of a smiling woman with a modern workspace in the background. The lighting is soft and natural, emphasizing a clean and premium smart home aesthetic. The color palette is composed of soft grays and warm skin tones, reflecting a high-end lifestyle brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzIznq2NgdDioaZXycosWgIBZa-nU9LLGk8p6NMcGauVQ8hEPp1m9eOyJFPJ-NkhFTqIMuPm8j0d_dwG5Zbu_HrqjitziCw4pK1iDhbAGW5moKgP_AUc01NbsM59grKRJIDYOrUkbuV_GhMvbZdyTVsY9vlBJBUGaW1f83eSk1KW_qITWSDPSLzjqVGh-6PBgWe4s0EoRiXtHIRLFARzvdWGZDoe4cHJaoC9NIahuiSQEwyjBR18ETTBLO1wh57A7sC9xgiWyaZac"/>
+</div>
+</header>
+<main class="mt-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Progress Stepper -->
+<div class="flex justify-between items-center mb-xl px-4">
+<div class="w-10 h-10 rounded-full flex items-center justify-center neomorph-raised-active text-white font-bold transition-all duration-300" id="step-indicator-1">1</div>
+<div class="flex-1 h-1 mx-2 neomorph-sunken rounded-full overflow-hidden">
+<div class="h-full bg-primary w-0 transition-all duration-500" id="progress-1"></div>
+</div>
+<div class="w-10 h-10 rounded-full flex items-center justify-center neomorph-raised text-on-surface-variant font-bold transition-all duration-300" id="step-indicator-2">2</div>
+<div class="flex-1 h-1 mx-2 neomorph-sunken rounded-full overflow-hidden">
+<div class="h-full bg-primary w-0 transition-all duration-500" id="progress-2"></div>
+</div>
+<div class="w-10 h-10 rounded-full flex items-center justify-center neomorph-raised text-on-surface-variant font-bold transition-all duration-300" id="step-indicator-3">3</div>
+</div>
+<!-- Wizard Steps Container -->
+<div class="relative overflow-hidden">
+<!-- Step 1: Select Devices -->
+<div class="step-transition" id="step-1">
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md mb-xs">Select Devices</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Choose which devices will be part of this scene.</p>
+</div>
+<div class="space-y-md">
+<!-- Device Neomorphic Checkbox Card -->
+<label class="block p-lg rounded-xl neomorph-raised cursor-pointer transition-all hover:opacity-90 active:scale-[0.98]">
+<input checked="" class="hidden peer" type="checkbox"/>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl flex items-center justify-center neomorph-sunken">
+<span class="material-symbols-outlined text-primary text-[28px]">lightbulb</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Main Living Room Lights</p>
+<p class="text-xs text-on-surface-variant">Philips Hue Hub</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-md neomorph-sunken flex items-center justify-center peer-checked:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-sm opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</label>
+<label class="block p-lg rounded-xl neomorph-raised cursor-pointer transition-all hover:opacity-90 active:scale-[0.98]">
+<input class="hidden peer" type="checkbox"/>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl flex items-center justify-center neomorph-sunken">
+<span class="material-symbols-outlined text-primary text-[28px]">thermostat</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Nest Thermostat</p>
+<p class="text-xs text-on-surface-variant">Hallway</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-md neomorph-sunken flex items-center justify-center peer-checked:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-sm opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</label>
+<label class="block p-lg rounded-xl neomorph-raised cursor-pointer transition-all hover:opacity-90 active:scale-[0.98]">
+<input checked="" class="hidden peer" type="checkbox"/>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl flex items-center justify-center neomorph-sunken">
+<span class="material-symbols-outlined text-primary text-[28px]">curtains</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Smart Blinds</p>
+<p class="text-xs text-on-surface-variant">Master Bedroom</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-md neomorph-sunken flex items-center justify-center peer-checked:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-sm opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Step 2: Choose Actions (Hidden Initially) -->
+<div class="step-transition hidden translate-x-full opacity-0" id="step-2">
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md mb-xs">Configure Actions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Define what happens when the scene is triggered.</p>
+</div>
+<div class="space-y-lg">
+<!-- Light Dimmer -->
+<div class="p-lg rounded-xl neomorph-raised">
+<div class="flex justify-between items-center mb-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">light_mode</span>
+<span class="font-label-md text-label-md">Brightness</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary" id="brightness-val">80%</span>
+</div>
+<div class="h-8 w-full neomorph-sunken rounded-full relative px-2 flex items-center">
+<input class="w-full h-full opacity-0 absolute cursor-pointer z-10" id="brightness-slider" oninput="document.getElementById('brightness-val').innerText = this.value + '%'" type="range" value="80"/>
+<div class="h-2 bg-primary rounded-full" id="brightness-progress" style="width: 80%"></div>
+<div class="w-6 h-6 rounded-full bg-background neomorph-raised border-2 border-primary absolute" id="brightness-thumb" style="left: calc(80% - 12px)"></div>
+</div>
+</div>
+<!-- Temperature Dial Placeholder (Neomorphic Style) -->
+<div class="p-lg rounded-xl neomorph-raised flex flex-col items-center">
+<span class="font-label-md text-label-md self-start mb-lg">Target Temperature</span>
+<div class="w-48 h-48 rounded-full neomorph-sunken p-6 relative">
+<div class="w-full h-full rounded-full neomorph-raised flex flex-col items-center justify-center">
+<span class="text-4xl font-extrabold text-primary">22°C</span>
+<span class="text-xs text-on-surface-variant">Heating to</span>
+</div>
+<!-- Small dial knob -->
+<div class="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/30"></div>
+</div>
+<div class="flex gap-lg mt-lg">
+<button class="w-12 h-12 rounded-full neomorph-raised text-primary active:scale-90">-</button>
+<button class="w-12 h-12 rounded-full neomorph-raised text-primary active:scale-90">+</button>
+</div>
+</div>
+<!-- Toggle Logic -->
+<div class="p-lg rounded-xl neomorph-raised flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">Lock Front Door</span>
+<span class="text-xs text-on-surface-variant">Security Protocol</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant neomorph-sunken rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-1 after:left-1 after:bg-background after:neomorph-raised after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Step 3: Save Scene (Hidden Initially) -->
+<div class="step-transition hidden translate-x-full opacity-0" id="step-3">
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md mb-xs">Save Scene</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Give your scene a name and an icon.</p>
+</div>
+<div class="space-y-lg">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md px-1">Scene Name</label>
+<div class="neomorph-sunken rounded-xl p-4">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-on-surface placeholder:text-outline-variant" placeholder="e.g. Movie Night" type="text"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md px-1">Choose Icon</label>
+<div class="grid grid-cols-4 gap-md">
+<button class="aspect-square rounded-xl neomorph-raised-active text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">movie</span>
+</button>
+<button class="aspect-square rounded-xl neomorph-raised text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">bedtime</span>
+</button>
+<button class="aspect-square rounded-xl neomorph-raised text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">wb_sunny</span>
+</button>
+<button class="aspect-square rounded-xl neomorph-raised text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">coffee</span>
+</button>
+</div>
+</div>
+<div class="p-lg rounded-2xl neomorph-sunken relative overflow-hidden h-40 group">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-110" data-alt="A cinematic, shallow depth-of-field photograph of a modern, warm living room with ambient purple and orange lighting. Smart home devices are subtly integrated into the decor. The atmosphere is cozy, high-tech, and luxurious, captured in a clean light-mode photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWyevA2CFo2sxIADYQPwhnioGvRDnZObYa9hSkxLlG5Z54RCoBoHgZxnNDx1uuVTk2WyR8ofQ-QW7jlafwZKDP25SLOpRPANWI98OxOK5BBFCVAoyKWrRl8l4-IbAmoG70LCBoAKHQTjS2Pg_KOBiiMBXoWZD4l0g5JVmIvxsZFX-3S5Si8aghy5dVWe5mxh2Aauxp0k_sd9nI_DXZ_oRRq4mADRPa1F8b-qE2x8LnCdb3v1yRKdepoo7SMWhgR1Nlwa57re3QSCo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-md">
+<p class="text-white font-label-md">Preview: Movie Night Activation</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 w-full p-lg bg-background/80 backdrop-blur-md z-50">
+<div class="flex gap-md max-w-2xl mx-auto">
+<button class="flex-1 py-4 rounded-2xl font-label-md text-label-md neomorph-raised text-on-surface-variant hidden" id="btn-back" onclick="prevStep()">
+                Back
+            </button>
+<button class="flex-[2] py-4 rounded-2xl font-label-md text-label-md bg-primary text-white neomorph-raised shadow-[0_4px_15px_rgba(99,28,229,0.4)] active:scale-95 transition-all" id="btn-next" onclick="nextStep()">
+                Next Step
+            </button>
+<button class="flex-[2] py-4 rounded-2xl font-label-md text-label-md bg-primary text-white neomorph-raised shadow-[0_4px_15px_rgba(99,28,229,0.4)] active:scale-95 transition-all hidden" id="btn-save" onclick="saveScene()">
+                Save Scene
+            </button>
+</div>
+</footer>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateStepUI() {
+            // Update progress bar & indicators
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step-indicator-${i}`);
+                const progress = document.getElementById(`progress-${i}`);
+                
+                if (i < currentStep) {
+                    indicator.classList.remove('neomorph-raised', 'text-on-surface-variant');
+                    indicator.classList.add('neomorph-raised-active', 'text-white');
+                    if (progress) progress.style.width = '100%';
+                } else if (i === currentStep) {
+                    indicator.classList.remove('neomorph-raised', 'text-on-surface-variant');
+                    indicator.classList.add('neomorph-raised-active', 'text-white');
+                    if (progress) progress.style.width = '0%';
+                } else {
+                    indicator.classList.remove('neomorph-raised-active', 'text-white');
+                    indicator.classList.add('neomorph-raised', 'text-on-surface-variant');
+                    if (progress) progress.style.width = '0%';
+                }
+            }
+
+            // Show/Hide step content
+            for (let i = 1; i <= totalSteps; i++) {
+                const step = document.getElementById(`step-${i}`);
+                if (i === currentStep) {
+                    step.classList.remove('hidden', 'translate-x-full', 'opacity-0');
+                    step.classList.add('block', 'translate-x-0', 'opacity-100');
+                } else {
+                    step.classList.add('hidden', 'translate-x-full', 'opacity-0');
+                    step.classList.remove('block', 'translate-x-0', 'opacity-100');
+                }
+            }
+
+            // Update buttons
+            const btnBack = document.getElementById('btn-back');
+            const btnNext = document.getElementById('btn-next');
+            const btnSave = document.getElementById('btn-save');
+
+            if (currentStep === 1) {
+                btnBack.classList.add('hidden');
+                btnNext.classList.remove('hidden');
+                btnSave.classList.add('hidden');
+            } else if (currentStep === totalSteps) {
+                btnBack.classList.remove('hidden');
+                btnNext.classList.add('hidden');
+                btnSave.classList.remove('hidden');
+            } else {
+                btnBack.classList.remove('hidden');
+                btnNext.classList.remove('hidden');
+                btnSave.classList.add('hidden');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStepUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepUI();
+            }
+        }
+
+        function saveScene() {
+            const btn = document.getElementById('btn-save');
+            btn.innerText = "Saving...";
+            btn.disabled = true;
+            setTimeout(() => {
+                alert("Scene 'Movie Night' saved successfully!");
+                window.location.reload();
+            }, 1500);
+        }
+
+        // Custom Slider Interaction
+        const slider = document.getElementById('brightness-slider');
+        const progress = document.getElementById('brightness-progress');
+        const thumb = document.getElementById('brightness-thumb');
+
+        if(slider) {
+            slider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                progress.style.width = val + '%';
+                thumb.style.left = `calc(${val}% - 12px)`;
+            });
+        }
+    </script>
+</body></html>

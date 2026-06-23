@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Smart Light Control</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#cac3d8",
+                    "tertiary": "#565a5c",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eeeef0",
+                    "surface-bright": "#f9f9fc",
+                    "primary-fixed-dim": "#cdbdff",
+                    "primary-container": "#7c4dff",
+                    "on-background": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#004495",
+                    "secondary-container": "#1e70e4",
+                    "surface-variant": "#e2e2e5",
+                    "surface-dim": "#dadadc",
+                    "on-surface": "#1a1c1e",
+                    "surface-container-high": "#e8e8ea",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#6f7275",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#cdbdff",
+                    "secondary": "#0058bd",
+                    "primary-fixed": "#e8deff",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "background": "#f9f9fc",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "outline": "#7a7487",
+                    "on-tertiary-container": "#f6f8fb",
+                    "surface-tint": "#6833ea",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9fc",
+                    "on-primary-fixed": "#20005f",
+                    "on-primary-container": "#fcf6ff",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "primary": "#632ce5",
+                    "inverse-on-surface": "#f0f0f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neumorphic-raised {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.9);
+        }
+        .neumorphic-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.08), inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+        }
+        .neumorphic-button-active:active {
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+            transform: scale(0.97);
+        }
+        .gradient-glow {
+            background: linear-gradient(135deg, #7c4dff 0%, #632ce5 100%);
+            box-shadow: 0 0 20px rgba(124, 77, 255, 0.4);
+        }
+        .knob-track {
+            background: conic-gradient(from 180deg, #7c4dff calc(var(--value) * 1%), #e2e2e5 0);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neumorphic-raised flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional close-up studio portrait of a modern homeowner with a friendly expression. The lighting is soft and high-key, reflecting a clean and sophisticated light-mode UI aesthetic. The background is a blurred, high-end interior with neutral tones and soft violet accents, creating a sense of luxury and technological integration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ7KUEO_iublsHeK9w1eX12gQMefko-XYgMUmaXbGowJckBDBmjYy0rPrnFTQnxFo98XIzWW_HbADJj5ocyToOVNHvom32NzIFLpC6it8nyzn9IpvfMEr5uCsZZWnPKtD7FMV_Z5_TIQOr8NLv9yYJsq-x8SYoUdl9nYB_UUIwNw5Soyz5I9y6uPfKdLcjn35eZ42W5qBwC7ofFJEBZ455SPmfP0SduVo9buNP7Nvswt3cpAyIJhFyVuO3PhStuGOvZcIwGwco_2c"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">NexaHome</h1>
+</div>
+<button class="w-12 h-12 rounded-full neumorphic-raised flex items-center justify-center text-primary hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile flex flex-col gap-lg">
+<!-- Header Context -->
+<section class="flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="living">living</span> Living Room
+            </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pendant Light</h2>
+</section>
+<!-- Circular Brightness Controller -->
+<section class="flex flex-col items-center justify-center py-md">
+<div class="relative w-72 h-72 rounded-full neumorphic-raised flex items-center justify-center group" id="brightness-container" style="--value: 75;">
+<!-- Outer Track (Sunken) -->
+<div class="absolute inset-4 rounded-full neumorphic-sunken"></div>
+<!-- Circular Progress SVG -->
+<svg class="absolute inset-4 w-[calc(100%-32px)] h-[calc(100%-32px)] -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest" cx="50" cy="50" fill="none" r="44" stroke="currentColor" stroke-width="8"></circle>
+<circle class="transition-all duration-300 ease-out" cx="50" cy="50" fill="none" id="progress-circle" r="44" stroke="url(#primary-gradient)" stroke-dasharray="276.46" stroke-dashoffset="69.1" stroke-linecap="round" stroke-width="8"></circle>
+<defs>
+<lineargradient id="primary-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#cdbdff"></stop>
+<stop offset="100%" stop-color="#632ce5"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Center Dial (Raised) -->
+<div class="relative w-48 h-48 rounded-full neumorphic-raised flex flex-col items-center justify-center bg-background cursor-pointer active:scale-95 transition-transform duration-200">
+<span class="font-display text-display text-primary" id="brightness-value">75%</span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">Brightness</span>
+</div>
+<!-- Interaction Hint (Dot) -->
+<div class="absolute w-8 h-8 rounded-full gradient-glow border-4 border-white shadow-lg flex items-center justify-center z-10 pointer-events-none" id="knob-dot" style="transform: rotate(180deg) translateY(-112px);">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+</div>
+</div>
+</section>
+<!-- Quick Controls -->
+<div class="grid grid-cols-2 gap-md">
+<button class="neumorphic-raised p-lg rounded-xl flex items-center justify-center gap-md font-headline-md text-headline-md text-primary neumorphic-button-active">
+<span class="material-symbols-outlined" data-icon="power_settings_new">power_settings_new</span>
+<span>Power</span>
+</button>
+<button class="neumorphic-raised p-lg rounded-xl flex items-center justify-center gap-md font-headline-md text-headline-md text-on-surface-variant neumorphic-button-active">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span>Schedule</span>
+</button>
+</div>
+<!-- Color Palette -->
+<section class="flex flex-col gap-md">
+<div class="flex justify-between items-center px-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Color Picker</h3>
+<span class="material-symbols-outlined text-outline" data-icon="palette">palette</span>
+</div>
+<div class="neumorphic-raised p-lg rounded-2xl flex flex-wrap justify-between gap-md">
+<!-- Color Chips -->
+<button class="w-12 h-12 rounded-full neumorphic-raised p-1 ring-2 ring-primary ring-offset-4 ring-offset-background" style="background-color: #632ce5;"></button>
+<button class="w-12 h-12 rounded-full neumorphic-raised p-1" style="background-color: #0058bd;"></button>
+<button class="w-12 h-12 rounded-full neumorphic-raised p-1" style="background-color: #ba1a1a;"></button>
+<button class="w-12 h-12 rounded-full neumorphic-raised p-1" style="background-color: #6f7275;"></button>
+<button class="w-12 h-12 rounded-full neumorphic-raised p-1 flex items-center justify-center bg-white">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="colorize">colorize</span>
+</button>
+</div>
+</section>
+<!-- Color Temperature Slider -->
+<section class="flex flex-col gap-md">
+<div class="flex justify-between items-center px-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Temperature</h3>
+<span class="font-label-md text-label-md text-outline">Warm • Cool</span>
+</div>
+<div class="relative h-20 w-full neumorphic-sunken rounded-2xl flex items-center px-md">
+<!-- Warm to Cool Gradient Track -->
+<div class="absolute inset-y-4 inset-x-4 rounded-full bg-gradient-to-r from-[#ffcc33] via-white to-[#33ccff] opacity-40"></div>
+<!-- Interactive Handle -->
+<div class="relative w-full h-2 flex items-center">
+<div class="absolute left-[40%] w-10 h-10 rounded-full neumorphic-raised bg-background border-2 border-white flex items-center justify-center cursor-grab active:cursor-grabbing">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" data-icon="devices" style="font-variation-settings: 'FILL' 1;">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic for brightness dial
+        const brightnessContainer = document.getElementById('brightness-container');
+        const brightnessValueDisplay = document.getElementById('brightness-value');
+        const progressCircle = document.getElementById('progress-circle');
+        const knobDot = document.getElementById('knob-dot');
+
+        let isDragging = false;
+
+        function updateBrightness(e) {
+            const rect = brightnessContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const x = (e.touches ? e.touches[0].clientX : e.clientX) - centerX;
+            const y = (e.touches ? e.touches[0].clientY : e.clientY) - centerY;
+            
+            let angle = Math.atan2(y, x) * (180 / Math.PI);
+            angle += 90; // Adjust for SVG starting position
+            if (angle < 0) angle += 360;
+
+            const percentage = Math.round((angle / 360) * 100);
+            
+            // Update UI
+            brightnessValueDisplay.textContent = percentage + '%';
+            
+            // Update Circular Dashoffset
+            // Circumference = 2 * PI * 44 = 276.46
+            const offset = 276.46 - (276.46 * (percentage / 100));
+            progressCircle.style.strokeDashoffset = offset;
+
+            // Update Knob Position
+            knobDot.style.transform = `rotate(${angle}deg) translateY(-112px)`;
+            
+            // Set CSS Variable for possible conic effects
+            brightnessContainer.style.setProperty('--value', percentage);
+        }
+
+        brightnessContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateBrightness(e);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) updateBrightness(e);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch support
+        brightnessContainer.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            updateBrightness(e);
+            e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                updateBrightness(e);
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    </script>
+</body></html>

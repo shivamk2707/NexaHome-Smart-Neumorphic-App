@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Scenes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --light-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8);
+            --dark-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
+            --inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+            --inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .neomorph-raised {
+            box-shadow: var(--light-shadow), var(--dark-shadow);
+        }
+
+        .neomorph-sunken {
+            box-shadow: var(--inset-light), var(--inset-dark);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-glow {
+            box-shadow: 0 0 20px rgba(99, 44, 229, 0.3), var(--light-shadow), var(--dark-shadow);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e0e3e6",
+                        "surface-container-high": "#e8e8ea",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-container": "#7c4dff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#20005f",
+                        "inverse-surface": "#2f3133",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "primary": "#632ce5",
+                        "background": "#f9f9fc",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "on-secondary-fixed": "#001a42",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#6833ea",
+                        "outline": "#7a7487",
+                        "inverse-primary": "#cdbdff",
+                        "surface-container": "#eeeef0",
+                        "secondary": "#0058bd",
+                        "tertiary": "#565a5c",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "surface-container-highest": "#e2e2e5",
+                        "inverse-on-surface": "#f0f0f3",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-dim": "#dadadc",
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "primary-fixed": "#e8deff",
+                        "secondary-container": "#1e70e4",
+                        "on-primary-container": "#fcf6ff",
+                        "on-tertiary-container": "#f6f8fb",
+                        "primary-fixed-dim": "#cdbdff",
+                        "on-surface-variant": "#494455",
+                        "on-surface": "#1a1c1e",
+                        "surface-variant": "#e2e2e5",
+                        "outline-variant": "#cac3d8",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container-low": "#f3f3f6",
+                        "surface-bright": "#f9f9fc",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#6f7275",
+                        "surface": "#f9f9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-desktop": "40px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden border-2 border-white">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern tech-savvy individual with a warm smile, set against a clean, soft-focus smart home background. The lighting is bright and airy, consistent with a high-end light-mode UI design. The composition is a close-up headshot suitable for a user profile avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8I81lkD9HIPbmri7mNmDBsE-4ZbWQlTEBl-DyxnrpX6fC-Uybuma5xy2zr_ll39AceLX9qrYq3ePToml_8Xeetwo7YDFyUCg-MQ90DeUEeyP7weaTX1LC345FOewJIkrtgw7zZWlhq1qN2bXw5bQ0PSTJzjXrBhkxf36jrMiUADOuKuf4lVSSOIB6vfDNXira0Yq1tAsaeUCKpI0B3u_YD3x-M7LIbsaKupe8ZeudvT4rsfMntKY-THjpO5HsV8CLYbkKLdjJKT8"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl neomorph-raised hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="flex-1 mt-20 mb-24 px-margin-mobile">
+<!-- Screen Title -->
+<div class="py-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">Smart Scenes</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Curated environments for your lifestyle.</p>
+</div>
+<!-- Bento Grid Layout for Scenes -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-lg pb-10">
+<!-- Movie Mode Card -->
+<div class="neomorph-raised rounded-[24px] p-lg flex flex-col gap-md relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700" data-alt="A cinematic home theater room with plush velvet seating, a massive glowing projector screen displaying a colorful nebula, and soft violet ambient cove lighting. The atmosphere is cozy and immersive, styled as a high-fidelity architectural visualization with a premium, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjw3oweeYbTbSSzQ0PVDUBE7JCzxFSPmueCiBxw8TPJsVRvE1P-jmqaXBEYyFrid0v4Mis1XezP_h2pXGWuYoVJhxCWx7wAG1HXQ1cKNO82rc6vnGdUUTSUwWTmf93W62p-sSHLW8eM5C7ZOrMENMZ7lW-7pBlovyjl-aC5hKpUtdk6tDLX3pAXLygAL-j6aPdsPGTQhkjvJngWn_5aipDA6-AEn8H9Hd7Ky3Mm3v6P44OSoTI6AAhx_J8airJ0z4nNUsZ85zyd1Q"/>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-14 h-14 flex items-center justify-center rounded-2xl neomorph-sunken text-primary">
+<span class="material-symbols-outlined text-4xl" data-icon="movie">movie</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 rounded-full text-label-sm font-label-sm neomorph-sunken text-on-surface-variant uppercase tracking-wider">Inactive</span>
+</div>
+</div>
+<div class="mt-4 relative z-10">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Movie Mode</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Dims lights to 5%, activates surround sound, and closes the blinds.</p>
+</div>
+<div class="flex gap-md mt-lg relative z-10">
+<button class="flex-1 py-3 rounded-xl neomorph-raised bg-background font-label-md text-label-md text-primary font-bold hover:bg-primary-fixed transition-colors active:scale-95">Activate</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-sunken hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<!-- Sleep Mode Card (Active State) -->
+<div class="neomorph-raised rounded-[24px] p-lg flex flex-col gap-md relative overflow-hidden group border-2 border-primary/10 active-glow">
+<div class="absolute inset-0 opacity-10">
+<img class="w-full h-full object-cover" data-alt="A serene master bedroom at night with soft moonlight filtering through sheer curtains. A high-end minimalist bed with crisp white linens is the focal point, accented by soft indigo bedside lighting. The mood is tranquil and sophisticated, perfectly matching a calm smart home interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxFOI75jWYMoO8l-qm39B4FEZ8umjcNOyR26E-wtLIbPYt33kgVvRMizBOrJENnHx4Y1Lc_BscovPkzuSO7UuMpS9EF8-wszOh4l608Il15b3qIRrPWldsjAXpYP3DG03woD9S4uPX1auhrKs0Y5B1jmqoGhgBh-C5zUgZsUJu6-q5JAvraVeheOiuPLAYy99IYSSjBfpFSVYNY9A9eMnWkfRgym_x6eCmQLrSh-6nUV-ySfj8MpK1MncrvEJqxJDdVZqpHuyGbh0"/>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-14 h-14 flex items-center justify-center rounded-2xl bg-primary text-white shadow-lg">
+<span class="material-symbols-outlined text-4xl" data-icon="bedtime" style="font-variation-settings: 'FILL' 1;">bedtime</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 rounded-full text-label-sm font-label-sm bg-primary/10 text-primary font-bold uppercase tracking-wider">Active</span>
+</div>
+</div>
+<div class="mt-4 relative z-10">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Sleep Mode</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Locks all doors, sets thermostat to 68°F, and activates white noise.</p>
+</div>
+<div class="flex gap-md mt-lg relative z-10">
+<button class="flex-1 py-3 rounded-xl bg-primary text-white font-label-md text-label-md font-bold shadow-lg hover:opacity-90 transition-opacity active:scale-95">Deactivate</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-sunken hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<!-- Party Mode Card -->
+<div class="neomorph-raised rounded-[24px] p-lg flex flex-col gap-md relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700" data-alt="A vibrant modern living area designed for entertaining, featuring multi-colored RGB strip lighting in neons and electric blues. The scene includes high-end audio equipment and an open-plan kitchen in the background. The aesthetic is energetic and contemporary, with a focus on smart home atmosphere and high-tech lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0Ag3x2MfZv-em5pAPLS8uEc7XXXxC9irTrbNjPOiRk3c_BdUdcaPJNzrFmqf7wjPMpzal5C3Hj9ESPAl4EeKSAehVC8LdbJiTS4SKEwK1xFPNzyUb8yIbk156-2SqwtqH0Rx9EQriG-y6woBFYd5ZSQVQjgTrHuxenR5L_mhxPR_P4O4CHSI9JH82ZYPaTuK5hhaMl8M-pcwpYvRPq-3gByrKVXQkn-i-zl5gKUNVT26CVv-4NbL5BxbGZkndLcV2H2CTnMJ5poc"/>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-14 h-14 flex items-center justify-center rounded-2xl neomorph-sunken text-secondary">
+<span class="material-symbols-outlined text-4xl" data-icon="celebration">celebration</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 rounded-full text-label-sm font-label-sm neomorph-sunken text-on-surface-variant uppercase tracking-wider">Inactive</span>
+</div>
+</div>
+<div class="mt-4 relative z-10">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Party Mode</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Syncs RGB lights to music, enables outdoor speakers, and opens patio gates.</p>
+</div>
+<div class="flex gap-md mt-lg relative z-10">
+<button class="flex-1 py-3 rounded-xl neomorph-raised bg-background font-label-md text-label-md text-primary font-bold hover:bg-primary-fixed transition-colors active:scale-95">Activate</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-sunken hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<!-- Vacation Mode Card -->
+<div class="neomorph-raised rounded-[24px] p-lg flex flex-col gap-md relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700" data-alt="An exterior view of a high-end smart home villa at twilight, with strategic security lighting illuminating the perimeter. The house looks secure and modern, with large glass windows and clean architectural lines. The lighting is warm yet watchful, suggesting a secure, remotely-monitored vacation state." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg10jw298ua68yr-CdQADOqItybXTUVqpAPN22aK4vHduiS_oa9HqOJvprOY4q3zNHDts7hv-huA1grW56l81-DeocxNXb6-5yFRWLjuLxb4uldj3090NAXfaoiV-AN6zX4fqr2Sj7-ydk1pv91cwANyS2F2mAo9fgz8AZFxI_vo3IxXrWRDbzeu5q2Vd7VdgSmmFcHrZC5t32pF0Y8P62E9HHXK0gElRduBx8ZJ2_Zkp3peUpB3pGk5Pa9bCkELJQl4hvkAGhqxs"/>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-14 h-14 flex items-center justify-center rounded-2xl neomorph-sunken text-error">
+<span class="material-symbols-outlined text-4xl" data-icon="flight">flight</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 rounded-full text-label-sm font-label-sm neomorph-sunken text-on-surface-variant uppercase tracking-wider">Inactive</span>
+</div>
+</div>
+<div class="mt-4 relative z-10">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Vacation Mode</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Simulates occupancy with random lighting, shuts off water main, and alerts security.</p>
+</div>
+<div class="flex gap-md mt-lg relative z-10">
+<button class="flex-1 py-3 rounded-xl neomorph-raised bg-background font-label-md text-label-md text-primary font-bold hover:bg-primary-fixed transition-colors active:scale-95">Activate</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl neomorph-sunken hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<!-- Add New Scene Button -->
+<button class="neomorph-raised rounded-[24px] p-lg flex flex-col items-center justify-center gap-md border-2 border-dashed border-outline-variant hover:border-primary transition-all group min-h-[250px]">
+<div class="w-16 h-16 flex items-center justify-center rounded-full neomorph-sunken text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-4xl" data-icon="add">add</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface-variant group-hover:text-primary transition-colors">Create Scene</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-label-sm text-label-sm mt-1 font-bold">Scenes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm mt-1">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm mt-1">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<!-- Atmospheric Glow Effect Background (Optional Micro-interaction) -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none opacity-20 transition-all duration-1000 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 z-[-1]" id="glow-effect"></div>
+<script>
+        // Micro-interaction: Update background glow based on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const glow = document.getElementById('glow-effect');
+            if (glow) {
+                glow.style.opacity = 0.1 + (scrollPercent * 0.2);
+            }
+        });
+
+        // Simple feedback for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-90');
+                setTimeout(() => this.classList.remove('scale-90'), 150);
+            });
+        });
+    </script>
+</body></html>

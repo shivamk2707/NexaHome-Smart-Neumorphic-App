@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - AI-Powered Living</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#565a5c",
+                    "primary-container": "#7c4dff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-primary-fixed": "#20005f",
+                    "surface-container": "#eeeef0",
+                    "surface-container-high": "#e8e8ea",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "surface-bright": "#f9f9fc",
+                    "primary": "#632ce5",
+                    "primary-fixed": "#e8deff",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#6833ea",
+                    "secondary-container": "#1e70e4",
+                    "on-tertiary-fixed": "#191c1e",
+                    "outline": "#7a7487",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "on-background": "#1a1c1e",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "secondary": "#0058bd",
+                    "outline-variant": "#cac3d8",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f3f6",
+                    "on-primary-container": "#fcf6ff",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1a1c1e",
+                    "surface-dim": "#dadadc",
+                    "tertiary-container": "#6f7275",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#004495",
+                    "surface": "#f9f9fc",
+                    "on-secondary-fixed": "#001a42",
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "inverse-surface": "#2f3133",
+                    "primary-fixed-dim": "#cdbdff",
+                    "secondary-fixed": "#d8e2ff",
+                    "background": "#f9f9fc",
+                    "surface-variant": "#e2e2e5",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-tertiary-container": "#f6f8fb",
+                    "inverse-primary": "#cdbdff",
+                    "on-tertiary-fixed-variant": "#44474a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.8);
+        }
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.08), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+        .neomorph-pressed {
+            transform: scale(0.96);
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+            transition: all 0.1s ease-in-out;
+        }
+        .gradient-glow {
+            background: linear-gradient(135deg, #632ce5 0%, #7c4dff 100%);
+            box-shadow: 0 10px 20px -5px rgba(99, 44, 229, 0.4);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .orbit-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+        .orbit-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+        }
+        @keyframes rotate-ccw {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(-360deg) translateX(110px) rotate(360deg); }
+        }
+        .animate-orbit {
+            animation: rotate-ccw 20s linear infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden min-h-screen flex flex-col items-center justify-center p-margin-mobile">
+<!-- Top Navigation (Logo only for onboarding) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-center items-center py-lg px-margin-mobile">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight font-extrabold">NexaHome</h1>
+</header>
+<main class="w-full max-w-md flex flex-col items-center text-center mt-12 mb-24">
+<!-- Illustration Section -->
+<div class="relative orbit-container mb-12 flex items-center justify-center">
+<!-- Central Clock Well -->
+<div class="w-40 h-40 rounded-full neomorph-sunken flex items-center justify-center bg-background z-10">
+<div class="w-32 h-32 rounded-full neomorph-raised bg-background flex flex-col items-center justify-center relative">
+<span class="material-symbols-outlined text-primary text-5xl mb-1" data-icon="schedule">schedule</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">22:00</span>
+</div>
+</div>
+<!-- Orbiting Device Icons -->
+<div class="orbit-item animate-orbit" style="animation-delay: 0s;">
+<div class="w-12 h-12 rounded-full neomorph-raised bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="lightbulb">lightbulb</span>
+</div>
+</div>
+<div class="orbit-item animate-orbit" style="animation-delay: -5s;">
+<div class="w-12 h-12 rounded-full neomorph-raised bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="air_purifier_gen">air_purifier_gen</span>
+</div>
+</div>
+<div class="orbit-item animate-orbit" style="animation-delay: -10s;">
+<div class="w-12 h-12 rounded-full neomorph-raised bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="orbit-item animate-orbit" style="animation-delay: -15s;">
+<div class="w-12 h-12 rounded-full neomorph-raised bg-background flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="ac_unit">ac_unit</span>
+</div>
+</div>
+<!-- Background Rings -->
+<div class="absolute inset-0 border-2 border-dashed border-outline-variant/30 rounded-full scale-[0.8]"></div>
+</div>
+<!-- AI Assistant Card -->
+<div class="w-full neomorph-raised rounded-xl bg-background p-lg mb-xl relative overflow-hidden group">
+<div class="flex items-center gap-md mb-md">
+<div class="w-10 h-10 rounded-full gradient-glow flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="text-left">
+<p class="font-label-md text-label-md text-primary font-bold">AI Assistant</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Recommended Action</p>
+</div>
+</div>
+<div class="neomorph-sunken rounded-lg p-md bg-background flex items-center justify-between">
+<p class="font-body-md text-body-md text-on-surface font-medium">Turning off lights in 5 mins.</p>
+<div class="w-8 h-8 rounded-full border-2 border-primary/20 flex items-center justify-center">
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse"></div>
+</div>
+</div>
+<!-- Subtle background decorative element -->
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl" data-icon="bolt">bolt</span>
+</div>
+</div>
+<!-- Copy Text -->
+<div class="px-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-extrabold mb-sm">AI-Powered Living</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Let NexaHome learn your routines and automate your life for maximum efficiency.
+            </p>
+</div>
+</main>
+<!-- Bottom Actions -->
+<footer class="fixed bottom-0 left-0 w-full p-margin-mobile flex flex-col gap-md">
+<!-- Progress Indicators -->
+<div class="flex justify-center gap-sm mb-base">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-8 h-2 rounded-full bg-primary"></div>
+</div>
+<button class="w-full h-14 rounded-full gradient-glow text-on-primary font-label-md text-label-md flex items-center justify-center gap-sm transition-transform active:scale-95 group" onclick="window.location.href='#'">
+            FINISH
+            <span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</footer>
+<!-- Background Atmospheric Touches -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[10%] left-[10%] w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[20%] right-[10%] w-80 h-80 bg-secondary/5 rounded-full blur-[120px]"></div>
+</div>
+<script>
+        // Micro-interaction for the Finish button
+        document.querySelector('button').addEventListener('touchstart', function() {
+            this.classList.add('neomorph-pressed');
+        });
+        document.querySelector('button').addEventListener('touchend', function() {
+            this.classList.remove('neomorph-pressed');
+        });
+
+        // Simulating the dynamic update of the AI card countdown (visual only)
+        let seconds = 300;
+        const statusText = document.querySelector('.neomorph-sunken p');
+        
+        setInterval(() => {
+            if (seconds > 0) {
+                seconds--;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                // We keep the prompt requirement "Turning off lights in 5 mins." mostly static for brand integrity
+                // but we could pulse the indicator
+            }
+        }, 1000);
+    </script>
+</body></html>

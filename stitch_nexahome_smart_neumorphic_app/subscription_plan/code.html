@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    .neomorph-raised {
+      box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+    }
+    
+    .neomorph-raised-intense {
+      box-shadow: 8px 8px 16px rgba(0,0,0,0.12), -8px -8px 16px rgba(255,255,255,0.9);
+    }
+
+    .neomorph-sunken {
+      box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+    }
+
+    .neomorph-active-glow {
+      box-shadow: 0 0 20px rgba(99, 44, 229, 0.2), 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+    }
+
+    .active-toggle-track {
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2), inset -2px -2px 5px rgba(255,255,255,0.5);
+      background: #eeeef0;
+    }
+
+    body {
+      background-color: #f9f9fc;
+      color: #1a1c1e;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #632ce5 0%, #7c4dff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    .animate-pulse-soft {
+      animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#dadadc",
+            "surface-container-high": "#e8e8ea",
+            "background": "#f9f9fc",
+            "surface-bright": "#f9f9fc",
+            "tertiary-fixed": "#e0e3e6",
+            "on-primary-container": "#fcf6ff",
+            "on-background": "#1a1c1e",
+            "tertiary": "#565a5c",
+            "surface-variant": "#e2e2e5",
+            "surface-container-highest": "#e2e2e5",
+            "on-surface-variant": "#494455",
+            "surface-container-lowest": "#ffffff",
+            "primary": "#632ce5",
+            "on-secondary-container": "#fefcff",
+            "secondary-fixed": "#d8e2ff",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "surface-tint": "#6833ea",
+            "surface": "#f9f9fc",
+            "on-secondary-fixed-variant": "#004495",
+            "inverse-primary": "#cdbdff",
+            "outline-variant": "#cac3d8",
+            "outline": "#7a7487",
+            "primary-fixed-dim": "#cdbdff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed-variant": "#4f00d0",
+            "surface-container-low": "#f3f3f6",
+            "secondary": "#0058bd",
+            "tertiary-fixed-dim": "#c4c7ca",
+            "tertiary-container": "#6f7275",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#001a42",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#adc6ff",
+            "secondary-container": "#1e70e4",
+            "on-tertiary-fixed-variant": "#44474a",
+            "primary-container": "#7c4dff",
+            "on-tertiary-fixed": "#191c1e",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2f3133",
+            "on-tertiary-container": "#f6f8fb",
+            "on-surface": "#1a1c1e",
+            "inverse-on-surface": "#f0f0f3",
+            "surface-container": "#eeeef0",
+            "primary-fixed": "#e8deff",
+            "on-primary-fixed": "#20005f"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xs": "4px",
+            "lg": "24px",
+            "md": "16px",
+            "sm": "8px",
+            "margin-mobile": "20px",
+            "gutter": "16px",
+            "xl": "32px",
+            "margin-desktop": "40px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "display": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+            "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-background min-h-screen pb-32">
+<!-- Top Navigation -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-xl neomorph-raised flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close-up studio portrait of a modern professional user for a tech profile. Soft, high-key lighting creates a clean, premium light-mode aesthetic. The background is a soft, blurred neutral gray, focusing on the friendly expression. Professional photography style with sharp detail and natural skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfLQ87Lk6gmrAThVsslIAhdgOzNoRBYn1AkmTw6cOSUaFFp96fxpsekK1-wNNgGLr4OVD_2ZyqtM0NhNJj7thbQNHN3uwXA3OMNuaRpmCI-4WUBlTDINueSZgEoUTkKiMTWQDQ2Dh_UylLGfNvB_z3XEpi_L8p4yJtM7VCU4QzY72OQ4BaJTBykhE1KagPNwlWclRn84IB3BVO4t6NgLHe6pis-u867fkGLEmsomF4A37jBZe0WLbqYyI-N_-vlmripbfL7mGwkXg"/>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-4xl mx-auto">
+<!-- Hero Section -->
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg mb-2">Upgrade Your Intelligence</h2>
+<p class="text-on-surface-variant font-body-md max-w-md mx-auto">Experience a home that thinks, learns, and anticipates your every need with NexaHome AI.</p>
+</div>
+<!-- Toggle Selector (Monthly/Yearly) -->
+<div class="flex justify-center mb-10">
+<div class="neomorph-sunken p-1 rounded-full flex items-center">
+<button class="px-6 py-2 rounded-full font-label-md transition-all duration-300 neomorph-raised bg-background text-primary">Monthly</button>
+<button class="px-6 py-2 rounded-full font-label-md transition-all duration-300 text-on-surface-variant">Yearly <span class="text-primary text-xs font-bold ml-1">-20%</span></button>
+</div>
+</div>
+<!-- Pricing Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Basic Card -->
+<div class="neomorph-raised bg-background rounded-[24px] p-lg flex flex-col items-start transition-transform hover:scale-[1.02] duration-300">
+<div class="w-12 h-12 neomorph-sunken rounded-xl flex items-center justify-center mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1">Basic</h3>
+<p class="font-label-sm text-on-surface-variant mb-6">Standard control</p>
+<div class="mb-8">
+<span class="text-4xl font-extrabold tracking-tight">Free</span>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+            Up to 5 devices
+          </li>
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+            Manual schedules
+          </li>
+<li class="flex items-center gap-3 text-label-md text-outline">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+            No AI insights
+          </li>
+</ul>
+<button class="w-full py-4 rounded-xl font-label-md neomorph-sunken text-on-surface-variant transition-all active:scale-95">Current Plan</button>
+</div>
+<!-- AI Pro Card (Highlighted) -->
+<div class="neomorph-raised-intense bg-background rounded-[24px] p-lg flex flex-col items-start relative border-2 border-primary-fixed transition-transform hover:scale-[1.05] duration-300 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm px-4 py-1 rounded-full shadow-lg">MOST POPULAR</div>
+<div class="w-12 h-12 neomorph-sunken rounded-xl flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1 gradient-text">AI Pro</h3>
+<p class="font-label-sm text-on-surface-variant mb-6">Autonomous living</p>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="text-4xl font-extrabold tracking-tight">$9.99</span>
+<span class="text-on-surface-variant font-label-sm">/mo</span>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            Unlimited devices
+          </li>
+<li class="flex items-center gap-3 text-label-md font-bold">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            Predictive Automation
+          </li>
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            Voice cloning
+          </li>
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            Energy optimizer
+          </li>
+</ul>
+<button class="w-full py-4 rounded-xl font-label-md bg-primary text-on-primary shadow-[0_0_15px_rgba(99,44,229,0.4)] hover:brightness-110 active:scale-95 transition-all duration-200" onclick="triggerHaptic()">Upgrade Now</button>
+</div>
+<!-- Smart Card -->
+<div class="neomorph-raised bg-background rounded-[24px] p-lg flex flex-col items-start transition-transform hover:scale-[1.02] duration-300">
+<div class="w-12 h-12 neomorph-sunken rounded-xl flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1">Smart</h3>
+<p class="font-label-sm text-on-surface-variant mb-6">Enhanced experience</p>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="text-4xl font-extrabold tracking-tight">$4.99</span>
+<span class="text-on-surface-variant font-label-sm">/mo</span>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+            Up to 20 devices
+          </li>
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+            Remote access plus
+          </li>
+<li class="flex items-center gap-3 text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+            Advanced scenes
+          </li>
+</ul>
+<button class="w-full py-4 rounded-xl font-label-md neomorph-raised text-primary transition-all active:scale-95 hover:bg-surface-container-low">Select Plan</button>
+</div>
+</div>
+<!-- Features Bento Grid -->
+<div class="mt-20">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-8 text-center">Exclusive Pro Features</h3>
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[500px]">
+<!-- Large visual card -->
+<div class="md:col-span-2 md:row-span-2 rounded-[32px] overflow-hidden neomorph-raised p-2">
+<div class="w-full h-full rounded-[24px] relative overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic, ultra-modern smart home interior during a moody blue-hour twilight. Glowing neon purple accents trace the architectural lines of the ceiling. A transparent holographic interface floats in the foreground, displaying complex energy consumption graphs and home health data. The mood is sophisticated, high-tech, and futuristic, consistent with a premium AI Pro service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_lM54uY3T9wI7cdxKK9wDjrywBD637bJawsfiD_DOis2tPq4nmqW87zSio2jXAlsbZ0S6N_cTCDBo-kwWeZncWuN0BMMXHrWZU0Xi9yHpjEcuHIlB1Ulnd3A2HBqGIjnI5EgQpz2L1nmc8MZj_5HrTxvLIjuWX9RQa2UTEDShg4QynQYtidXhXUzDsFlnqDt5MH6DHI1fiGaF-JsJmg1ahfpa7TUEMCH3_I3Of_irDzPk__DbWDHCNNWy22fn2SQER-qSAy_9nOo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
+<h4 class="font-headline-md text-headline-md">Holographic Dashboard</h4>
+<p class="font-body-md opacity-80">Full spatial visualization of your home ecosystem on any device.</p>
+</div>
+</div>
+</div>
+<!-- Small feature cards -->
+<div class="md:col-span-2 neomorph-raised bg-background rounded-[32px] p-8 flex items-center gap-6">
+<div class="flex-shrink-0 w-16 h-16 rounded-2xl neomorph-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h4 class="font-label-md text-lg font-bold">Threat Detection</h4>
+<p class="font-body-md text-on-surface-variant">Real-time AI monitoring for unusual patterns and safety leaks.</p>
+</div>
+</div>
+<div class="md:col-span-1 neomorph-raised bg-background rounded-[32px] p-8 flex flex-col justify-center items-center text-center">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<h4 class="font-label-md font-bold mb-2">Net Zero</h4>
+<p class="text-xs text-on-surface-variant">Optimize energy automatically.</p>
+</div>
+<div class="md:col-span-1 neomorph-raised bg-background rounded-[32px] p-8 flex flex-col justify-center items-center text-center">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h4 class="font-label-md font-bold mb-2">24/7 Concierge</h4>
+<p class="text-xs text-on-surface-variant">Priority human and AI support.</p>
+</div>
+</div>
+</div>
+<!-- FAQ Section (Sunken Neomorph) -->
+<div class="mt-20 neomorph-sunken rounded-[40px] p-lg">
+<h3 class="font-headline-md text-headline-md mb-8 text-center">Frequently Asked</h3>
+<div class="space-y-6 max-w-2xl mx-auto">
+<details class="group">
+<summary class="flex justify-between items-center cursor-pointer list-none p-4 neomorph-raised rounded-2xl bg-background transition-all group-open:mb-4">
+<span class="font-label-md">Can I cancel anytime?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 py-4 font-body-md text-on-surface-variant">
+            Yes, all subscriptions are monthly or yearly and can be canceled at any time from your account settings without penalties.
+          </div>
+</details>
+<details class="group">
+<summary class="flex justify-between items-center cursor-pointer list-none p-4 neomorph-raised rounded-2xl bg-background transition-all group-open:mb-4">
+<span class="font-label-md">Does AI Pro work offline?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 py-4 font-body-md text-on-surface-variant">
+            NexaHome AI Pro uses local edge processing for core security and automation, ensuring functionality even when your internet connection is unstable.
+          </div>
+</details>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+    function triggerHaptic() {
+      // Small visual feedback for "haptic" feel
+      const btn = event.currentTarget;
+      btn.style.transform = "scale(0.92)";
+      setTimeout(() => {
+        btn.style.transform = "scale(1)";
+        alert("Preparing your AI Pro upgrade...");
+      }, 150);
+    }
+
+    // Toggle interaction
+    const toggleButtons = document.querySelectorAll('.neomorph-sunken button');
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggleButtons.forEach(b => {
+          b.classList.remove('neomorph-raised', 'bg-background', 'text-primary');
+          b.classList.add('text-on-surface-variant');
+        });
+        btn.classList.add('neomorph-raised', 'bg-background', 'text-primary');
+        btn.classList.remove('text-on-surface-variant');
+      });
+    });
+  </script>
+</body></html>

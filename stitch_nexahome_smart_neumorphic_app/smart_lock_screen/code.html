@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cac3d8",
+                        "tertiary": "#565a5c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container": "#eeeef0",
+                        "surface-bright": "#f9f9fc",
+                        "primary-fixed-dim": "#cdbdff",
+                        "primary-container": "#7c4dff",
+                        "on-background": "#1a1c1e",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#004495",
+                        "secondary-container": "#1e70e4",
+                        "surface-variant": "#e2e2e5",
+                        "surface-dim": "#dadadc",
+                        "on-surface": "#1a1c1e",
+                        "surface-container-high": "#e8e8ea",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#494455",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6f7275",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#cdbdff",
+                        "secondary": "#0058bd",
+                        "primary-fixed": "#e8deff",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "background": "#f9f9fc",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "outline": "#7a7487",
+                        "on-tertiary-container": "#f6f8fb",
+                        "surface-tint": "#6833ea",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed": "#20005f",
+                        "on-primary-container": "#fcf6ff",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "primary": "#632ce5",
+                        "inverse-on-surface": "#f0f0f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+        }
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+        .neomorph-active {
+            box-shadow: inset 6px 6px 12px rgba(0,0,0,0.15), inset -6px -6px 12px rgba(255,255,255,0.9);
+            background: linear-gradient(145deg, #f9f9fc, #ffffff);
+        }
+        .primary-glow {
+            box-shadow: 0 0 20px rgba(99, 44, 229, 0.3);
+        }
+        .lock-animation-container {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .active-scale:active {
+            transform: scale(0.95);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cac3d8;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased overflow-x-hidden min-h-screen">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary active:scale-95 duration-100" style="font-variation-settings: 'FILL' 0;">arrow_back_ios_new</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity cursor-pointer">notifications</span>
+<div class="w-8 h-8 rounded-full neomorph-raised border-2 border-white overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up high-resolution portrait of a stylish young professional man with a friendly expression. He is photographed in a bright, modern architectural space with soft, high-key lighting that emphasizes clean surfaces and a minimalist aesthetic. The image uses a soft focus background to keep the subject crisp, reflecting a high-end smart home technology lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWK7upMOGmMYJzQO7MNumllqwXUVaAMTXpgoxDBAiZF88XeLl79BiLahai-UhgkdgQJN9SBr6Hb9pXFdXNHyAkGYz6u5Rvr9e7TTLuyOUU277oZrZ92ZUfknUR5gbHDM5JJyQ_D5qOFiDTH-36Fh1mT270S4Woq475TjSsMF4vOtyQBfaTbAxRSg2QSTEGYIjp6Hbr_Gw_RZnysoR6jgChaCHYw2wpkozIev9A7wOZNoDyJ9T3aQZzgFYhYDYA5lh5lxNs5efp4VU"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile flex flex-col gap-xl">
+<!-- Header & Quick Info -->
+<section class="flex flex-col gap-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Front Door Lock</h2>
+<p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">battery_full</span>
+                85% Battery • Connected
+            </p>
+</section>
+<!-- Main Lock Status Indicator -->
+<section class="flex justify-center py-lg">
+<div class="relative w-64 h-64 rounded-full flex items-center justify-center cursor-pointer lock-animation-container neomorph-raised transition-all active:scale-90" id="lockButton" onclick="toggleLock()">
+<!-- Progress Circle (Recessed Track) -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90">
+<circle class="text-surface-container-low neomorph-sunken" cx="128" cy="128" fill="transparent" r="120" stroke="currentColor" stroke-width="12"></circle>
+<circle class="transition-all duration-700 ease-in-out" cx="128" cy="128" fill="transparent" id="lockProgress" r="120" stroke="url(#primaryGradient)" stroke-dasharray="753.98" stroke-dashoffset="0" stroke-width="12"></circle>
+<defs>
+<lineargradient id="primaryGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#632ce5"></stop>
+<stop offset="100%" stop-color="#7c4dff"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Inner Dial (Raised) -->
+<div class="w-48 h-48 rounded-full neomorph-raised flex flex-col items-center justify-center gap-xs z-10" id="lockDial">
+<span class="material-symbols-outlined text-[64px] text-primary transition-all duration-300" id="lockIcon" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-md text-label-md font-bold uppercase tracking-widest text-on-surface-variant" id="lockLabel">Locked</span>
+</div>
+</div>
+</section>
+<!-- Guest Access Section -->
+<section class="flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Guest Access</h3>
+<div class="neomorph-raised rounded-xl p-lg bg-background flex flex-col gap-lg">
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Temporary Code</span>
+<span class="font-display text-display text-primary tracking-widest mt-xs" id="guestCode">----</span>
+</div>
+<button class="w-14 h-14 rounded-full neomorph-raised text-primary flex items-center justify-center active:scale-90 transition-all" onclick="generateCode()">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+<div class="neomorph-sunken rounded-lg p-md flex items-center gap-md">
+<span class="material-symbols-outlined text-outline">info</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-tight">
+                        Generated codes are valid for 24 hours only. You can revoke access at any time.
+                    </p>
+</div>
+<button class="w-full py-md rounded-xl bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-sm active-scale primary-glow">
+<span class="material-symbols-outlined text-[20px]">share</span>
+                    SHARE ACCESS
+                </button>
+</div>
+</section>
+<!-- Activity History Timeline -->
+<section class="flex flex-col gap-md">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-md text-headline-md text-on-surface">Activity History</h3>
+<span class="font-label-sm text-label-sm text-primary cursor-pointer hover:underline">View All</span>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Timeline Item 1 -->
+<div class="neomorph-raised rounded-xl p-md flex items-center gap-md">
+<div class="w-12 h-12 rounded-full neomorph-sunken flex items-center justify-center bg-surface-container-low text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="flex-1 flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Unlocked by Sarah</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 2:14 PM</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<!-- Timeline Item 2 -->
+<div class="neomorph-raised rounded-xl p-md flex items-center gap-md">
+<div class="w-12 h-12 rounded-full neomorph-sunken flex items-center justify-center bg-surface-container-low text-secondary">
+<span class="material-symbols-outlined">auto_mode</span>
+</div>
+<div class="flex-1 flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Auto-Locked</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 1:45 PM</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<!-- Timeline Item 3 -->
+<div class="neomorph-raised rounded-xl p-md flex items-center gap-md">
+<div class="w-12 h-12 rounded-full neomorph-sunken flex items-center justify-center bg-surface-container-low text-on-surface">
+<span class="material-symbols-outlined">vpn_key</span>
+</div>
+<div class="flex-1 flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Guest Entry (John)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday, 5:30 PM</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+        let isLocked = true;
+        const lockButton = document.getElementById('lockButton');
+        const lockDial = document.getElementById('lockDial');
+        const lockIcon = document.getElementById('lockIcon');
+        const lockLabel = document.getElementById('lockLabel');
+        const lockProgress = document.getElementById('lockProgress');
+
+        function toggleLock() {
+            isLocked = !isLocked;
+            
+            if (isLocked) {
+                // Locked state
+                lockDial.classList.remove('neomorph-sunken');
+                lockDial.classList.add('neomorph-raised');
+                lockIcon.textContent = 'lock';
+                lockIcon.style.color = 'var(--primary)';
+                lockLabel.textContent = 'Locked';
+                lockProgress.style.strokeDashoffset = '0';
+                lockButton.style.transform = 'scale(1)';
+            } else {
+                // Unlocked state
+                lockDial.classList.remove('neomorph-raised');
+                lockDial.classList.add('neomorph-sunken');
+                lockIcon.textContent = 'lock_open';
+                lockIcon.style.color = '#7a7487'; // outline color
+                lockLabel.textContent = 'Unlocked';
+                lockProgress.style.strokeDashoffset = '753.98';
+                lockButton.style.transform = 'scale(1)';
+            }
+            
+            // Haptic feedback simulation
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(20);
+            }
+        }
+
+        function generateCode() {
+            const guestCodeElem = document.getElementById('guestCode');
+            let counter = 0;
+            const interval = setInterval(() => {
+                guestCodeElem.textContent = Math.floor(1000 + Math.random() * 9000);
+                counter++;
+                if (counter > 10) {
+                    clearInterval(interval);
+                    guestCodeElem.textContent = Math.floor(1000 + Math.random() * 9000);
+                }
+            }, 50);
+        }
+
+        // Initialize progress bar
+        lockProgress.style.strokeDasharray = '753.98';
+    </script>
+</body></html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.8);
+            --shadow-dark: 6px 6px 12px rgba(0, 0, 0, 0.1);
+            --shadow-light-inset: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+            --shadow-dark-inset: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .neo-raised {
+            box-shadow: var(--shadow-light), var(--shadow-dark);
+        }
+
+        .neo-sunken {
+            box-shadow: var(--shadow-light-inset), var(--shadow-dark-inset);
+        }
+
+        .neo-btn-active {
+            box-shadow: 0 0 15px rgba(99, 44, 229, 0.4);
+            background: linear-gradient(145deg, #7c4dff, #632ce5);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .live-indicator {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+            overflow-x: hidden;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cac3d8",
+                        "tertiary": "#565a5c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container": "#eeeef0",
+                        "surface-bright": "#f9f9fc",
+                        "primary-fixed-dim": "#cdbdff",
+                        "primary-container": "#7c4dff",
+                        "on-background": "#1a1c1e",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#004495",
+                        "secondary-container": "#1e70e4",
+                        "surface-variant": "#e2e2e5",
+                        "surface-dim": "#dadadc",
+                        "on-surface": "#1a1c1e",
+                        "surface-container-high": "#e8e8ea",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#494455",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6f7275",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#cdbdff",
+                        "secondary": "#0058bd",
+                        "primary-fixed": "#e8deff",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "background": "#f9f9fc",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "outline": "#7a7487",
+                        "on-tertiary-container": "#f6f8fb",
+                        "surface-tint": "#6833ea",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed": "#20005f",
+                        "on-primary-container": "#fcf6ff",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "primary": "#632ce5",
+                        "inverse-on-surface": "#f0f0f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- Top App Bar (Shared Component) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neo-raised overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution profile portrait of a modern homeowner, shot in a minimalist studio setting with soft side lighting and a neutral palette. The style is crisp and modern, reflecting a high-tech smart home aesthetic with a calm and confident expression, emphasizing a premium lifestyle and security-conscious persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFdDEmhWm1JJXHNqG29b0Rt04R9CJLEH9uUj6i9QO9o6srViVCldlXgq8oUmAx7NBAtkxrSmPJz46VoQfB0AJiFi318GVEHEw27AxC5m5hF6pyHIzrVlj71BJgYF7006hgo1qJq9eU093uZJ8OMewOcSZouR2K5hB6zhc2IYYQj4cnY5_84p2FsTbduGY2W5RaF4jQUa9bwPC9e7Nn91t-H1e9NVoKN_RrBULoAiUdHrCWBqX8wMxzGGzn6YMzb_ZzD3o2YCu7Ius"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center neo-raised rounded-full text-primary hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="mt-20 mb-28 px-margin-mobile flex-grow">
+<!-- Main Feed Section -->
+<div class="mb-lg">
+<div class="flex items-center justify-between mb-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Front Driveway</h2>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error live-indicator"></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">LIVE • 4K ULTRA HD</p>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="p-3 rounded-xl neo-raised text-on-surface-variant active:scale-95 transition-all" id="night-vision-toggle">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<button class="p-3 rounded-xl neo-raised text-on-surface-variant active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<!-- 16:9 Primary Camera Feed -->
+<div class="relative aspect-video rounded-3xl overflow-hidden neo-raised bg-surface-container border-8 border-background">
+<img class="w-full h-full object-cover" data-alt="A high-definition 4K security camera perspective of a luxury modern residential driveway at dusk. The scene features a sleek electric vehicle parked on textured pavers, surrounded by minimalist landscaping and architectural lighting. The atmosphere is quiet, secure, and technologically advanced, with a wide-angle lens view showing the front gate and entry path." id="main-camera-stream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsinztkwd0fiSvZ-FKtRI3L7bFezJi580jA1o6kI9jhTCUNt76s85nWb-ddKIx6aeSRffEDmc_IK0Od3SoZh_7vqEyInkKIuIFRt1UQiem39b8gbzYPDi1UqA4udgsfL1wr3Gaa28QBInxl8tFv7vGk40J2B8k4tGsgwg8hYRsJNYXqJ_ZWP4NJtG-XKBnSYReDm8J-PJCwxFIsMm7kcRyBAZD9RZclEZEvl-fQ9_iTv3xnafTWX4VR9V8eYjSXdH7fUerGrZuH0M"/>
+<!-- Overlay Status -->
+<div class="absolute top-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="videocam">videocam</span>
+<span class="text-white font-label-sm text-[12px]">CAM-01</span>
+</div>
+<!-- Live Overlay Controls (Floating Glass) -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-lg bg-black/20 backdrop-blur-lg px-lg py-md rounded-full border border-white/10">
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all active:scale-90">
+<span class="material-symbols-outlined text-white" data-icon="fiber_manual_record">fiber_manual_record</span>
+</div>
+<span class="text-[10px] text-white font-label-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Record</span>
+</button>
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all active:scale-90">
+<span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+</div>
+<span class="text-[10px] text-white font-label-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Snap</span>
+</button>
+<button class="flex flex-col items-center gap-xs group" id="mic-btn">
+<div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary text-white shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[32px]" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<span class="text-[10px] text-white font-label-sm uppercase tracking-widest">Hold to Speak</span>
+</button>
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all active:scale-90">
+<span class="material-symbols-outlined text-white" data-icon="history">history</span>
+</div>
+<span class="text-[10px] text-white font-label-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Playback</span>
+</button>
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all active:scale-90">
+<span class="material-symbols-outlined text-white" data-icon="grid_view">grid_view</span>
+</div>
+<span class="text-[10px] text-white font-label-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Grid</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Camera Grid Section -->
+<div>
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Other Cameras</h3>
+<span class="font-label-md text-label-md text-primary">View All</span>
+</div>
+<!-- Bento Grid Layout for other streams -->
+<div class="grid grid-cols-2 gap-md">
+<!-- Backyard Pool -->
+<div class="p-4 rounded-3xl neo-raised bg-background group cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="aspect-square rounded-2xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover" data-alt="A tranquil backyard scene featuring a minimalist geometric swimming pool with turquoise water. The pool area is surrounded by sleek wooden decking and modern outdoor lounge furniture. High-angle security camera perspective with soft morning sunlight casting gentle shadows. Pristine, modern, and high-end aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWykACCsr02zaCnM5rTLLqdd3zFGg4NpZzc6dckwBiYU--UvK0Gr7sJgfVA5vF32PcrrBjj-NXj8LucThlrm52boIVMen-0iDY9lBOc6MccEvd8QO9ZF_K0Sl9kqQMO-Ffx5XS8jKFDdZ6VjyIsl7QShlIdhWkAXwuHER2fFF3NPD4lFDb2hCF6oHk7Nr_ONptVyo3j7o1nmQFbGtTrA5wO2QLArFb7b0rnn-DoH-3jUAPd9MOpbVyHxsBN8eCoMEx46Ig8m7LLV0"/>
+<div class="absolute bottom-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-white font-bold">10:45 AM</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Backyard Pool</p>
+<p class="text-[12px] text-on-surface-variant">No motion detected</p>
+</div>
+<!-- Living Room -->
+<div class="p-4 rounded-3xl neo-raised bg-background group cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="aspect-square rounded-2xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover" data-alt="Interior view of a spacious modern living room with floor-to-ceiling windows, designer furniture, and high-tech minimalist decor. The lighting is bright and airy, showing a clean, safe indoor environment. Wide-angle security camera perspective from a corner ceiling mount. Sophisticated palette of greys and warm wood tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR0IekzP493OQ5iKG-Vg9CfDM3pUFoWRZR0CpTnoqY1RrNjRVWhz3sIrc9F8CpQGzZrO-iXC0okspTUfyMRtZmnOhUVnNl7GYDlXvU5OjOaJzfA2pc-ndvXKOjNNctENrC7ywsVEzYWwXhETPrR-JkAKWdi79f-Q8tW4QTdo19as8bpWoS9Bp5ikMc_bljoHc0L4KkoONPtdPqhYKC6uv5gIYmm1qNYWgVJVpZQJ2fzamPPVHJOneR6PFEI7GQsGM4RiWfKjuIIDw"/>
+<div class="absolute bottom-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-white font-bold">10:45 AM</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Living Room</p>
+<p class="text-[12px] text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                        Motion detected
+                    </p>
+</div>
+<!-- Garage Entry -->
+<div class="p-4 rounded-3xl neo-raised bg-background group cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="aspect-square rounded-2xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover" data-alt="A modern two-car garage interior with polished concrete floors and smart storage solutions. An electric vehicle is plugged into a wall-mounted charging station. Bright overhead LED lighting provides clear visibility. Security camera perspective focusing on the main garage door and side entry. Clean, organized, and secure aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGpZQT_vZ74BQuaUCjCijVRcI-2UdDxGOJNbMFliLgS5vWL0UN8SMIwGBbBEfkg94fssT6EsG1dcaq71Y7TPLLPkuUUUYUbGU1HrIt1HTVei4mcDBlh2zSsDn7gcXIcqY3tP_wdKjeDtPYsvjZxoI-lm67jvYspmI4WIfmCKQtxHci2CnFH4pvOYhTf1RWKfeREbE9E-ckY4A6cwnPp9RUwIqQBSvcxmzwTIzLUbeFCbPMtIDq9mMyk9Smoomkr9Hegkb9TCoqb4g"/>
+<div class="absolute bottom-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-white font-bold">10:43 AM</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Garage Entry</p>
+<p class="text-[12px] text-on-surface-variant">Secure</p>
+</div>
+<!-- Front Door -->
+<div class="p-4 rounded-3xl neo-raised bg-background group cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="aspect-square rounded-2xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover" data-alt="Extreme close-up security camera view of a modern front door with a smart lock and video doorbell. The scene shows the porch area with a minimalist welcome mat and a potted architectural plant. Clear daylight visibility with sharp details of the door texture and surrounding entry area. Secure, inviting, and high-tech residential vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZbBswvwIfq5LhEUC42CbsoqI2a7Sc7L2OrNF7eAC5679zUqERjKv3CjrEvfj7PcDmmcS0jG3zdpT2f62r0drIpHPnEzXOIBVq3RWDcDNyMtgqmuxj8AzCq0_EKMW1mbhflAQuVhHq-s9Tp--4f9qPP0uyP-UCsCEHGsjS5uYgfUr9fyOKvrohkJQKVYWGlc51gT6QnLzp5tVyLOMcWkfwuTi8GTiDuVZyUwwZ-QD-aE4BqphlnPFj5ltYzi-tBUDeOnsJgjkBI7w"/>
+<div class="absolute bottom-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-white font-bold">10:44 AM</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Front Door</p>
+<p class="text-[12px] text-on-surface-variant">Last activity 2m ago</p>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed (Bento Style) -->
+<div class="mt-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Recent Alerts</h3>
+<div class="space-y-md">
+<div class="flex items-center gap-md p-md rounded-3xl neo-sunken bg-surface-container-low">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Person detected at Front Door</p>
+<p class="text-[12px] text-on-surface-variant">Today, 10:44 AM</p>
+</div>
+<button class="p-2 rounded-xl neo-raised text-primary">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</button>
+</div>
+<div class="flex items-center gap-md p-md rounded-3xl neo-raised">
+<div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Package delivered</p>
+<p class="text-[12px] text-on-surface-variant">Today, 09:12 AM</p>
+</div>
+<button class="p-2 rounded-xl neo-raised text-primary">
+<span class="material-symbols-outlined" data-icon="photo">photo</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="devices" data-weight="fill" style="font-variation-settings: 'FILL' 1;">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for Mic Button
+        const micBtn = document.getElementById('mic-btn');
+        const micIcon = micBtn.querySelector('.material-symbols-outlined');
+        
+        micBtn.addEventListener('mousedown', () => {
+            micBtn.classList.remove('bg-primary');
+            micBtn.classList.add('bg-error', 'scale-95');
+            micBtn.querySelector('span:last-child').textContent = 'Speaking...';
+        });
+
+        micBtn.addEventListener('mouseup', () => {
+            micBtn.classList.remove('bg-error', 'scale-95');
+            micBtn.classList.add('bg-primary');
+            micBtn.querySelector('span:last-child').textContent = 'Hold to Speak';
+        });
+
+        // Night Vision Toggle Logic
+        const nvToggle = document.getElementById('night-vision-toggle');
+        const mainStream = document.getElementById('main-camera-stream');
+        let isNightVision = false;
+
+        nvToggle.addEventListener('click', () => {
+            isNightVision = !isNightVision;
+            if (isNightVision) {
+                nvToggle.classList.add('neo-sunken', 'text-primary');
+                nvToggle.classList.remove('neo-raised');
+                mainStream.style.filter = 'grayscale(100%) brightness(120%) contrast(150%) sepia(100%) hue-rotate(50deg) saturate(200%)';
+            } else {
+                nvToggle.classList.remove('neo-sunken', 'text-primary');
+                nvToggle.classList.add('neo-raised');
+                mainStream.style.filter = 'none';
+            }
+        });
+
+        // Touch support for Mic
+        micBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            micBtn.classList.remove('bg-primary');
+            micBtn.classList.add('bg-error', 'scale-95');
+        });
+
+        micBtn.addEventListener('touchend', () => {
+            micBtn.classList.remove('bg-error', 'scale-95');
+            micBtn.classList.add('bg-primary');
+        });
+    </script>
+</body></html>

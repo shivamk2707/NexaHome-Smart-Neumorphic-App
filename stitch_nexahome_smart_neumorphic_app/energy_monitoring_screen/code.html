@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome | Energy Monitoring</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --light-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8);
+            --dark-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
+            --inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+            --inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark {
+            --light-shadow: -6px -6px 12px rgba(255, 255, 255, 0.05);
+            --dark-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
+            --inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+            --inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .neomorph-raised {
+            box-shadow: var(--dark-shadow), var(--light-shadow);
+        }
+
+        .neomorph-sunken {
+            box-shadow: var(--inset-dark), var(--inset-light);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #632ce5 0%, #7c4dff 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fc;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .chart-bar {
+            transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cac3d8",
+                        "tertiary": "#565a5c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container": "#eeeef0",
+                        "surface-bright": "#f9f9fc",
+                        "primary-fixed-dim": "#cdbdff",
+                        "primary-container": "#7c4dff",
+                        "on-background": "#1a1c1e",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#004495",
+                        "secondary-container": "#1e70e4",
+                        "surface-variant": "#e2e2e5",
+                        "surface-dim": "#dadadc",
+                        "on-surface": "#1a1c1e",
+                        "surface-container-high": "#e8e8ea",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#494455",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6f7275",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#cdbdff",
+                        "secondary": "#0058bd",
+                        "primary-fixed": "#e8deff",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "background": "#f9f9fc",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "outline": "#7a7487",
+                        "on-tertiary-container": "#f6f8fb",
+                        "surface-tint": "#6833ea",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed": "#20005f",
+                        "on-primary-container": "#fcf6ff",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "primary": "#632ce5",
+                        "inverse-on-surface": "#f0f0f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)] dark:shadow-[6px_6px_12px_rgba(0,0,0,0.4),-6px_-6px_12px_rgba(255,255,255,0.05)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A clean professional headshot of a person in high-tech home environment, soft warm lighting, modern photography style, minimalist background with smart home interfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2pTf0N_ju04NKBOhCuKjKt4cRB7R7mkFQSwLp4xpfSdfh2gC21DhUaq6jgNGeitrN9hjENfBkjrOvSrjJgNEViexGfJcib-57jmmeWSP0tYC31nfoa-FTQ3sv3Vcv2Q5g4ZPStg0vXrAuLMfWRctPA9Jh0ig9BcrZMv_4K6TyZqFKstquIBzrZkJtWudMIB4SvxfpHNKuS9pJMsBfMUOIc0BA6mi-m9Tlz7hXVKkBQaRMUr_C3BINvbMYwAX6Vxmc3ssCcwKoLPY"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">NexaHome</h1>
+</div>
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="mt-24 px-margin-mobile space-y-lg">
+<!-- Hero Summary Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Main Usage Card -->
+<div class="neomorph-raised bg-background p-lg rounded-[24px] space-y-md">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Live Usage</h2>
+<span class="flex items-center gap-xs px-md py-xs rounded-full neomorph-sunken text-primary font-label-md">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                        Active
+                    </span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="text-display font-display text-primary">2.45</span>
+<span class="text-headline-md font-headline-md text-on-surface-variant">kWh</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">Real-time consumption across 12 devices.</p>
+</div>
+<!-- Cost Estimator Card -->
+<div class="neomorph-raised bg-background p-lg rounded-[24px] space-y-md">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Estimated Cost</h2>
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="text-display font-display text-primary">£142.20</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">Current billing cycle prediction.</p>
+</div>
+</section>
+<!-- Timeframe Selector -->
+<nav class="neomorph-sunken p-2 rounded-xl flex justify-between gap-xs">
+<button class="flex-1 py-2 rounded-lg font-label-md transition-all duration-200 neomorph-raised bg-background text-primary" id="btn-daily" onclick="switchTab('daily')">Daily</button>
+<button class="flex-1 py-2 rounded-lg font-label-md transition-all duration-200 text-on-surface-variant" id="btn-weekly" onclick="switchTab('weekly')">Weekly</button>
+<button class="flex-1 py-2 rounded-lg font-label-md transition-all duration-200 text-on-surface-variant" id="btn-monthly" onclick="switchTab('monthly')">Monthly</button>
+</nav>
+<!-- Dynamic Chart Section -->
+<section class="neomorph-raised bg-background p-lg rounded-[24px] min-h-[300px] flex flex-col gap-lg">
+<div class="flex justify-between items-end h-48 px-md mb-4 gap-2">
+<!-- Daily Bars (Default) -->
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neomorph-raised" style="height: 45%;"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Mon</span>
+</div>
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neomorph-raised" style="height: 65%;"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Tue</span>
+</div>
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full primary-gradient rounded-t-lg neomorph-raised shadow-[0_0_15px_rgba(99,44,229,0.4)]" style="height: 85%;"></div>
+<span class="text-label-sm font-label-sm text-primary">Wed</span>
+</div>
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neomorph-raised" style="height: 55%;"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Thu</span>
+</div>
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neomorph-raised" style="height: 40%;"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Fri</span>
+</div>
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neomorph-raised" style="height: 30%;"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Sat</span>
+</div>
+<div class="chart-container flex-1 flex flex-col items-center justify-end gap-sm h-full group">
+<div class="chart-bar w-full bg-surface-container rounded-t-lg neomorph-raised" style="height: 50%;"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Sun</span>
+</div>
+</div>
+<div class="flex justify-around neomorph-sunken p-md rounded-xl">
+<div class="text-center">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Average</p>
+<p class="text-headline-md font-headline-md text-on-surface">12.4 kWh</p>
+</div>
+<div class="w-[1px] bg-outline-variant h-8 self-center"></div>
+<div class="text-center">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Peak</p>
+<p class="text-headline-md font-headline-md text-on-surface">18.2 kWh</p>
+</div>
+</div>
+</section>
+<!-- Comparison Cards -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="neomorph-raised bg-background p-lg rounded-[24px]">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">vs Last Month</h3>
+<p class="font-headline-md text-headline-md text-error flex items-center gap-xs">
+<span class="material-symbols-outlined">trending_up</span>
+                            +12.5%
+                        </p>
+</div>
+<div class="neomorph-sunken p-3 rounded-xl">
+<span class="material-symbols-outlined text-on-surface-variant">calendar_month</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2 neomorph-sunken overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div class="neomorph-raised bg-background p-lg rounded-[24px]">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Efficiency</h3>
+<p class="font-headline-md text-headline-md text-secondary flex items-center gap-xs">
+<span class="material-symbols-outlined">eco</span>
+                            Optimal
+                        </p>
+</div>
+<div class="neomorph-sunken p-3 rounded-xl">
+<span class="material-symbols-outlined text-secondary">energy_savings_leaf</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2 neomorph-sunken overflow-hidden">
+<div class="primary-gradient h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</section>
+<!-- Device Breakdown (Bento Style) -->
+<h3 class="font-headline-md text-headline-md px-2">Device Efficiency</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="neomorph-raised bg-background p-md rounded-xl flex flex-col items-center gap-xs text-center">
+<div class="neomorph-sunken p-sm rounded-full mb-xs">
+<span class="material-symbols-outlined text-primary">ac_unit</span>
+</div>
+<p class="font-label-md text-label-md">HVAC</p>
+<p class="font-headline-md text-headline-md">40%</p>
+</div>
+<div class="neomorph-raised bg-background p-md rounded-xl flex flex-col items-center gap-xs text-center">
+<div class="neomorph-sunken p-sm rounded-full mb-xs">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+</div>
+<p class="font-label-md text-label-md">Lights</p>
+<p class="font-headline-md text-headline-md">15%</p>
+</div>
+<div class="neomorph-raised bg-background p-md rounded-xl flex flex-col items-center gap-xs text-center">
+<div class="neomorph-sunken p-sm rounded-full mb-xs">
+<span class="material-symbols-outlined text-primary">kitchen</span>
+</div>
+<p class="font-label-md text-label-md">Fridge</p>
+<p class="font-headline-md text-headline-md">12%</p>
+</div>
+<div class="neomorph-raised bg-background p-md rounded-xl flex flex-col items-center gap-xs text-center">
+<div class="neomorph-sunken p-sm rounded-full mb-xs">
+<span class="material-symbols-outlined text-primary">more_horiz</span>
+</div>
+<p class="font-label-md text-label-md">Other</p>
+<p class="font-headline-md text-headline-md">33%</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] dark:shadow-[0px_-6px_12px_rgba(0,0,0,0.3)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] dark:shadow-[inset_4px_4px_8px_rgba(0,0,0,0.4),inset_-4px_-4px_8px_rgba(255,255,255,0.05)] rounded-xl p-2 scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<script>
+        function switchTab(timeframe) {
+            const btns = ['daily', 'weekly', 'monthly'];
+            btns.forEach(btn => {
+                const element = document.getElementById(`btn-${btn}`);
+                if (btn === timeframe) {
+                    element.classList.add('neomorph-raised', 'bg-background', 'text-primary');
+                    element.classList.remove('text-on-surface-variant');
+                } else {
+                    element.classList.remove('neomorph-raised', 'bg-background', 'text-primary');
+                    element.classList.add('text-on-surface-variant');
+                }
+            });
+
+            // Randomize bar heights to simulate data change
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                const randomHeight = Math.floor(Math.random() * 60) + 20;
+                bar.style.height = `${randomHeight}%`;
+            });
+        }
+    </script>
+</body></html>

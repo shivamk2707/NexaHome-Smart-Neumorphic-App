@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome AI Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --bg-color: #f9f9fc;
+            --shadow-light: rgba(255, 255, 255, 0.8);
+            --shadow-dark: rgba(0, 0, 0, 0.1);
+        }
+
+        .neo-raised {
+            box-shadow: -6px -6px 12px var(--shadow-light), 6px 6px 12px var(--shadow-dark);
+        }
+
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        .neo-button-active:active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+            transform: scale(0.98);
+        }
+
+        .glass-ai-bubble {
+            background: rgba(99, 44, 229, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 44, 229, 0.1);
+            box-shadow: 4px 4px 10px var(--shadow-dark);
+        }
+
+        .voice-glow {
+            box-shadow: 0 0 20px rgba(99, 44, 229, 0.4), -6px -6px 12px var(--shadow-light), 6px 6px 12px var(--shadow-dark);
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+        .voice-bar {
+            animation: wave 1s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e0e3e6",
+                        "surface-container-high": "#e8e8ea",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-container": "#7c4dff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#20005f",
+                        "inverse-surface": "#2f3133",
+                        "on-background": "#1a1c1e",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "primary": "#632ce5",
+                        "background": "#f9f9fc",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "on-secondary-fixed": "#001a42",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#6833ea",
+                        "outline": "#7a7487",
+                        "inverse-primary": "#cdbdff",
+                        "surface-container": "#eeeef0",
+                        "secondary": "#0058bd",
+                        "tertiary": "#565a5c",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "surface-container-highest": "#e2e2e5",
+                        "inverse-on-surface": "#f0f0f3",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-dim": "#dadadc",
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "primary-fixed": "#e8deff",
+                        "secondary-container": "#1e70e4",
+                        "on-primary-container": "#fcf6ff",
+                        "on-tertiary-container": "#f6f8fb",
+                        "primary-fixed-dim": "#cdbdff",
+                        "on-surface-variant": "#494455",
+                        "on-surface": "#1a1c1e",
+                        "surface-variant": "#e2e2e5",
+                        "outline-variant": "#cac3d8",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#004495",
+                        "surface-container-low": "#f3f3f6",
+                        "surface-bright": "#f9f9fc",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#6f7275",
+                        "surface": "#f9f9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-desktop": "40px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Top AppBar (from JSON) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full neo-raised overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-quality studio portrait of a professional woman with a friendly expression, soft lighting, minimalist background, part of a high-end smart home application user profile. The aesthetic is clean, bright, and modern, using a light-mode color palette with soft purple accents to maintain brand cohesion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOOkQaQaNcNqfk888HzvJUJ-OSxgAx4xy1XQnRZOyPnWFpuoh4MBf07RQIk628TephuL6FDl83CAj1-Qp5ivJ_nd34GhRHhai4Mq0w4Hz-qZ3vy0R8PqerAQ5S1ikXs5L7WFTJ8uET42RjQ57M3kFHcsz1uioY1Zo3V-fzAz3v37eUupxNb99yPGY46j56o4L66VDgomJIC5dBZcuDylJfMxh_0SVMMRBtqOU-l6TFNjMmg3KMcDPC1fAaxgLrmGTP2uGvP-G1kQY"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center neo-raised rounded-full text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-20 mb-32 px-margin-mobile flex flex-col overflow-y-auto">
+<!-- Chat History -->
+<div class="flex-1 space-y-lg py-md" id="chat-container">
+<!-- AI Welcome Message -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="glass-ai-bubble p-lg rounded-2xl rounded-tl-none">
+<p class="font-body-md text-on-surface">Hello! I'm your NexaHome assistant. How can I help you manage your home today?</p>
+</div>
+<span class="mt-sm font-label-sm text-label-sm text-outline-variant">Just now</span>
+</div>
+<!-- User Message Example -->
+<div class="flex flex-col items-end self-end max-w-[85%]">
+<div class="neo-raised bg-background p-lg rounded-2xl rounded-tr-none">
+<p class="font-body-md text-on-surface">Check the current temperature in the Living Room.</p>
+</div>
+<span class="mt-sm font-label-sm text-label-sm text-outline-variant">2 mins ago</span>
+</div>
+<!-- AI Response Example -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="glass-ai-bubble p-lg rounded-2xl rounded-tl-none border-l-4 border-primary">
+<p class="font-body-md text-on-surface">The Living Room is currently at <span class="text-primary font-bold">22.5°C</span>. Would you like me to adjust the thermostat?</p>
+</div>
+<span class="mt-sm font-label-sm text-label-sm text-outline-variant">1 min ago</span>
+</div>
+</div>
+<!-- Suggested Commands -->
+<div class="py-md overflow-x-auto no-scrollbar flex gap-md">
+<button class="whitespace-nowrap px-lg py-md neo-raised bg-background rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">
+                Turn off all lights
+            </button>
+<button class="whitespace-nowrap px-lg py-md neo-raised bg-background rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">
+                What is my energy usage today?
+            </button>
+<button class="whitespace-nowrap px-lg py-md neo-raised bg-background rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">
+                Secure all doors
+            </button>
+</div>
+</main>
+<!-- Interactive Bottom Bar -->
+<section class="fixed bottom-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md rounded-t-3xl pt-lg pb-xl px-margin-mobile flex flex-col items-center gap-lg">
+<!-- Text Input Field (Sunken) -->
+<div class="w-full neo-sunken rounded-2xl flex items-center px-lg py-sm">
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md text-on-surface py-md" placeholder="Type a command..." type="text"/>
+<button class="text-primary p-sm neo-raised rounded-full bg-background active:scale-95 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<!-- Voice Interaction Control -->
+<div class="flex flex-col items-center relative">
+<!-- Voice Waves (Micro-interaction) -->
+<div class="hidden absolute -top-12 flex items-center justify-center gap-1 h-8" id="voice-waves">
+<div class="voice-bar w-1 h-4 bg-primary rounded-full"></div>
+<div class="voice-bar w-1 h-8 bg-primary rounded-full" style="animation-delay: 0.1s"></div>
+<div class="voice-bar w-1 h-6 bg-primary rounded-full" style="animation-delay: 0.2s"></div>
+<div class="voice-bar w-1 h-8 bg-primary rounded-full" style="animation-delay: 0.3s"></div>
+<div class="voice-bar w-1 h-4 bg-primary rounded-full" style="animation-delay: 0.4s"></div>
+</div>
+<!-- Large Glowing Voice Button -->
+<button class="w-20 h-20 rounded-full neo-raised voice-glow flex items-center justify-center bg-background group active:scale-90 duration-200" id="mic-btn">
+<span class="material-symbols-outlined text-primary text-[40px] group-active:text-secondary" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+<span class="mt-md font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Tap to Speak</span>
+</div>
+</section>
+<!-- Bottom Navigation (from JSON) -->
+<!-- Note: BottomNavBar is hidden on this focused AI screen to prioritize the AI canvas as per the UX goal "suppress navigation to prioritize the content canvas". However, if we need it as an 'anchor', we include it but styled properly. Given the task "AI Smart Assistant Screen", we focus on the assistant experience. -->
+<script>
+        const micBtn = document.getElementById('mic-btn');
+        const voiceWaves = document.getElementById('voice-waves');
+        let isListening = false;
+
+        micBtn.addEventListener('click', () => {
+            isListening = !isListening;
+            if (isListening) {
+                voiceWaves.classList.remove('hidden');
+                voiceWaves.classList.add('flex');
+                micBtn.classList.add('neo-sunken');
+                micBtn.classList.remove('neo-raised');
+            } else {
+                voiceWaves.classList.add('hidden');
+                voiceWaves.classList.remove('flex');
+                micBtn.classList.remove('neo-sunken');
+                micBtn.classList.add('neo-raised');
+            }
+        });
+
+        // Simple input focus behavior
+        const input = document.querySelector('input');
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        input.addEventListener('blur', () => {
+            input.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

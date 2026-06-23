@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexaHome - Room Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#c4c7ca",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#cac3d8",
+                    "tertiary": "#565a5c",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eeeef0",
+                    "surface-bright": "#f9f9fc",
+                    "primary-fixed-dim": "#cdbdff",
+                    "primary-container": "#7c4dff",
+                    "on-background": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#004495",
+                    "secondary-container": "#1e70e4",
+                    "surface-variant": "#e2e2e5",
+                    "surface-dim": "#dadadc",
+                    "on-surface": "#1a1c1e",
+                    "surface-container-high": "#e8e8ea",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#494455",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#6f7275",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#cdbdff",
+                    "secondary": "#0058bd",
+                    "primary-fixed": "#e8deff",
+                    "secondary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "background": "#f9f9fc",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-primary-fixed-variant": "#4f00d0",
+                    "outline": "#7a7487",
+                    "on-tertiary-container": "#f6f8fb",
+                    "surface-tint": "#6833ea",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f9f9fc",
+                    "on-primary-fixed": "#20005f",
+                    "on-primary-container": "#fcf6ff",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#44474a",
+                    "primary": "#632ce5",
+                    "inverse-on-surface": "#f0f0f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "xs": "4px",
+                    "margin-desktop": "40px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9fc;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .neo-raised {
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.8);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .neo-raised:active {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+            transform: scale(0.98);
+        }
+
+        .neo-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.08), inset -4px -4px 8px rgba(255,255,255,0.7);
+        }
+
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e2e5;
+            border-radius: 10px;
+        }
+
+        .active-nav-glow {
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-surface">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full overflow-hidden neo-raised border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution close-up portrait of a young tech-savvy homeowner, looking friendly with a slight smile. The lighting is soft and natural, emphasizing clean skin and clear eyes. The background is a blurred, high-end smart home interior with subtle violet accents and minimalist white walls, perfectly matching the NexaHome brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAglnPwBjDgC8PVzykcbqFUeAKYXfgwYamYx_jw4N2GVOR7PGz2eg-yaVRsZ7ftu-fA6Ly7cgebVGLEejGYQe-dtInL_JD5uW-UThgE06mcM95SJsQq7ovEhfeqVyh12-GfWf_jYXDNnnY0clU9kD_ugdrEQcMnNKA5TLKrMJCXl1TAA7eQF-fsnR6LW1j4pr2nghtEpqAKKlstMCQkexqfRwkV5Gh2XN2Lzleg1jdUZ9q1z2TZu8i21TXvOGjExCeuxxUgRzJIQk"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-extrabold tracking-tight">NexaHome</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl neo-raised hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-28 px-margin-mobile max-w-4xl mx-auto">
+<!-- Header Section -->
+<div class="mb-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Your Spaces</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage 5 active zones and 24 connected devices.</p>
+</div>
+<!-- Room Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Living Room - Large Feature Card -->
+<div class="md:col-span-2 group relative h-64 rounded-3xl overflow-hidden neo-raised border-[6px] border-surface-container-low cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A wide-angle interior photograph of a modern, luxurious living room. The space features a plush grey sectional sofa, a minimalist black coffee table, and large floor-to-ceiling windows showing a soft twilight cityscape. Smart LED strip lighting in a soft violet hue illuminates the ceiling coves, creating a futuristic yet cozy atmosphere. The overall style is clean, airy, and high-tech." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFaw7JMd7I9hgrFrxQP-qmLYu92YKdzVl4F6gPjzVgzgmzU6zLg2254TkVL7RHtM7Os_hj4KhatDglyLNVyh7cYYzUo5goFEt8z3g8WC-cY8OZP3p1g2FUB6bDZh3crpOsDc8np2zVkjsiLwfwHvvFFAQtiuOFz9xKV1s8dI1cxIrlFI96-Ow9dnYcSPYa17jXR7k-6fshMa8wfJupBJQ9UxLOwTJ41jsyB9zn3sik8puRO0yF87a_2CyJ_Oo2bNRS6f5vO9CZNr0')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-lg flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md text-white">Living Room</h3>
+<p class="font-label-md text-label-md text-white/80">8 Devices Active</p>
+</div>
+<div class="glass-overlay rounded-2xl px-md py-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="thermostat">thermostat</span>
+<span class="font-headline-md text-headline-md text-white">22°C</span>
+</div>
+</div>
+</div>
+<!-- Bedroom Card -->
+<div class="group relative h-56 rounded-3xl overflow-hidden neo-raised border-[6px] border-surface-container-low cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A serene and minimalist bedroom interior with a large king-sized bed featuring crisp white linens and a charcoal grey upholstered headboard. The walls are a soft off-white, and warm, dimmable smart lighting glows from behind a wall-mounted wooden panel. A large Monstera plant sits in the corner, and the morning light filters through sheer white curtains, creating a calm, restorative mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCSbuMHFdrTLuCuHV4N6MRlg7vXdoY0A8QNTrRkiJrFE9xt52qur26LV37u85vU6hsDHfU2dMfDWEqXAunVcKFbhihV2Id03rzOKzMoU-eLGDKE0EpNGqHWzq41GBmYPkRdSekOZ2nLN49ih4DVYRSt1EeQJGXNCM7_5XapY6sP2tFHHdAxlhhGhnXLAtV7zhrKzFaV1w3Xwla3Ny-0Z0IvNcSG2rYU4DVhO8URQhFeBDBP7Hp3lgEOR8D6tBkU-fEn3EvQK1tvcKA')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-md flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md text-white">Bedroom</h3>
+<p class="font-label-md text-label-md text-white/80">4 Devices</p>
+</div>
+<div class="glass-overlay rounded-xl px-sm py-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="thermostat">thermostat</span>
+<span class="font-label-md text-label-md text-white">20°C</span>
+</div>
+</div>
+</div>
+<!-- Kitchen Card -->
+<div class="group relative h-56 rounded-3xl overflow-hidden neo-raised border-[6px] border-surface-container-low cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A state-of-the-art designer kitchen with matte black cabinetry and white marble countertops. Integrated smart appliances like a sleek induction cooktop and a touch-screen refrigerator are visible. The lighting is bright and crisp, provided by recessed ceiling spots and under-cabinet LED bars. A bowl of fresh citrus fruits adds a pop of natural color to the sophisticated monochromatic palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDcG42EintOhH-QhyoUp8N8k8FGe4zSHKloLvq-RY0uTcnTgyCCNTUrvhEExSJzgQcQJoaYmT-WGvH1iDytbDezaLxWpBESj7yYzOom9tbHBCWGLdOOrcmIZ0tg0ECj6InOJswzSPcvIFgmz2zpttLmhK6SEkLiIWJcYOGe7BV10e0FiET3RLDNZOXbmlhwLeKZrC4WsrC85qeVpPXwAxWECh9hGu6bBqzE2hyj263Vti_VWraYWON6G6JXmyFo58t9PqFg47Zpnhs')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-md flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md text-white">Kitchen</h3>
+<p class="font-label-md text-label-md text-white/80">6 Devices</p>
+</div>
+<div class="glass-overlay rounded-xl px-sm py-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="thermostat">thermostat</span>
+<span class="font-label-md text-label-md text-white">23°C</span>
+</div>
+</div>
+</div>
+<!-- Office Card -->
+<div class="group relative h-56 rounded-3xl overflow-hidden neo-raised border-[6px] border-surface-container-low cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A focused and modern home office setup. A floating wooden desk holds an ultra-wide monitor with a clean digital interface and a mechanical keyboard. An ergonomic mesh chair is positioned perfectly. The background features a bookshelf with neatly arranged tech accessories and books. The lighting is cool and productive, with a smart desk lamp providing focused illumination. Minimalist and high-tech feel." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBJffDatI5DzlzeN-tHd658JSHS1wHMKei4yIUDmKYJlCG2B3snS4vmb7KrsSNGZXiQWJWe7JUWYBtjVQKqS4I1SXExZ2VE_gkFtmTif7WwcuOgKFGKQPXNnXIibkWOB169Ux8PNuiucqbYb2GtvViaN_gn0phNdy-VFnmMBiTBFT1_v1imFnts5XVFJ3vCtHfv6c4AHwWuaUFfWbjdgx0u9wdKHZ1wIcUCbLN2sRy-L9nXCVBnax43rYD0AzCuN2qd96g0kkqkKvE')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-md flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md text-white">Office</h3>
+<p class="font-label-md text-label-md text-white/80">3 Devices</p>
+</div>
+<div class="glass-overlay rounded-xl px-sm py-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="thermostat">thermostat</span>
+<span class="font-label-md text-label-md text-white">21°C</span>
+</div>
+</div>
+</div>
+<!-- Garden Card -->
+<div class="group relative h-56 rounded-3xl overflow-hidden neo-raised border-[6px] border-surface-container-low cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A modern urban garden at night, beautifully illuminated by smart landscape lighting. Stone paths lead through manicured greenery and structural plants. Small, discreet LED bollard lights cast a warm glow on the ground, while violet uplights accentuate a large architectural tree. A wooden deck with minimalist outdoor seating is visible in the background, creating a peaceful and tech-enhanced outdoor sanctuary." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBimZqiaUXzzAbeIpeTI-jp0DETOr_-I7TzPgp4Zt_xAivTd1mszuCx8LtvjCIb8LMeg9PXyzPU5DjEdlND-Mn-ottgv6KyX1N0SgtgAdBjCaCWz7Rmr3rF3V1bFbe5ds6MARq1FjeYTt1oFXFz24Fkf_KrIcc_SUkXRnuJHLgNzKyjQS1MKkfRpePeESrS19AFXG4sELzuLOouPJOps2Xl-6zkSuGQbj2dUcSDkXm1XS6O13u7onjHT3Km85zDZkcuLeZ00lo-XMY')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-md flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md text-white">Garden</h3>
+<p class="font-label-md text-label-md text-white/80">3 Devices</p>
+</div>
+<div class="glass-overlay rounded-xl px-sm py-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="thermostat">thermostat</span>
+<span class="font-label-md text-label-md text-white">18°C</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for FAB -->
+<div class="h-12"></div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-margin-mobile z-50 w-16 h-16 rounded-full flex items-center justify-center bg-primary text-on-primary shadow-[0px_8px_16px_rgba(99,44,229,0.4)] hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px]" data-icon="add">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background rounded-t-xl shadow-[0px_-6px_12px_rgba(0,0,0,0.05)]">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Rooms (Active) -->
+<a class="flex flex-col items-center justify-center text-primary active-nav-glow rounded-xl p-2 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-label-sm text-label-sm mt-1">Rooms</span>
+</a>
+<!-- Devices -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm mt-1">Devices</span>
+</a>
+<!-- Auto -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm mt-1">Auto</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for room cards
+        document.querySelectorAll('.neo-raised').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple parallax effect on scroll for bg images
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.bg-cover').forEach(bg => {
+                const speed = 0.15;
+                bg.style.backgroundPositionY = (scrolled * speed) + 'px';
+            });
+        });
+    </script>
+</body></html>

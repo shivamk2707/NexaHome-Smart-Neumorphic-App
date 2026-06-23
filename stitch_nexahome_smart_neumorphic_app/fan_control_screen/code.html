@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7ca",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cac3d8",
+                        "tertiary": "#565a5c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container": "#eeeef0",
+                        "surface-bright": "#f9f9fc",
+                        "primary-fixed-dim": "#cdbdff",
+                        "primary-container": "#7c4dff",
+                        "on-background": "#1a1c1e",
+                        "inverse-surface": "#2f3133",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#004495",
+                        "secondary-container": "#1e70e4",
+                        "surface-variant": "#e2e2e5",
+                        "surface-dim": "#dadadc",
+                        "on-surface": "#1a1c1e",
+                        "surface-container-high": "#e8e8ea",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#494455",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6f7275",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#cdbdff",
+                        "secondary": "#0058bd",
+                        "primary-fixed": "#e8deff",
+                        "secondary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "background": "#f9f9fc",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-primary-fixed-variant": "#4f00d0",
+                        "outline": "#7a7487",
+                        "on-tertiary-container": "#f6f8fb",
+                        "surface-tint": "#6833ea",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f9f9fc",
+                        "on-primary-fixed": "#20005f",
+                        "on-primary-container": "#fcf6ff",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#44474a",
+                        "primary": "#632ce5",
+                        "inverse-on-surface": "#f0f0f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .neomorph-raised {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.8);
+        }
+        .neomorph-sunken {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.05), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+        .neomorph-sunken-deep {
+            box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.1), inset -6px -6px 12px rgba(255, 255, 255, 0.8);
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(99, 44, 229, 0.4), 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.8);
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #632ce5;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(99, 44, 229, 0.3);
+            border: 3px solid #f9f9fc;
+        }
+        .slider-thumb::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #632ce5;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(99, 44, 229, 0.3);
+            border: 3px solid #f9f9fc;
+        }
+        .knob-container {
+            position: relative;
+            width: 260px;
+            height: 260px;
+        }
+        .circular-progress {
+            transform: rotate(-90deg);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-background shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)]">
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full neomorph-raised flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Living Room Fan</h1>
+</div>
+<div class="w-10 h-10 rounded-full neomorph-raised overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a young technology enthusiast in a minimalist setting with soft, high-key lighting that emphasizes a clean and modern smart home aesthetic. The portrait features gentle shadows and a neutral color palette that integrates perfectly with a sophisticated UI design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOBK2X0MuJub1kDyYVkonuLk9j6hV7QF1wMlhz7F7AiZIG9REznvUwjur7IiornKxCbjWb-ryO61eRZvW5GzhJCj9O_poX-4lfERvlpE08m829BvO42D7oN_msgm1p9SNDLwPB7dUvrmbBVpVzCMiEmM1q8rTYmPPJPDZBoC1IwMJLXWC6y4Erkdi8LVPG-zra6xd3j_QtdQQI6A1t2bZlEBPsXf2hz0pJZWZLzGSzgdgr3N8NbkckjiEFkb4sRnSWnJeB4DIXNuM"/>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-md mx-auto">
+<!-- Main Circular Control -->
+<section class="flex flex-col items-center justify-center py-xl">
+<div class="knob-container flex items-center justify-center neomorph-raised rounded-full p-4 relative">
+<!-- SVG Circular Track -->
+<svg class="circular-progress absolute" height="230" width="230">
+<circle class="text-surface-container-high" cx="115" cy="115" fill="transparent" r="100" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary transition-all duration-300" cx="115" cy="115" fill="transparent" id="progress-circle" r="100" stroke="currentColor" stroke-dasharray="628" stroke-dashoffset="314" stroke-width="12"></circle>
+</svg>
+<!-- Inner Dial -->
+<div class="w-44 h-44 rounded-full neomorph-raised flex flex-col items-center justify-center bg-background z-10">
+<span class="material-symbols-outlined text-primary text-display mb-1" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+<div class="flex items-baseline gap-xs">
+<span class="font-display text-display text-on-surface" id="speed-value">50</span>
+<span class="font-label-md text-label-md text-on-surface-variant">%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Power On</span>
+</div>
+</div>
+</section>
+<!-- Speed Level Selection -->
+<section class="mb-xl">
+<h2 class="font-headline-md text-headline-md mb-lg text-on-surface">Speed Levels</h2>
+<div class="grid grid-cols-4 gap-md">
+<button class="speed-btn neomorph-raised rounded-xl py-4 flex flex-col items-center justify-center active:scale-95 transition-all" onclick="setSpeed(25, 0)">
+<span class="font-headline-md text-headline-md mb-1">1</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Low</span>
+</button>
+<button class="speed-btn active-glow border-2 border-primary/20 rounded-xl py-4 flex flex-col items-center justify-center active:scale-95 transition-all" onclick="setSpeed(50, 1)">
+<span class="font-headline-md text-headline-md mb-1">2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Med</span>
+</button>
+<button class="speed-btn neomorph-raised rounded-xl py-4 flex flex-col items-center justify-center active:scale-95 transition-all" onclick="setSpeed(75, 2)">
+<span class="font-headline-md text-headline-md mb-1">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">High</span>
+</button>
+<button class="speed-btn neomorph-raised rounded-xl py-4 flex flex-col items-center justify-center active:scale-95 transition-all" onclick="setSpeed(100, 3)">
+<span class="material-symbols-outlined text-primary mb-1">bolt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Boost</span>
+</button>
+</div>
+</section>
+<!-- Specialized Modes -->
+<section class="mb-xl">
+<h2 class="font-headline-md text-headline-md mb-lg text-on-surface">Specialized Modes</h2>
+<div class="grid grid-cols-2 gap-lg">
+<div class="neomorph-raised rounded-2xl p-lg flex items-center gap-md active:scale-98 transition-transform cursor-pointer">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">air</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Natural Breeze</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Variable speed</div>
+</div>
+</div>
+<div class="neomorph-raised rounded-2xl p-lg flex items-center gap-md active:scale-98 transition-transform cursor-pointer border-2 border-primary/10">
+<div class="w-12 h-12 rounded-xl neomorph-sunken flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bedtime</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Sleep Mode</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Quiet operation</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Oscillation Control -->
+<section class="neomorph-raised rounded-3xl p-lg mb-xl">
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Oscillation Angle</h2>
+<div class="w-12 h-6 rounded-full neomorph-sunken relative cursor-pointer" onclick="this.querySelector('div').classList.toggle('translate-x-6'); this.classList.toggle('bg-primary-fixed')">
+<div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-primary transition-transform duration-200"></div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant px-1">
+<span>30°</span>
+<span class="text-primary font-bold" id="angle-display">90°</span>
+<span>180°</span>
+</div>
+<div class="neomorph-sunken-deep h-4 rounded-full px-1 flex items-center">
+<input class="w-full h-1 bg-transparent appearance-none slider-thumb outline-none" max="180" min="30" oninput="document.getElementById('angle-display').innerText = this.value + '°'" step="15" type="range" value="90"/>
+</div>
+</div>
+</section>
+<!-- Device Analytics Card -->
+<section class="neomorph-raised rounded-3xl p-lg mb-8 overflow-hidden relative">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Air Quality</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Indoor Circulation Status</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">EXCELLENT</span>
+</div>
+<div class="h-24 w-full rounded-xl overflow-hidden neomorph-sunken mt-4">
+<div class="w-full h-full bg-cover bg-center" data-alt="A sophisticated digital dashboard showing real-time environmental data with abstract glowing lines representing air flow. The aesthetic is clean, minimalist, and high-tech, using a palette of soft whites, cool greys, and vibrant purple highlights to match a premium smart home interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBwkwsgGw8hm9xsRkBbFw77P14j1yXNlf-ht-DMsjTLJOT-Hygt64nlCQJzaJm8oHcaCj5WnPnHSbYmY7lCF2By4xoHo-e9Dw5aj_BHjzim4WUAg67xuwyTA043NC4_Hp8BSYJodWqRmIVkzxajq-jufGtpYyEWUxCWyT4D87biF7xp2TArtQIf7aoEcS7jXS8V1djL9tGQ7e7RgiPwg4gviCD22fyDwADw1NXryI-W75Bhs3kZIr6AdZmXpDV7DL8NgXbVxsuDyG8')"></div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-background shadow-[0px_-6px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Rooms</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.8)] rounded-xl p-2">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-sm text-label-sm">Devices</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm">Auto</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+        function setSpeed(value, btnIndex) {
+            // Update text
+            document.getElementById('speed-value').innerText = value;
+            
+            // Update circular progress
+            const circle = document.getElementById('progress-circle');
+            const radius = 100;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (value / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+            
+            // Update button styles
+            const buttons = document.querySelectorAll('.speed-btn');
+            buttons.forEach((btn, idx) => {
+                if (idx === btnIndex) {
+                    btn.classList.add('active-glow', 'border-2', 'border-primary/20');
+                    btn.classList.remove('neomorph-raised');
+                } else {
+                    btn.classList.remove('active-glow', 'border-2', 'border-primary/20');
+                    btn.classList.add('neomorph-raised');
+                }
+            });
+        }
+
+        // Initialize progress bar position
+        window.onload = () => {
+            setSpeed(50, 1);
+        };
+    </script>
+</body></html>
