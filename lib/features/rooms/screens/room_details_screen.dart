@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../devices/bloc/device_cubit.dart';
+import '../../../data/models/device_model.dart' as dm;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
@@ -30,18 +33,25 @@ class RoomDetailsScreen extends StatelessWidget {
               Text('Devices in this room', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
               SizedBox(height: 16.h),
 
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 16.w,
-                mainAxisSpacing: 16.w,
-                childAspectRatio: 0.85,
-                children: [
-                  _buildDeviceCard(context, 'Smart AC', Icons.ac_unit, true),
-                  _buildDeviceCard(context, 'Main Light', Icons.lightbulb_outline, false),
-                  _buildDeviceCard(context, 'Smart TV', Icons.tv, true),
-                ],
+              BlocBuilder<DeviceCubit, List<dm.DeviceModel>>(
+                builder: (context, devices) {
+                  final roomDevices = devices.where((d) => d.roomId == 'r1').toList();
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16.w,
+                      mainAxisSpacing: 16.w,
+                      childAspectRatio: 0.85,
+                    ),
+                    itemCount: roomDevices.length,
+                    itemBuilder: (context, index) {
+                      final device = roomDevices[index];
+                      return _buildDeviceCard(context, device);
+                    },
+                  );
+                }
               ),
             ],
           ),
@@ -50,7 +60,7 @@ class RoomDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDeviceCard(BuildContext context, String name, IconData icon, bool isOn) {
+  Widget _buildDeviceCard(BuildContext context, dm.DeviceModel device) {
     return NeumorphicContainer(
       borderRadius: 24.r,
       padding: EdgeInsets.all(16.w),
@@ -61,24 +71,20 @@ class RoomDetailsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               NeumorphicContainer(
-                isPressed: isOn,
+                isPressed: device.isOn,
                 borderRadius: 999,
                 width: 48.w,
                 height: 48.w,
-                child: Icon(icon, color: isOn ? AppColors.primary : AppColors.lightTextSecondary),
+                child: Icon(device.icon, color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary),
               ),
-              StatefulBuilder(builder: (context, setState) {
-                return NeumorphicToggle(
-                  value: isOn,
-                  onChanged: (val) {
-                    setState(() => isOn = val);
-                  },
-                );
-              }),
+              NeumorphicToggle(
+                value: device.isOn,
+                onChanged: (val) => context.read<DeviceCubit>().toggleDevice(device.id),
+              ),
             ],
           ),
           Spacer(),
-          Text(name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface), maxLines: 1, overflow: TextOverflow.ellipsis),
+          Text(device.name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface), maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
       ),
     );

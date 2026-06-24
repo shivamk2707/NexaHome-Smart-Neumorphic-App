@@ -5,10 +5,9 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/widgets/neumorphic_button.dart';
 import '../../../core/widgets/neumorphic_container.dart';
-import '../../../data/services/preferences_service.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+class OnboardingConnectivityScreen extends StatelessWidget {
+  const OnboardingConnectivityScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +19,13 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(),
-              // Icon
               NeumorphicContainer(
                 width: 120.w,
                 height: 120.w,
                 shape: BoxShape.circle,
                 child: Center(
                   child: Icon(
-                    Icons.maps_home_work_rounded,
+                    Icons.wifi_tethering,
                     size: 60.w,
                     color: AppColors.primary,
                   ),
@@ -35,13 +33,13 @@ class WelcomeScreen extends StatelessWidget {
               ),
               SizedBox(height: 48.h),
               Text(
-                'Welcome to NexaHome',
+                'Seamless Connectivity',
                 style: AppTextStyles.headlineLarge(Theme.of(context).colorScheme.onSurface),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 16.h),
               Text(
-                'Experience the ultimate comfort and security with NexaHome\'s premium automation.',
+                'Connect all your devices effortlessly for a truly smart home experience.',
                 style: AppTextStyles.bodyMedium(AppColors.lightTextSecondary),
                 textAlign: TextAlign.center,
               ),
@@ -50,15 +48,11 @@ class WelcomeScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 56.h,
                 child: NeumorphicButton(
-                  onTap: () async {
-                                        if (context.mounted) {
-                      context.push('/onboarding_connectivity');
-                    }
-                  },
+                  onTap: () => context.push('/onboarding_automation'),
                   borderRadius: 16.r,
                   child: Center(
                     child: Text(
-                      'Get Started',
+                      'Next',
                       style: AppTextStyles.labelMedium(AppColors.primary),
                     ),
                   ),

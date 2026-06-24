@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/widgets/neumorphic_button.dart';
 import '../../../core/widgets/neumorphic_container.dart';
+import '../../auth/bloc/auth_cubit.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
@@ -48,18 +50,42 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 24.h),
-              Text('Alex Johnson', style: AppTextStyles.headlineLarge(Theme.of(context).colorScheme.onSurface)),
-              Text('alex.johnson@example.com', style: AppTextStyles.bodyMedium(AppColors.lightTextSecondary)),
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) => Text(state.userName ?? 'User', style: AppTextStyles.headlineLarge(Theme.of(context).colorScheme.onSurface)),
+              ),
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) => Text(state.userEmail ?? '', style: AppTextStyles.bodyMedium(AppColors.lightTextSecondary)),
+              ),
               SizedBox(height: 48.h),
 
-              _buildTextField(context, 'Full Name', 'Alex Johnson', Icons.person_outline),
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) => _buildTextField(context, 'Full Name', state.userName ?? '', Icons.person_outline),
+              ),
               SizedBox(height: 24.h),
-              _buildTextField(context, 'Email Address', 'alex.johnson@example.com', Icons.email_outlined),
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) => _buildTextField(context, 'Email Address', state.userEmail ?? '', Icons.email_outlined),
+              ),
               SizedBox(height: 24.h),
               _buildTextField(context, 'Phone Number', '+1 234 567 8900', Icons.phone_outlined),
 
+              SizedBox(height: 24.h),
+              _buildActionRow(context, 'Activity History', Icons.history, () => context.push('/activity_history')),
+              SizedBox(height: 16.h),
+              _buildActionRow(context, 'Favorites', Icons.favorite_border, () => context.push('/favorites')),
+              SizedBox(height: 16.h),
+              _buildActionRow(context, 'Voice Control', Icons.mic_none, () => context.push('/voice_control')),
+              SizedBox(height: 16.h),
+              _buildActionRow(context, 'AI Smart Assistant', Icons.smart_toy_outlined, () => context.push('/ai_smart_assistant')),
+              SizedBox(height: 16.h),
+              _buildActionRow(context, 'Home Members', Icons.group_outlined, () => context.push('/home_members')),
+              SizedBox(height: 16.h),
+              _buildActionRow(context, 'Subscription Plan', Icons.card_membership, () => context.push('/subscription_plan')),
+              SizedBox(height: 16.h),
+              _buildActionRow(context, 'Help & Support', Icons.help_outline, () => context.push('/help_support')),
+
               SizedBox(height: 48.h),
               SizedBox(
+                width: double.infinity,
                 height: 56.h,
                 child: NeumorphicButton(
                   onTap: () {},
@@ -96,6 +122,24 @@ class UserProfileScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildActionRow(BuildContext context, String title, IconData icon, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: NeumorphicContainer(
+        borderRadius: 16.r,
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        child: Row(
+          children: [
+            Icon(icon, color: AppColors.primary),
+            SizedBox(width: 16.w),
+            Expanded(child: Text(title, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface))),
+            Icon(Icons.chevron_right, color: AppColors.lightTextSecondary),
+          ],
+        ),
+      ),
     );
   }
 }

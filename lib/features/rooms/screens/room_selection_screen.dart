@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/room_cubit.dart';
+import '../../../data/models/room_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
@@ -10,13 +13,6 @@ class RoomSelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rooms = [
-      {'name': 'Living Room', 'icon': Icons.weekend},
-      {'name': 'Bedroom', 'icon': Icons.bed},
-      {'name': 'Kitchen', 'icon': Icons.kitchen},
-      {'name': 'Bathroom', 'icon': Icons.bathtub},
-    ];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -27,35 +23,39 @@ class RoomSelectionScreen extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: rooms.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16.w,
-              mainAxisSpacing: 16.w,
-              childAspectRatio: 1.0,
-            ),
-            itemBuilder: (context, index) {
-              final room = rooms[index];
-              return NeumorphicButton(
-                onTap: () => context.push('/room_details'),
-                borderRadius: 24.r,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(room['icon'] as IconData, size: 48.w, color: AppColors.primary),
-                    SizedBox(height: 16.h),
-                    Text(
-                      room['name'] as String,
-                      style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+          child: BlocBuilder<RoomCubit, List<RoomModel>>(
+            builder: (context, rooms) {
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: rooms.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.w,
+                  childAspectRatio: 1.0,
                 ),
+                itemBuilder: (context, index) {
+                  final room = rooms[index];
+                  return NeumorphicButton(
+                    onTap: () => context.push('/room_details'),
+                    borderRadius: 24.r,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(room.icon, size: 48.w, color: AppColors.primary),
+                        SizedBox(height: 16.h),
+                        Text(
+                          room.name,
+                          style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                },
               );
-            },
+            }
           ),
         ),
       ),
