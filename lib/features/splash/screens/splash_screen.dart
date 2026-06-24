@@ -27,9 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
     final prefs = PreferencesService();
     final hasOnboarded = await prefs.isOnboardingDone();
+    final isAuth = await prefs.isAuthenticated();
 
     if (!mounted) return;
-    if (hasOnboarded) {
+    if (isAuth) {
+      context.go('/dashboard');
+    } else if (hasOnboarded) {
       context.go('/login');
     } else {
       context.go('/welcome');

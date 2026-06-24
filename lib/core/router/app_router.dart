@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/splash/screens/splash_screen.dart';
@@ -17,9 +18,13 @@ import '../../features/rooms/screens/room_details_screen.dart';
 import '../../features/energy/screens/energy_monitoring_screen.dart';
 import '../../features/settings/screens/settings_screen.dart';
 import '../../features/settings/screens/user_profile_screen.dart';
+import '../widgets/main_scaffold_screen.dart';
+
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   static final router = GoRouter(
+    navigatorKey: _rootNavigatorKey,
     initialLocation: '/',
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
@@ -27,18 +32,64 @@ class AppRouter {
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       GoRoute(path: '/registration', builder: (context, state) => const RegistrationScreen()),
       GoRoute(path: '/otp', builder: (context, state) => const OtpVerificationScreen()),
-      GoRoute(path: '/dashboard', builder: (context, state) => const HomeDashboardScreen()),
-      GoRoute(path: '/smart_home_overview', builder: (context, state) => const SmartHomeOverviewScreen()),
+
+      // Bottom Navigation Shell
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainScaffoldScreen(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/dashboard',
+                builder: (context, state) => const HomeDashboardScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/room_selection',
+                builder: (context, state) => const RoomSelectionScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/smart_home_overview',
+                builder: (context, state) => const SmartHomeOverviewScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/automation',
+                builder: (context, state) => const AutomationDashboardScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/user_profile',
+                builder: (context, state) => const UserProfileScreen(),
+              ),
+            ],
+          ),
+        ],
+      ),
+
+      // Other top-level routes
       GoRoute(path: '/ac_control', builder: (context, state) => const AcControlScreen()),
       GoRoute(path: '/fan_control', builder: (context, state) => const FanControlScreen()),
       GoRoute(path: '/light_control', builder: (context, state) => const SmartLightControlScreen()),
       GoRoute(path: '/lock_control', builder: (context, state) => const SmartLockScreen()),
-      GoRoute(path: '/automation', builder: (context, state) => const AutomationDashboardScreen()),
-      GoRoute(path: '/room_selection', builder: (context, state) => const RoomSelectionScreen()),
       GoRoute(path: '/room_details', builder: (context, state) => const RoomDetailsScreen()),
       GoRoute(path: '/energy', builder: (context, state) => const EnergyMonitoringScreen()),
       GoRoute(path: '/settings', builder: (context, state) => const SettingsScreen()),
-      GoRoute(path: '/user_profile', builder: (context, state) => const UserProfileScreen()),
     ],
   );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
@@ -19,6 +20,12 @@ class UserProfileScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('Profile', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings, color: Theme.of(context).colorScheme.onSurface),
+            onPressed: () => context.push('/settings'),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
