@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../auth/bloc/auth_cubit.dart';
+import '../../devices/bloc/device_cubit.dart';
+import '../../rooms/bloc/room_cubit.dart';
+import '../../../data/models/device_model.dart' as dm;
+import '../../../data/models/room_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
@@ -14,7 +20,7 @@ class HomeDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => context.push('/add_device'),
         backgroundColor: AppColors.primary,
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -36,9 +42,13 @@ class HomeDashboardScreen extends StatelessWidget {
                         'Good Morning,',
                         style: AppTextStyles.bodyMedium(AppColors.lightTextSecondary),
                       ),
-                      Text(
-                        'Alex',
-                        style: AppTextStyles.headlineLarge(Theme.of(context).colorScheme.onSurface),
+                      BlocBuilder<AuthCubit, AuthState>(
+                        builder: (context, state) {
+                          return Text(
+                            state.userName?.split(' ').first ?? 'User',
+                            style: AppTextStyles.headlineLarge(Theme.of(context).colorScheme.onSurface),
+                          );
+                        }
                       ),
                     ],
                   ),
@@ -78,19 +88,22 @@ class HomeDashboardScreen extends StatelessWidget {
               ),
               SizedBox(height: 32.h),
 
-              // Room Tabs (Placeholder list)
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  children: [
-                    _buildRoomTab(context, 'Living Room', true),
-                    SizedBox(width: 16.w),
-                    _buildRoomTab(context, 'Bedroom', false),
-                    SizedBox(width: 16.w),
-                    _buildRoomTab(context, 'Kitchen', false),
-                  ],
-                ),
+              // Room Tabs (Dynamic)
+              BlocBuilder<RoomCubit, List<RoomModel>>(
+                builder: (context, rooms) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Row(
+                      children: rooms.map((room) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 16.w),
+                          child: _buildRoomTab(context, room.name, rooms.indexOf(room) == 0),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 32.h),
 
@@ -100,19 +113,38 @@ class HomeDashboardScreen extends StatelessWidget {
                 style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface),
               ),
               SizedBox(height: 16.h),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 16.w,
-                mainAxisSpacing: 16.w,
-                childAspectRatio: 0.85,
-                children: [
-                  _buildDeviceCard(context, 'Smart AC', 'Living Room', Icons.ac_unit, true, onTap: () => context.push('/ac_control')),
-                  _buildDeviceCard(context, 'Main Light', 'Living Room', Icons.lightbulb_outline, false, onTap: () => context.push('/light_control')),
-                  _buildDeviceCard(context, 'Smart Door', 'Front', Icons.lock, true, onTap: () => context.push('/lock_control')),
-                  _buildDeviceCard(context, 'Ceiling Fan', 'Living Room', Icons.air, false, onTap: () => context.push('/fan_control')),
-                ],
+              BlocBuilder<DeviceCubit, List<dm.DeviceModel>>(
+                builder: (context, devices) {
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16.w,
+                      mainAxisSpacing: 16.w,
+                      childAspectRatio: 0.85,
+                    ),
+                    itemCount: devices.length,
+                    itemBuilder: (context, index) {
+                      final device = devices[index];
+                      // Find room name
+                      final rooms = context.read<RoomCubit>().state;
+                      final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => RoomModel(id: '', name: 'Unknown', icon: Icons.error)).name;
+
+                      return _buildDeviceCard(
+                        context,
+                        device,
+                        roomName,
+                        onTap: () {
+                          if (device.type == dm.DeviceType.ac) context.push('/ac_control/${device.id}');
+                          if (device.type == dm.DeviceType.light) context.push('/light_control/${device.id}');
+                          if (device.type == dm.DeviceType.lock) context.push('/lock_control/${device.id}');
+                          if (device.type == dm.DeviceType.fan) context.push('/fan_control/${device.id}');
+                        },
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),
@@ -133,7 +165,7 @@ class HomeDashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDeviceCard(BuildContext context, String name, String room, IconData icon, bool isOn, {VoidCallback? onTap}) {
+  Widget _buildDeviceCard(BuildContext context, dm.DeviceModel device, String roomName, {VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: NeumorphicContainer(
@@ -146,26 +178,24 @@ class HomeDashboardScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 NeumorphicContainer(
-                  isPressed: isOn,
+                  isPressed: device.isOn,
                   borderRadius: 999,
                   width: 48.w,
                   height: 48.w,
-                  child: Icon(icon, color: isOn ? AppColors.primary : AppColors.lightTextSecondary),
+                  child: Icon(device.icon, color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary),
                 ),
-                StatefulBuilder(builder: (context, setState) {
-                  return NeumorphicToggle(
-                    value: isOn,
-                    onChanged: (val) {
-                      setState(() => isOn = val);
-                    },
-                  );
-                }),
+                NeumorphicToggle(
+                  value: device.isOn,
+                  onChanged: (val) {
+                    context.read<DeviceCubit>().toggleDevice(device.id);
+                  },
+                ),
               ],
             ),
             Spacer(),
-            Text(name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface), maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(device.name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface), maxLines: 1, overflow: TextOverflow.ellipsis),
             SizedBox(height: 4.h),
-            Text(room, style: AppTextStyles.labelSmall(AppColors.lightTextSecondary), maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(roomName, style: AppTextStyles.labelSmall(AppColors.lightTextSecondary), maxLines: 1, overflow: TextOverflow.ellipsis),
           ],
         ),
       ),

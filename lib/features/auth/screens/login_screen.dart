@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/auth_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
@@ -87,8 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 56.h,
                       child: NeumorphicButton(
                         onTap: () async {
-                          final prefs = PreferencesService();
-                          await prefs.setAuthenticated(true);
+                          await context.read<AuthCubit>().login(_emailController.text, _passwordController.text);
                           if (context.mounted) {
                             context.go('/dashboard');
                           }

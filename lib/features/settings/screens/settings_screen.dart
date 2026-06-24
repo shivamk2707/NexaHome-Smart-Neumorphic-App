@@ -7,6 +7,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/widgets/neumorphic_container.dart';
 import '../../../core/widgets/neumorphic_toggle.dart';
 import '../../../core/theme/theme_cubit.dart';
+import '../../auth/bloc/auth_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -35,13 +36,18 @@ class SettingsScreen extends StatelessWidget {
                   (val) => context.read<ThemeCubit>().toggleTheme(),
                 ),
                 SizedBox(height: 16.h),
-                _buildToggleRow(context, 'Notifications', Icons.notifications_none, true, (val) {}),
+                _buildActionRow(context, 'Notifications', Icons.notifications_none, () => context.push('/notifications')),
               ]),
               SizedBox(height: 32.h),
               _buildSection(context, 'Account', [
                 _buildActionRow(context, 'Profile Information', Icons.person_outline, () => context.push('/user_profile')),
                 SizedBox(height: 16.h),
-                _buildActionRow(context, 'Security', Icons.security, () {}),
+                _buildActionRow(context, 'Security', Icons.security, () => context.push('/security_settings')),
+                SizedBox(height: 16.h),
+                _buildActionRow(context, 'Logout', Icons.logout, () {
+                  context.read<AuthCubit>().logout();
+                  context.go('/login');
+                }),
               ]),
             ],
           ),

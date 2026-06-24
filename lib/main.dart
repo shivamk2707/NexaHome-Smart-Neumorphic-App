@@ -7,6 +7,9 @@ import 'core/theme/app_theme.dart';
 import 'core/theme/theme_cubit.dart';
 import 'core/router/app_router.dart';
 import 'data/services/preferences_service.dart';
+import 'features/auth/bloc/auth_cubit.dart';
+import 'features/devices/bloc/device_cubit.dart';
+import 'features/rooms/bloc/room_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +18,9 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit(prefsService)),
+        BlocProvider(create: (_) => AuthCubit(prefsService)),
+        BlocProvider(create: (_) => DeviceCubit()),
+        BlocProvider(create: (_) => RoomCubit()),
       ],
       child: const NexaHomeApp(),
     ),
