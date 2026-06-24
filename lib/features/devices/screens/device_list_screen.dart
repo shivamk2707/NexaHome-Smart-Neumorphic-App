@@ -10,6 +10,7 @@ import '../../../core/widgets/neumorphic_toggle.dart';
 import '../bloc/device_cubit.dart';
 import '../../rooms/bloc/room_cubit.dart';
 import '../../../data/models/device_model.dart' as dm;
+import '../../../data/models/room_model.dart';
 
 class DeviceListScreen extends StatelessWidget {
   const DeviceListScreen({super.key});
@@ -54,7 +55,7 @@ class DeviceListScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final device = devices[index];
                   final rooms = context.read<RoomCubit>().state;
-                  final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => throw Exception()).name;
+                  final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => const RoomModel(id: '', name: 'Unassigned', icon: Icons.help)).name;
 
                   return _buildDeviceListItem(context, device, roomName);
                 },

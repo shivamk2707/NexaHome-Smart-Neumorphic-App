@@ -13,8 +13,15 @@ import '../../../core/widgets/neumorphic_button.dart';
 import '../../../core/widgets/neumorphic_container.dart';
 import '../../../core/widgets/neumorphic_toggle.dart';
 
-class HomeDashboardScreen extends StatelessWidget {
+class HomeDashboardScreen extends StatefulWidget {
   const HomeDashboardScreen({super.key});
+
+  @override
+  State<HomeDashboardScreen> createState() => _HomeDashboardScreenState();
+}
+
+class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
+  String? _selectedRoomId;
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +102,24 @@ class HomeDashboardScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
                     child: Row(
-                      children: rooms.map((room) {
-                        return Padding(
+                      children: [
+                        Padding(
                           padding: EdgeInsets.only(right: 16.w),
-                          child: _buildRoomTab(context, room.name, rooms.indexOf(room) == 0),
-                        );
-                      }).toList(),
+                          child: GestureDetector(
+                            onTap: () => setState(() => _selectedRoomId = null),
+                            child: _buildRoomTab(context, 'All', _selectedRoomId == null),
+                          ),
+                        ),
+                        ...rooms.map((room) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 16.w),
+                            child: GestureDetector(
+                              onTap: () => setState(() => _selectedRoomId = room.id),
+                              child: _buildRoomTab(context, room.name, _selectedRoomId == room.id),
+                            ),
+                          );
+                        }).toList(),
+                      ],
                     ),
                   );
                 },
@@ -115,6 +134,9 @@ class HomeDashboardScreen extends StatelessWidget {
               SizedBox(height: 16.h),
               BlocBuilder<DeviceCubit, List<dm.DeviceModel>>(
                 builder: (context, devices) {
+                  final filteredDevices = _selectedRoomId == null
+                      ? devices
+                      : devices.where((d) => d.roomId == _selectedRoomId).toList();
                   return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -124,9 +146,9 @@ class HomeDashboardScreen extends StatelessWidget {
                       mainAxisSpacing: 16.w,
                       childAspectRatio: 0.85,
                     ),
-                    itemCount: devices.length,
+                    itemCount: filteredDevices.length,
                     itemBuilder: (context, index) {
-                      final device = devices[index];
+                      final device = filteredDevices[index];
                       // Find room name
                       final rooms = context.read<RoomCubit>().state;
                       final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => RoomModel(id: '', name: 'Unknown', icon: Icons.error)).name;

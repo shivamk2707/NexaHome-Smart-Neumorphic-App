@@ -125,7 +125,7 @@ class AppRouter {
       GoRoute(path: '/device_pairing', builder: (context, state) => const DevicePairingScreen()),
       GoRoute(path: '/device_setup_form', builder: (context, state) => const DeviceSetupFormScreen()),
 
-      GoRoute(path: '/room_details', builder: (context, state) => const RoomDetailsScreen()),
+      GoRoute(path: '/room_details/:id', builder: (context, state) => RoomDetailsScreen(roomId: state.pathParameters['id'] ?? 'r1')),
 
       GoRoute(path: '/scenes', builder: (context, state) => const ScenesScreen()),
       GoRoute(path: '/create_new_scene', builder: (context, state) => const CreateNewSceneScreen()),

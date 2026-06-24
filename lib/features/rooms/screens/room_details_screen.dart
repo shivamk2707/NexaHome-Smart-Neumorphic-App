@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../devices/bloc/device_cubit.dart';
+import '../bloc/room_cubit.dart';
 import '../../../data/models/device_model.dart' as dm;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
@@ -9,7 +10,8 @@ import '../../../core/widgets/neumorphic_container.dart';
 import '../../../core/widgets/neumorphic_toggle.dart';
 
 class RoomDetailsScreen extends StatelessWidget {
-  const RoomDetailsScreen({super.key});
+  final String roomId;
+  const RoomDetailsScreen({super.key, required this.roomId});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,13 @@ class RoomDetailsScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Living Room', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
+        title: Builder(
+          builder: (context) {
+            final rooms = context.read<RoomCubit>().state;
+            final roomName = rooms.firstWhere((r) => r.id == roomId, orElse: () => rooms.first).name;
+            return Text(roomName, style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface));
+          }
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -35,7 +43,7 @@ class RoomDetailsScreen extends StatelessWidget {
 
               BlocBuilder<DeviceCubit, List<dm.DeviceModel>>(
                 builder: (context, devices) {
-                  final roomDevices = devices.where((d) => d.roomId == 'r1').toList();
+                  final roomDevices = devices.where((d) => d.roomId == roomId).toList();
                   return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
