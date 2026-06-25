@@ -9,9 +9,127 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/widgets/neumorphic_container.dart';
 import '../../../core/widgets/neumorphic_toggle.dart';
 
-class RoomDetailsScreen extends StatelessWidget {
+import 'dart:math';
+import '../../../core/widgets/neumorphic_button.dart';
+
+class RoomDetailsScreen extends StatefulWidget {
   final String roomId;
   const RoomDetailsScreen({super.key, required this.roomId});
+
+  @override
+  State<RoomDetailsScreen> createState() => _RoomDetailsScreenState();
+}
+
+class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
+  void _showAddDeviceSheet(BuildContext context) {
+    final nameController = TextEditingController();
+    dm.DeviceType selectedType = dm.DeviceType.light;
+    IconData selectedIcon = Icons.lightbulb_outline;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setSheetState) {
+            return Container(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
+                left: 24.w,
+                right: 24.w,
+                top: 24.h,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Add New Device', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
+                  SizedBox(height: 24.h),
+                  Text('Device Name', style: AppTextStyles.labelSmall(AppColors.lightTextSecondary)),
+                  SizedBox(height: 8.h),
+                  NeumorphicContainer(
+                    isPressed: true,
+                    borderRadius: 16.r,
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: TextField(
+                      controller: nameController,
+                      decoration: const InputDecoration(border: InputBorder.none, hintText: 'e.g. Desk Lamp'),
+                      style: AppTextStyles.bodyMedium(Theme.of(context).colorScheme.onSurface),
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Text('Device Type', style: AppTextStyles.labelSmall(AppColors.lightTextSecondary)),
+                  SizedBox(height: 8.h),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _buildTypeSelector(context, 'Light', Icons.lightbulb_outline, dm.DeviceType.light, selectedType, (t, i) => setSheetState(() { selectedType = t; selectedIcon = i; })),
+                        _buildTypeSelector(context, 'AC', Icons.ac_unit, dm.DeviceType.ac, selectedType, (t, i) => setSheetState(() { selectedType = t; selectedIcon = i; })),
+                        _buildTypeSelector(context, 'Fan', Icons.air, dm.DeviceType.fan, selectedType, (t, i) => setSheetState(() { selectedType = t; selectedIcon = i; })),
+                        _buildTypeSelector(context, 'Lock', Icons.lock, dm.DeviceType.lock, selectedType, (t, i) => setSheetState(() { selectedType = t; selectedIcon = i; })),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 32.h),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56.h,
+                    child: NeumorphicButton(
+                      onTap: () {
+                        if (nameController.text.isNotEmpty) {
+                          final newDevice = dm.DeviceModel(
+                            id: 'd_${DateTime.now().millisecondsSinceEpoch}',
+                            name: nameController.text,
+                            roomId: widget.roomId,
+                            type: selectedType,
+                            icon: selectedIcon,
+                          );
+                          context.read<DeviceCubit>().addDevice(newDevice);
+                          Navigator.pop(context);
+                        }
+                      },
+                      borderRadius: 16.r,
+                      child: Center(
+                        child: Text('Add Device', style: AppTextStyles.labelMedium(AppColors.primary)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        );
+      },
+    );
+  }
+
+  Widget _buildTypeSelector(BuildContext context, String label, IconData icon, dm.DeviceType type, dm.DeviceType selectedType, Function(dm.DeviceType, IconData) onTap) {
+    final isSelected = selectedType == type;
+    return Padding(
+      padding: EdgeInsets.only(right: 16.w),
+      child: GestureDetector(
+        onTap: () => onTap(type, icon),
+        child: Column(
+          children: [
+            NeumorphicContainer(
+              isPressed: isSelected,
+              shape: BoxShape.circle,
+              padding: EdgeInsets.all(16.w),
+              child: Icon(icon, color: isSelected ? AppColors.primary : AppColors.lightTextSecondary),
+            ),
+            SizedBox(height: 8.h),
+            Text(label, style: AppTextStyles.labelSmall(isSelected ? AppColors.primary : AppColors.lightTextSecondary)),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +144,16 @@ class RoomDetailsScreen extends StatelessWidget {
         title: Builder(
           builder: (context) {
             final rooms = context.read<RoomCubit>().state;
-            final roomName = rooms.firstWhere((r) => r.id == roomId, orElse: () => rooms.first).name;
+            final roomName = rooms.firstWhere((r) => r.id == widget.roomId, orElse: () => rooms.first).name;
             return Text(roomName, style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface));
           }
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurface),
+            onPressed: () => _showAddDeviceSheet(context),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -43,7 +167,7 @@ class RoomDetailsScreen extends StatelessWidget {
 
               BlocBuilder<DeviceCubit, List<dm.DeviceModel>>(
                 builder: (context, devices) {
-                  final roomDevices = devices.where((d) => d.roomId == roomId).toList();
+                  final roomDevices = devices.where((d) => d.roomId == widget.roomId).toList();
                   return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
