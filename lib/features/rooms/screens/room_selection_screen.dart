@@ -38,7 +38,7 @@ class RoomSelectionScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final room = rooms[index];
                   return NeumorphicButton(
-                    onTap: () => context.push('/room_details'),
+                    onTap: () => context.push('/room_details/${room.id}'),
                     borderRadius: 24.r,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
