@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/scene_cubit.dart';
+import '../../../data/models/scene_model.dart';
+import '../../devices/bloc/device_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
@@ -11,13 +15,6 @@ class ScenesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scenes = [
-      {'name': 'Movie Time', 'icon': Icons.movie},
-      {'name': 'Dinner', 'icon': Icons.restaurant},
-      {'name': 'Party', 'icon': Icons.celebration},
-      {'name': 'Focus', 'icon': Icons.center_focus_strong},
-    ];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -38,35 +35,43 @@ class ScenesScreen extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: scenes.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16.w,
-              mainAxisSpacing: 16.w,
-              childAspectRatio: 1.0,
-            ),
-            itemBuilder: (context, index) {
-              final scene = scenes[index];
-              return NeumorphicButton(
-                onTap: () {},
-                borderRadius: 24.r,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(scene['icon'] as IconData, size: 48.w, color: AppColors.primary),
-                    SizedBox(height: 16.h),
-                    Text(
-                      scene['name'] as String,
-                      style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+          child: BlocBuilder<SceneCubit, List<SceneModel>>(
+            builder: (context, scenes) {
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: scenes.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.w,
+                  childAspectRatio: 1.0,
                 ),
+                itemBuilder: (context, index) {
+                  final scene = scenes[index];
+                  return NeumorphicButton(
+                    onTap: () {
+                      final deviceCubit = context.read<DeviceCubit>();
+                      context.read<SceneCubit>().executeScene(scene.id, deviceCubit);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Executing ${scene.name}')));
+                    },
+                    borderRadius: 24.r,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(scene.icon, size: 48.w, color: AppColors.primary),
+                        SizedBox(height: 16.h),
+                        Text(
+                          scene.name,
+                          style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                },
               );
-            },
+            }
           ),
         ),
       ),

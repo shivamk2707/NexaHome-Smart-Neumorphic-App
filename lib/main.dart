@@ -11,6 +11,7 @@ import 'features/auth/bloc/auth_cubit.dart';
 import 'features/devices/bloc/device_cubit.dart';
 import 'features/rooms/bloc/room_cubit.dart';
 import 'features/settings/bloc/member_cubit.dart';
+import 'features/automation/bloc/scene_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,7 @@ void main() async {
         BlocProvider(create: (_) => DeviceCubit()),
         BlocProvider(create: (_) => RoomCubit()),
         BlocProvider(create: (_) => MemberCubit()),
+        BlocProvider(create: (_) => SceneCubit()),
       ],
       child: const NexaHomeApp(),
     ),

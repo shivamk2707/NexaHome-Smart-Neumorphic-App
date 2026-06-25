@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/scene_cubit.dart';
+import '../../../data/models/scene_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
@@ -6,8 +9,22 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/widgets/neumorphic_button.dart';
 import '../../../core/widgets/neumorphic_container.dart';
 
-class CreateNewSceneScreen extends StatelessWidget {
+class CreateNewSceneScreen extends StatefulWidget {
   const CreateNewSceneScreen({super.key});
+
+  @override
+  State<CreateNewSceneScreen> createState() => _CreateNewSceneScreenState();
+}
+
+class _CreateNewSceneScreenState extends State<CreateNewSceneScreen> {
+  final _nameController = TextEditingController();
+  IconData _selectedIcon = Icons.movie;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +52,7 @@ class CreateNewSceneScreen extends StatelessWidget {
                 borderRadius: 16.r,
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: TextField(
+                  controller: _nameController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'e.g. Movie Time',
@@ -52,11 +70,11 @@ class CreateNewSceneScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Row(
                   children: [
-                    _buildIconSelector(context, Icons.movie, true),
-                    _buildIconSelector(context, Icons.restaurant, false),
-                    _buildIconSelector(context, Icons.celebration, false),
-                    _buildIconSelector(context, Icons.wb_sunny, false),
-                    _buildIconSelector(context, Icons.nights_stay, false),
+                    _buildIconSelector(context, Icons.movie, _selectedIcon == Icons.movie),
+                    _buildIconSelector(context, Icons.restaurant, _selectedIcon == Icons.restaurant),
+                    _buildIconSelector(context, Icons.celebration, _selectedIcon == Icons.celebration),
+                    _buildIconSelector(context, Icons.wb_sunny, _selectedIcon == Icons.wb_sunny),
+                    _buildIconSelector(context, Icons.nights_stay, _selectedIcon == Icons.nights_stay),
                   ],
                 ),
               ),
@@ -83,7 +101,17 @@ class CreateNewSceneScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 56.h,
                 child: NeumorphicButton(
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    if (_nameController.text.isNotEmpty) {
+                      final newScene = SceneModel(
+                        id: 's_${DateTime.now().millisecondsSinceEpoch}',
+                        name: _nameController.text,
+                        icon: _selectedIcon,
+                      );
+                      context.read<SceneCubit>().addScene(newScene);
+                      context.pop();
+                    }
+                  },
                   borderRadius: 16.r,
                   child: Center(
                     child: Text('Save Scene', style: AppTextStyles.labelMedium(AppColors.primary)),
@@ -101,7 +129,7 @@ class CreateNewSceneScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: 16.w),
       child: NeumorphicButton(
-        onTap: () {},
+        onTap: () => setState(() => _selectedIcon = icon),
         shape: BoxShape.circle,
         padding: EdgeInsets.all(16.w),
         child: Icon(icon, color: isSelected ? AppColors.primary : AppColors.lightTextSecondary),

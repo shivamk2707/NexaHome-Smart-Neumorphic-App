@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../auth/bloc/auth_cubit.dart';
 import '../../devices/bloc/device_cubit.dart';
 import '../../rooms/bloc/room_cubit.dart';
+import '../../automation/bloc/scene_cubit.dart';
+import '../../../data/models/scene_model.dart';
 import '../../../data/models/device_model.dart' as dm;
 import '../../../data/models/room_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -97,20 +99,38 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               SizedBox(height: 32.h),
               Text('Quick Scenes', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
               SizedBox(height: 16.h),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  children: [
-                    _buildSceneButton(context, 'Movie Time', Icons.movie),
-                    SizedBox(width: 16.w),
-                    _buildSceneButton(context, 'Focus', Icons.center_focus_strong),
-                    SizedBox(width: 16.w),
-                    _buildSceneButton(context, 'Good Night', Icons.nights_stay),
-                    SizedBox(width: 16.w),
-                    _buildSceneButton(context, 'Leaving Home', Icons.directions_walk),
-                  ],
-                ),
+              BlocBuilder<SceneCubit, List<SceneModel>>(
+                builder: (context, scenes) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Row(
+                      children: scenes.map((scene) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 16.w),
+                          child: _buildSceneButton(context, scene),
+                        );
+                      }).toList()..add(
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.w),
+                          child: NeumorphicButton(
+                            onTap: () => context.push('/scenes'),
+                            borderRadius: 16.r,
+                            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('View All', style: AppTextStyles.labelMedium(AppColors.primary)),
+                                SizedBox(width: 8.w),
+                                Icon(Icons.arrow_forward, color: AppColors.primary, size: 20.w),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
               ),
 
               SizedBox(height: 32.h),
@@ -195,17 +215,20 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
     );
   }
 
-  Widget _buildSceneButton(BuildContext context, String name, IconData icon) {
+  Widget _buildSceneButton(BuildContext context, SceneModel scene) {
     return NeumorphicButton(
-      onTap: () {},
+      onTap: () {
+        context.read<SceneCubit>().executeScene(scene.id, context.read<DeviceCubit>());
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Executing ${scene.name}')));
+      },
       borderRadius: 16.r,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: AppColors.primary, size: 20.w),
+          Icon(scene.icon, color: AppColors.primary, size: 20.w),
           SizedBox(width: 8.w),
-          Text(name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface)),
+          Text(scene.name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface)),
         ],
       ),
     );
