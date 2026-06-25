@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
               ]),
               SizedBox(height: 32.h),
               _buildSection(context, 'Account', [
-                _buildActionRow(context, 'Profile Information', Icons.person_outline, () => context.push('/user_profile')),
+                _buildActionRow(context, 'Profile Information', Icons.person_outline, () => context.pop()),
                 SizedBox(height: 16.h),
                 _buildActionRow(context, 'Security', Icons.security, () => context.push('/security_settings')),
                 SizedBox(height: 16.h),

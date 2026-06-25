@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../devices/bloc/device_cubit.dart';
 import '../../../data/models/device_model.dart' as dm;
@@ -16,34 +18,70 @@ class VoiceControlScreen extends StatefulWidget {
 }
 
 class _VoiceControlScreenState extends State<VoiceControlScreen> {
+  final SpeechToText _speechToText = SpeechToText();
   bool _isListening = false;
   String _statusText = 'Try saying: "Turn off all lights"';
 
+  @override
+  void initState() {
+    super.initState();
+    _initSpeech();
+  }
+
+  void _initSpeech() async {
+    await _speechToText.initialize();
+  }
+
   void _startListening() async {
+    final status = await Permission.microphone.request();
+    if (status != PermissionStatus.granted) {
+      setState(() => _statusText = 'Microphone permission denied.');
+      return;
+    }
+
+    await _speechToText.listen(onResult: (result) {
+      setState(() {
+        _statusText = result.recognizedWords;
+      });
+      if (result.finalResult) {
+        _processCommand(result.recognizedWords.toLowerCase());
+      }
+    });
+
     setState(() {
       _isListening = true;
-      _statusText = 'Listening...';
     });
+  }
 
-    await Future.delayed(const Duration(seconds: 2));
-
+  void _stopListening() async {
+    await _speechToText.stop();
     setState(() {
-      _statusText = 'Processing...';
+      _isListening = false;
     });
+  }
 
-    await Future.delayed(const Duration(seconds: 1));
-
+  void _processCommand(String command) {
     if (mounted) {
       final devices = context.read<DeviceCubit>().state;
-      for (var device in devices) {
-        if (device.type == dm.DeviceType.light && device.isOn) {
-          context.read<DeviceCubit>().toggleDevice(device.id);
+      if (command.contains('turn off') && command.contains('light')) {
+        for (var device in devices) {
+          if (device.type == dm.DeviceType.light && device.isOn) {
+            context.read<DeviceCubit>().toggleDevice(device.id);
+          }
         }
+        setState(() {
+          _statusText = 'Turned off all lights.';
+        });
+      } else if (command.contains('turn on') && command.contains('light')) {
+        for (var device in devices) {
+          if (device.type == dm.DeviceType.light && !device.isOn) {
+            context.read<DeviceCubit>().toggleDevice(device.id);
+          }
+        }
+        setState(() {
+          _statusText = 'Turned on all lights.';
+        });
       }
-      setState(() {
-        _isListening = false;
-        _statusText = 'Turned off all lights.';
-      });
     }
   }
 
@@ -68,7 +106,7 @@ class _VoiceControlScreenState extends State<VoiceControlScreen> {
             children: [
               SizedBox(height: 32.h),
               NeumorphicButton(
-                onTap: _isListening ? () {} : _startListening,
+                onTap: _isListening ? _stopListening : _startListening,
                 shape: BoxShape.circle,
                 padding: EdgeInsets.all(48.w),
                 child: Center(

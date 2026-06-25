@@ -23,6 +23,7 @@ class _HomeMembersScreenState extends State<HomeMembersScreen> {
   void _showMemberSheet(BuildContext context, {MemberModel? member}) {
     final isEditing = member != null;
     final nameController = TextEditingController(text: member?.name ?? '');
+    final relationController = TextEditingController(text: member?.relation ?? '');
     String role = member?.role ?? 'Member';
     String? profileImageUrl = member?.profileImageUrl;
 
@@ -92,6 +93,19 @@ class _HomeMembersScreenState extends State<HomeMembersScreen> {
                   ),
                 ),
                 SizedBox(height: 16.h),
+                Text('Relation with Owner', style: AppTextStyles.labelSmall(AppColors.lightTextSecondary)),
+                SizedBox(height: 8.h),
+                NeumorphicContainer(
+                  isPressed: true,
+                  borderRadius: 16.r,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: TextField(
+                    controller: relationController,
+                    decoration: const InputDecoration(border: InputBorder.none, hintText: 'e.g. Spouse, Child, Friend'),
+                    style: AppTextStyles.bodyMedium(Theme.of(context).colorScheme.onSurface),
+                  ),
+                ),
+                SizedBox(height: 16.h),
                 Text('Role', style: AppTextStyles.labelSmall(AppColors.lightTextSecondary)),
                 SizedBox(height: 8.h),
                 NeumorphicContainer(
@@ -138,6 +152,7 @@ class _HomeMembersScreenState extends State<HomeMembersScreen> {
                               id: isEditing ? member.id : 'm_${DateTime.now().millisecondsSinceEpoch}',
                               name: nameController.text,
                               role: role,
+                              relation: relationController.text.isNotEmpty ? relationController.text : 'Family',
                               profileImageUrl: profileImageUrl,
                             );
                             if (isEditing) {
@@ -216,7 +231,7 @@ class _HomeMembersScreenState extends State<HomeMembersScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(member.name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface)),
-                            Text(member.role, style: AppTextStyles.labelSmall(AppColors.lightTextSecondary)),
+                            Text('${member.role} • ${member.relation}', style: AppTextStyles.labelSmall(AppColors.lightTextSecondary)),
                           ],
                         ),
                       ),

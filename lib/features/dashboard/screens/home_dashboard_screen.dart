@@ -60,7 +60,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                     ],
                   ),
                   NeumorphicButton(
-                    onTap: () {},
+                    onTap: () => context.push('/user_profile'),
                     borderRadius: 999,
                     child: CircleAvatar(
                       radius: 24.w,
@@ -93,6 +93,26 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   ),
                 ),
               ),
+
+              SizedBox(height: 32.h),
+              Text('Quick Scenes', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
+              SizedBox(height: 16.h),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                child: Row(
+                  children: [
+                    _buildSceneButton(context, 'Movie Time', Icons.movie),
+                    SizedBox(width: 16.w),
+                    _buildSceneButton(context, 'Focus', Icons.center_focus_strong),
+                    SizedBox(width: 16.w),
+                    _buildSceneButton(context, 'Good Night', Icons.nights_stay),
+                    SizedBox(width: 16.w),
+                    _buildSceneButton(context, 'Leaving Home', Icons.directions_walk),
+                  ],
+                ),
+              ),
+
               SizedBox(height: 32.h),
 
               // Room Tabs (Dynamic)
@@ -118,7 +138,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                               child: _buildRoomTab(context, room.name, _selectedRoomId == room.id),
                             ),
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   );
@@ -151,7 +171,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                       final device = filteredDevices[index];
                       // Find room name
                       final rooms = context.read<RoomCubit>().state;
-                      final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => RoomModel(id: '', name: 'Unknown', icon: Icons.error)).name;
+                      final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => const RoomModel(id: '', name: 'Unknown', icon: Icons.error)).name;
 
                       return _buildDeviceCard(
                         context,
@@ -171,6 +191,22 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSceneButton(BuildContext context, String name, IconData icon) {
+    return NeumorphicButton(
+      onTap: () {},
+      borderRadius: 16.r,
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: AppColors.primary, size: 20.w),
+          SizedBox(width: 8.w),
+          Text(name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface)),
+        ],
       ),
     );
   }
@@ -214,7 +250,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Text(device.name, style: AppTextStyles.labelMedium(Theme.of(context).colorScheme.onSurface), maxLines: 1, overflow: TextOverflow.ellipsis),
             SizedBox(height: 4.h),
             Text(roomName, style: AppTextStyles.labelSmall(AppColors.lightTextSecondary), maxLines: 1, overflow: TextOverflow.ellipsis),
