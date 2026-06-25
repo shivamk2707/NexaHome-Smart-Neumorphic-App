@@ -219,7 +219,6 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
     return NeumorphicButton(
       onTap: () {
         context.read<SceneCubit>().executeScene(scene.id, context.read<DeviceCubit>());
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Executing ${scene.name}')));
       },
       borderRadius: 16.r,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),

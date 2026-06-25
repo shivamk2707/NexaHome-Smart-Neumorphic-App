@@ -7,10 +7,44 @@ class SceneCubit extends Cubit<List<SceneModel>> {
   SceneCubit() : super(_initialScenes);
 
   static final List<SceneModel> _initialScenes = [
-    const SceneModel(id: 's1', name: 'Movie Time', icon: Icons.movie),
-    const SceneModel(id: 's2', name: 'Dinner', icon: Icons.restaurant),
-    const SceneModel(id: 's3', name: 'Party', icon: Icons.celebration),
-    const SceneModel(id: 's4', name: 'Focus', icon: Icons.center_focus_strong),
+    const SceneModel(
+      id: 's1',
+      name: 'Movie Time',
+      icon: Icons.movie,
+      actions: [
+        SceneAction(deviceId: 'd1', deviceName: 'Smart AC', targetIsOn: true),
+        SceneAction(deviceId: 'd2', deviceName: 'Main Light', targetIsOn: false),
+      ]
+    ),
+    const SceneModel(
+      id: 's2',
+      name: 'Dinner',
+      icon: Icons.restaurant,
+      actions: [
+        SceneAction(deviceId: 'd2', deviceName: 'Main Light', targetIsOn: true),
+      ]
+    ),
+    const SceneModel(
+      id: 's3',
+      name: 'Party',
+      icon: Icons.celebration,
+      actions: [
+        SceneAction(deviceId: 'd2', deviceName: 'Main Light', targetIsOn: true),
+        SceneAction(deviceId: 'd4', deviceName: 'Ceiling Fan', targetIsOn: true),
+      ]
+    ),
+    const SceneModel(
+      id: 's4',
+      name: 'Leaving Home',
+      icon: Icons.directions_walk,
+      actions: [
+        SceneAction(deviceId: 'd1', deviceName: 'Smart AC', targetIsOn: false),
+        SceneAction(deviceId: 'd2', deviceName: 'Main Light', targetIsOn: false),
+        SceneAction(deviceId: 'd3', deviceName: 'Smart Door', targetIsOn: true),
+        SceneAction(deviceId: 'd4', deviceName: 'Ceiling Fan', targetIsOn: false),
+        SceneAction(deviceId: 'd5', deviceName: 'Smart TV', targetIsOn: false),
+      ]
+    ),
   ];
 
   void addScene(SceneModel scene) {
@@ -18,20 +52,18 @@ class SceneCubit extends Cubit<List<SceneModel>> {
   }
 
   void executeScene(String id, DeviceCubit deviceCubit) {
-    final devices = deviceCubit.state;
     final scene = state.firstWhere((s) => s.id == id);
+    final devices = deviceCubit.state;
 
-    if (scene.name.toLowerCase().contains('movie')) {
-      for (var d in devices) {
-        if (d.isOn) deviceCubit.toggleDevice(d.id);
-      }
-    } else if (scene.name.toLowerCase().contains('party')) {
-      for (var d in devices) {
-        if (!d.isOn) deviceCubit.toggleDevice(d.id);
-      }
-    } else {
-      if (devices.isNotEmpty) {
-        deviceCubit.toggleDevice(devices.first.id);
+    for (var action in scene.actions) {
+      // Find the device
+      try {
+        final device = devices.firstWhere((d) => d.id == action.deviceId);
+        if (device.isOn != action.targetIsOn) {
+          deviceCubit.toggleDevice(device.id);
+        }
+      } catch (e) {
+        // Device not found, ignore
       }
     }
   }

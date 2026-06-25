@@ -53,7 +53,6 @@ class ScenesScreen extends StatelessWidget {
                     onTap: () {
                       final deviceCubit = context.read<DeviceCubit>();
                       context.read<SceneCubit>().executeScene(scene.id, deviceCubit);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Executing ${scene.name}')));
                     },
                     borderRadius: 24.r,
                     child: Column(
