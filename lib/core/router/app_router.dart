@@ -130,7 +130,7 @@ class AppRouter {
       GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/scenes', builder: (context, state) => const ScenesScreen()),
       GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/create_new_scene', builder: (context, state) => const CreateNewSceneScreen()),
       GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/create_automation', builder: (context, state) => const CreateAutomationScreen()),
-      GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/automation_detail', builder: (context, state) => const AutomationDetailScreen()),
+      GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/automation_detail/:id', builder: (context, state) => AutomationDetailScreen(sceneId: state.pathParameters['id'] ?? 's1')),
 
       GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/energy', builder: (context, state) => const EnergyMonitoringScreen()),
       GoRoute(parentNavigatorKey: _rootNavigatorKey, path: '/smart_home_overview', builder: (context, state) => const SmartHomeOverviewScreen()),

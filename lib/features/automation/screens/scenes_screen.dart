@@ -51,8 +51,7 @@ class ScenesScreen extends StatelessWidget {
                   final scene = scenes[index];
                   return NeumorphicButton(
                     onTap: () {
-                      final deviceCubit = context.read<DeviceCubit>();
-                      context.read<SceneCubit>().executeScene(scene.id, deviceCubit);
+                      context.push('/automation_detail/${scene.id}');
                     },
                     borderRadius: 24.r,
                     child: Column(
