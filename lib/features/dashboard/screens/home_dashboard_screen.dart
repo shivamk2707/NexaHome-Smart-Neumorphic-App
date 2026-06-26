@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../auth/bloc/auth_cubit.dart';
 import '../../devices/bloc/device_cubit.dart';
@@ -209,7 +210,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                 },
               ),
             ],
-          ),
+          ).animate().fade(duration: 400.ms).slideY(begin: 0.05, end: 0, duration: 400.ms, curve: Curves.easeOut),
         ),
       ),
     );
@@ -262,7 +263,15 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   borderRadius: 999,
                   width: 48.w,
                   height: 48.w,
-                  child: Icon(device.icon, color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
+                    child: Icon(
+                      device.icon,
+                      key: ValueKey('${device.id}_${device.isOn}'),
+                      color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary
+                    ),
+                  ),
                 ),
                 NeumorphicToggle(
                   value: device.isOn,

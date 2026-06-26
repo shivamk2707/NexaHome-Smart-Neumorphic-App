@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -57,7 +58,10 @@ class DeviceListScreen extends StatelessWidget {
                   final rooms = context.read<RoomCubit>().state;
                   final roomName = rooms.firstWhere((r) => r.id == device.roomId, orElse: () => const RoomModel(id: '', name: 'Unassigned', icon: Icons.help)).name;
 
-                  return _buildDeviceListItem(context, device, roomName);
+                  return _buildDeviceListItem(context, device, roomName)
+                    .animate()
+                    .fade(duration: 400.ms, delay: (index * 50).ms)
+                    .slideY(begin: 0.1, end: 0, duration: 400.ms, curve: Curves.easeOut);
                 },
               );
             },
@@ -83,7 +87,14 @@ class DeviceListScreen extends StatelessWidget {
             isPressed: device.isOn,
             borderRadius: 16.r,
             padding: EdgeInsets.all(12.w),
-            child: Icon(device.icon, color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: Icon(
+                device.icon,
+                key: ValueKey('${device.id}_${device.isOn}'),
+                color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary
+              ),
+            ),
           ),
           SizedBox(width: 16.w),
           Expanded(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../rooms/bloc/room_cubit.dart';
 import '../../devices/bloc/device_cubit.dart';
@@ -95,7 +96,7 @@ class SmartHomeOverviewScreen extends StatelessWidget {
                 },
               ),
             ],
-          ),
+          ).animate().fade(duration: 400.ms).slideY(begin: 0.05, end: 0, duration: 400.ms, curve: Curves.easeOut),
         ),
       ),
     );

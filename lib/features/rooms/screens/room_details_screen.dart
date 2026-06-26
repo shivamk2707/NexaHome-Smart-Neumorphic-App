@@ -207,7 +207,14 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
                 borderRadius: 999,
                 width: 48.w,
                 height: 48.w,
-                child: Icon(device.icon, color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary),
+                child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: Icon(
+                  device.icon,
+                  key: ValueKey('${device.id}_${device.isOn}'),
+                  color: device.isOn ? AppColors.primary : AppColors.lightTextSecondary
+                ),
+              ),
               ),
               NeumorphicToggle(
                 value: device.isOn,
