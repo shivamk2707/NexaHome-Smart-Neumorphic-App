@@ -121,7 +121,33 @@ class _AutomationDetailScreenState extends State<AutomationDetailScreen> {
                     height: 56.h,
                     child: NeumorphicButton(
                       onTap: () {
-                        context.read<SceneCubit>().executeScene(scene.id, context.read<DeviceCubit>());
+                        showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return AlertDialog(
+                              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+                              title: Text('Confirm Execution', style: AppTextStyles.headlineMedium(Theme.of(context).colorScheme.onSurface)),
+                              content: Text('Are you sure you want to execute ${scene.name}?', style: AppTextStyles.bodyMedium(AppColors.lightTextSecondary)),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(dialogContext).pop(),
+                                  child: Text('Cancel', style: AppTextStyles.labelMedium(AppColors.lightTextSecondary)),
+                                ),
+                                NeumorphicButton(
+                                  onTap: () {
+                                    context.read<SceneCubit>().executeScene(scene.id, context.read<DeviceCubit>());
+                                    Navigator.of(dialogContext).pop(); // Close dialog
+                                    Navigator.of(context).pop(); // Go back to previous screen
+                                  },
+                                  borderRadius: 16.r,
+                                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                                  child: Text('Confirm', style: AppTextStyles.labelMedium(AppColors.primary)),
+                                ),
+                              ],
+                            );
+                          }
+                        );
                       },
                       borderRadius: 16.r,
                       child: Center(
